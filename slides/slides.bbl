@@ -1,0 +1,38 @@
+\providecommand{\abntreprintinfo}[1]{%
+ \citeonline{#1}}
+\setlength{\labelsep}{0pt}\begin{thebibliography}{}
+\providecommand{\abntrefinfo}[3]{}
+\providecommand{\abntbstabout}[1]{}
+\abntbstabout{v-1.9.2 }
+
+\bibitem[{DA SILVA FILHO} 2006]{JoaoInacio}
+\abntrefinfo{{DA SILVA FILHO}}{{DA SILVA FILHO}}{2006}
+{{DA SILVA FILHO}, J.~I. Métodos de aplicações da lógica paraconsistente
+  anotada de anotação com dois valores-lpa2v.
+\emph{Revista Seleção Documental}, Santos, v.~1, n.~1, p. 18--25, Março
+  2006.}
+
+\bibitem[{DA SILVA FILHO} e Abe 2011]{JISF2011}
+\abntrefinfo{{DA SILVA FILHO} e Abe}{{DA SILVA FILHO}; ABE}{2011}
+{{DA SILVA FILHO}, J.~I.; ABE, J.~M. Aspectos de lógica e teoria da ciência:
+  Pesquisa e métodos de aplicações da lógica paraconsistente anotada em
+  sistemas de inteligência artificial.
+\emph{Instituto de Estudos Avançados da Universidade de São Paulo}, São
+  Paulo, p. 50--83, 2011.}
+
+\bibitem[Dorf e Bishop 2011]{dorf2011modern}
+\abntrefinfo{Dorf e Bishop}{DORF; BISHOP}{2011}
+{DORF, R.~C.; BISHOP, R.~H. \emph{Modern control systems}. 12ª. ed. New
+  Jersey: Pearson Education, Inc, 2011.}
+
+\bibitem[Krause 2004]{DecioKrause}
+\abntrefinfo{Krause}{KRAUSE}{2004}
+{KRAUSE, D. Lógica paraconsistente.
+\emph{Scientific American Brasil}, São Paulo, n.~30, p. 70--77, Nov 2004.}
+
+\bibitem[Ogata 2010]{Ogata}
+\abntrefinfo{Ogata}{OGATA}{2010}
+{OGATA, K. \emph{Modern Control Engineering}. 5ª. ed. New Jersey: Prentice
+  Hall, Pearson Education, Inc, 2010.}
+
+\end{thebibliography}
