@@ -1,196 +1,18 @@
-A modificação, de forma controlada, no comportamento de um sistema, 
-garantindo uma maior eficiência é o objetivo do controle de sistemas,
-que é estudado desde os antigos, mas que obteve grande relevância na necessidade trazida com a revolução industrial, 
-e hoje conta com o seu segmento específico da engenharia, com diversos trabalhos nessa área e uma infinidade de aplicações. 
- 
 
-A principal tarefa de um engenheiro é, segundo \citeauthor{dorf2011modern}(\citeyear{dorf2011modern}), 
-"o processo de concepção ou invenção de formas, partes e detalhes de um sistema para alcançar um propósito específico", 
-processo este que soma a grande capacidade de análise e a criatividade para atender as demandas da função, 
-como é o caso de projeto em engenharia no segmento de Sistemas de Controle, 
-cujo objetivo é obter a configuração, as especificações e a identificação de processos para atender uma necessidade real. 
-
-
-Uma concepção semelhante é trazida por \citeauthor{nise2009engenharia}(\citeyear{nise2009engenharia}) onde "Um sistema de controle consiste em subsistemas e processos(ou plantas) construídos com o objetivo de se obter uma saída desejada com desempenho desejado para uma entrada específica fornecida".
-
-
-Os sistemas de controle atuam basicamente gerando respostas específicas para estímulos específicos de forma controlada e automática, 
-trazendo vantagens nas aplicações em diversas áreas, tais como, 
-na movimentação de grandes equipamentos com precisão, 
-em locais remotos ou perigosos, 
-na compensação de perturbações, 
-manipulando os dados de forma conveniente.
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Diagrama de Blocos}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-Os sistemas de controle são geralmente representados através de diagramas de blocos ou fluxo de sinais, 
-como na Figura \ref{fig:processo}, 
-convenientes ao seu desenvolvimento e análise. 
-É composto por uma caixa representando o sistema a ser controlado, 
-setas no sentido da caixa representando as entradas do processo e setas no sentido para fora da caixa para indicar a saída do sistema.
-
-
-Em um sistema real podem haver muitas variáveis de entrada e de saída, 
-mas a abordagem clássica de controle isola apenas uma das variáveis de entrada e uma de saída, 
-ficando o sistema conhecido pela sigla em inglês SISO (\emph{Single In Single Out} - Única Entrada e Única Saída).
-
-
-\begin{figure}[!htb]
-\centering
-\caption{ Diagrama de blocos de sistema de controle}
-\begin{tikzpicture}[scale=1]
-%\draw [lightgray](0,0) grid (9,2);
-\draw (0,1) -- (3,1);
-\draw [black, thick](3,0) rectangle (6, 2) ; 
-\draw (6,1) -- (9,1);
-\draw [fill](3,1) -- (2.8, 1.1) -- (2.8,0.9) -- (3,1);
-\draw [fill](9,1) -- (8.8, 1.1) -- (8.8,0.9) -- (9,1);
-\node at (4.5, 1){Sistema};
-\node [above] at (1.5,1){Valor de};
-\node [below] at (1.5,1){Referência};
-\node [above] at (7.5,1){Variável};
-\node [below] at (7.5,1){Controlada};
-\end{tikzpicture}
-\label{fig:processo}
-
-{\small Fonte: \cite{Ogata} }
-\end{figure}
-
-
-O diagrama de blocos mostrado na Figura \ref{fig:processo} é uma simplificação ao máximo de um sistema de controle, 
-contém apenas o bloco representando o sistema, 
-uma entrada, para o valor de referência, 
-e uma saída com o valor da variável controlada.
-
-
-Em \citeauthor{Ogata}(\citeyear{Ogata}) % - Capítulo 3.3 - 
-são encontradas definições, 
-comentários sobre vantagens, 
-aplicações e procedimento para construção de Diagramas de blocos, 
-assim como a representação de sistemas em malha aberta, 
-malha fechada, 
-perturbações, 
-técnicas e regras da álgebra de blocos.
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Ação de Controle}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-A ação de controle é a forma como se busca atender os chamados requisitos de desempenho do sistema, 
-que de um modo geral se efetuam através de modificações das características da relação entrada/saída para se obter os valores desejados dessa relação, 
-ou ainda ajustar o comportamento da saída para uma dada entrada específica.
-
-
-Os principais e mais comuns requisitos de desempenho dos sistemas são associados a velocidade de resposta, 
-presença ou não de oscilações na estabilização e 
-a exatidão da resposta do sistema em relação ao valor desejado, 
-chamada de erro de regime estacionário.
-
-
-O erro de regime estacionário, mostrada na Figura \ref{fig:funcaoResposta}, 
-é uma medida que vai tender a zero em sistemas ideais, 
-mas que na realidade não alcança o valor zero, 
-assim assume-se um valor aceitável, 
-5\% do valor da resposta desejada para sistemas não críticos e 
-2\% para sistemas de maior grau de criticidade, 
-para assumir que o sistema entrou em estabilidade, 
-e a resposta real é aceita como tendo atingido o valor de resposta desejada. 
-
-
-
-\begin{figure}[!htb]
-\centering
-\caption{Gráfico da função Resposta}
-\begin{tikzpicture}[scale=1.00]
-%\draw [lightgray, dashed](0,0) grid (8.8,5.8);
-
-\draw [->] (0,0) -- (9,0); 
-\draw [fill] (0,6.2) -- (-0.1, 5.8) -- (0.1,5.8) -- (0,6.2);
-
-\draw [->] (0,0) -- (0,6);
-\draw [fill] (9.2,0) -- (8.8,0.1) -- (8.8,-0.1)--(9.2,0.0);
-
-\draw [purple, ->] (7.5,4.0) -- (7.5,4.6); 
-\draw [purple, fill] (7.5,4.8) -- (7.4,4.5) -- (7.6,4.5)--(7.5,4.8);
-
-\draw [purple, ->] (7.5,6.0) -- (7.5,5.2); 
-\draw [purple, fill] (7.5,5.0) -- (7.4,5.3) -- (7.6,5.3)--(7.5,5.0);
-
-\node at (9.0,-0.5) {$t$};
-\node at (0.2,6.5) {$r(t)$};
-
-\draw [blue, ultra thick] (0.0,5.0) -- (9.0,5.0);
-\draw [blue, ultra thick] (0.0,0.0) -- (0.0,5.0);
-
-\draw [red, ultra thick] (0,0) to [out=85, in=180] (6,4.8);
-
-\draw [purple, ultra thick] (6,4.8) -- (9,4.8);
-
-\node at (2.0,5.4)[blue]{{resposta desejada}};
-\node at (3.0,2.2)[red]{{resposta transiente}};
-\node at (7.0,3.4)[purple]{{Erro de Regime Estacionário}};
-
-\end{tikzpicture} 
-\label{fig:funcaoResposta}
-
-{\small Fonte: \cite{dorf2011modern} }
-\end{figure}
-
-
-
-
-Para realizar o controle de um sistema é necessário que estejam bem definidos os seus requisitos, 
-que são os objetivos a serem atendidos. 
-Quando um sistema por si só já atende aos requisitos, 
-não há a necessidade de controle. 
-De forma oposta, é projetado o sistema de controle, 
-que pode ser em malha aberta ou fechada, 
-clássico ou moderno, convencional ou não-convencional, 
-dependendo das características físicas do sistema. 
-
-
-Para a execução de um sistema de controle podem ser verificados requisitos do sistema de duas formas básicas, 
-sendo a primeira através dos testes e levantamento empírico da sua curva de resposta ou através de seu modelo matemático, 
-quando trabalha-se com elementos já bem estudados e com a equação que representa seu comportamento empírico bem estabelecida por diversos estudos anteriores.
-
-
-Em \citeauthor{dorf2011modern}(\citeyear{dorf2011modern}) 
-%- Capítulo 7.6 - \emph{PID Controllers} 
-é abordado o controlador PID, 
-uma das principais soluções e a mais encontrada em aplicações industriais segundo \citeauthor{Ogata}(\citeyear{Ogata}), 
-que trata do mesmo tema e as versões de PID modificados no Capítulo 10 de seu trabalho. 
-Ações de controle do tipo PID são responsáveis por controlar a planta e atender aos requisitos de desempenho desejados ao sistema.
-
-
-
-
-
-\newpage
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Controle Moderno Não Convencional \\ Lógica Paraconsistente}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-O controle moderno trata de sistemas multivariáveis, não lineares ou variantes no tempo de forma mais apropriada do que o controle clássico, reduzindo a complexidade das expressões para que haja a possibilidade de um processamento satisfatório.
-Dentro do universo do controle moderno, existe ainda o controle convencional que utiliza a análise de sistemas de controle no espaço de estados, que utiliza n-equações de primeira ordem combinadas em uma equação diferencial vetor-matricial, de forma a simplificar e possibilitar o trabalho com uma quantidade de variáveis alta sem que haja um grande impacto no processamento.  \cite{Ogata} 
+O controle moderno trata de sistemas multivariáveis, 
+não lineares ou variantes no tempo 
+de forma mais apropriada do que o controle clássico, 
+reduzindo a complexidade das expressões para que 
+haja a possibilidade de um processamento satisfatório.
+Dentro do universo do controle moderno, 
+existe ainda o controle convencional que utiliza a 
+análise de sistemas de controle no espaço de estados, 
+que utiliza n-equações de primeira ordem 
+combinadas em uma equação diferencial vetor-matricial, 
+de forma a simplificar e possibilitar 
+o trabalho com uma quantidade de variáveis alta 
+sem que haja um grande impacto no processamento.  
+\cite{Ogata} 
 Existem ainda o controle não convencional, 
 que também é classificado como controle moderno e que
 apresenta uma grande diversidade de técnicas, 
@@ -202,9 +24,21 @@ esta última sendo o alvo da abordagem do presente trabalho,
 entre outras.
 
 
-A lógica, como ramo filosófico que trata das relações de coerência racional e discursiva, proposições e conclusões, tem como origem a Grécia Antiga com o seu primeiro arranjo formal em \emph{Tópicos} de Aristóteles por volta de 340 a.C. Apesar de suas bases serem conhecidas e discutidas por diversos pensadores anteriores, não havia a formalização de uma teoria bem fundada, apenas o tratamento de ideias como consistência e consequências da contraditoriedade por exemplo. 
+A lógica, como ramo filosófico que trata das 
+relações de coerência racional e discursiva, proposições e conclusões, 
+tem como origem a Grécia Antiga com o seu primeiro arranjo formal em 
+\emph{Tópicos} de Aristóteles por volta de 340 a.C. 
+Apesar de suas bases serem conhecidas e discutidas por 
+diversos pensadores anteriores, 
+não havia a formalização de uma teoria bem fundada, 
+apenas o tratamento de ideias como 
+consistência e consequências da contraditoriedade por exemplo. 
 
-Os princípios da lógica enunciadas por Aristóteles são basilares para a teoria clássica e moldaram o pensamento e a noção de consistência, ou não contraditoriedade, estreitamente conectadas ao conceito de completude e podem ser descritos formalmente assim:
+Os princípios da lógica enunciadas por Aristóteles são 
+basilares para a teoria clássica e 
+moldaram o pensamento e a noção de consistência, ou não contraditoriedade, 
+estreitamente conectadas ao conceito de completude e 
+podem ser descritos formalmente assim:
 
 
 \begin{enumerate}
@@ -248,6 +82,18 @@ como o desenvolvido por
 Newton C. A. da Costa(1929-presente data) e 
 Stanislaw Jaskiwski(1906-1965), 
 que propuseram e desenvolveram sistemas lógicos que fossem capazes de lidar com essas inconsistências \cite{DecioKrause}. 
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{A Lógica Paraconsistente}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
 
 Ao restringir-se o princípio da não contradição, 
 em um certo sistema lógico, 
@@ -315,7 +161,7 @@ Nas Lógicas Paraconsistentes Anotadas, uma proposição $P$ utiliza um reticula
 \end{center}
 
 de acordo com graus de cresça das constantes anotacionais do reticulado de Hasse, 
-associado à Lógica Paraconsistente Anotada de anotação com dois valores (LPA2v), 
+associado à Lógica Paraconsistente Anotada Evidencial $E\tau$, 
 formalmente descritas como 
 
 \begin{center}
@@ -576,7 +422,7 @@ Uma divisão em 12 partes é mostrada na Figura \ref{fig:reticuladoLPA2v} com se
 
 \begin{figure}[!h]
 \centering
-\caption{Representação do reticulado da LPA2v subdividido em 12 regiões}
+\caption{Representação do reticulado da Lógica $E\tau$ subdividido em 12 regiões}
 \begin{tikzpicture}[scale=1.0]
 \tikzset{ >=latex, inner sep=0pt, outer sep=0pt,  }
 
@@ -677,7 +523,7 @@ O reticulado pode ser dividido de outras formas, dependendo dos limites dos Grau
 
 \begin{figure}[!h]
 \centering
-\caption{Representação do reticulado da LPA2v subdividido em 8 regiões}
+\caption{Representação do reticulado da Lógica $E\tau$ subdividido em 8 regiões}
 \begin{tikzpicture}[scale=1.0]
 \tikzset{ >=latex, inner sep=0pt, outer sep=0pt,  }
 
@@ -870,14 +716,14 @@ podem ser utilizados para realizar o controle dos mais diversos tipos de sistema
 dependendo apenas do tipo de controle e de sistema que deve ser implementado. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{A LPA2v aplicada em Controle}
+\subsection{A Lógica $E\tau$ e suas aplicações}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Os Sistemas Inteligentes estão cada vez mais presentes 
 em diversas aplicações modernas, 
 e segundo \citeauthor{JISF2011}(\citeyear{JISF2011}), 
 há um predomínio de Lógicas Não-Clássicas no suporte à tomada de decisão desses sistemas. 
-O sucesso na aplicação de técnicas como a LPA2v, 
+O sucesso na aplicação de técnicas como a Lógica $E\tau$, 
 que é uma extensão da Lógica Paraconsistente Anotada, 
 se dá em grande medida pelo uso de 
 algorítmos baseados em estudos dos reticulados representativos e 
@@ -893,14 +739,14 @@ tratar contradições ou incoerências,
 e trabalhar com situações reais, 
 da mesma forma que o Modelo Clássico, 
 que aplica regras computacionais, 
-a LPA2v possui um conjunto de axiomas e regras de inferência 
+a Lógica $E\tau$ possui um conjunto de axiomas e regras de inferência 
 que possibilitam um raciocínio válido em situações reais.
 
 \subsubsection{Robótica}
 
 Os algorítmos baseados no estudo do Reticulado Representativo gera 
 Estados Lógicos Paraconsistentes através da 
-descrição do algorítmo Para-Analisador da LPA2v, 
+descrição do algorítmo Para-Analisador da Lógica $E\tau$, 
 possibilitando que o sistema receba informação 
 através dos graus de evidência ($\mu, \lambda$), 
 processe os graus de certeza e contradição ($G_c$ e $G_{ct}$) e 
@@ -911,13 +757,13 @@ Os Graus de Certeza e Contradição podem gerar um Grau de Certeza Real,
 que pode servir de entrada para outra célula ou 
 Nó de Análise Paraconsistente (NAP), 
 possibilitando uma rede de análises para a tomada de decisão,
-como apresentado pelo Professor Dr. João Inácio da Silva Filho 
-com a construção do Robô Emmy, 
+como apresentado na construção e aperfeiçoamentos realizados no Robô Emmy,
+\cite{JoaoInacio}\cite{ClaudioRodrigoTorres} 
 desenvolvendo e aplicando tais técnicas aplicadas ao sistema de movimentação.
 
 \subsubsection{Engenharia de Produção}
 
-A LPA2v pode ser aplicada em diversas áreas 
+A Lógica $E\tau$ pode ser aplicada em diversas áreas 
 sendo um outro exemplo a sua aplicação na 
 área de Eng. de Produção, 
 como é mostrado no artigo de 
@@ -935,7 +781,7 @@ Método de Análise pelo Baricentro.
 
 No segmento logístico pode-se citar a dissertação do 
 Profº Me. Vander Célio Nunes (\cite{Vander}), 
-que aplicou a LPA2v ao processo de paletização 
+que aplicou a Lógica $E\tau$ ao processo de paletização 
 através da medição de peças e do tratamento de incertezas 
 relacionadas a possibilidade de seu depósito ou encaixe na pilha de palets, 
 levando à otimização de cargas armazenadas em um determinado espaço. 
@@ -955,10 +801,10 @@ onde a Lógica Paraconsistente é aplicada na análise de mamografias.
 
 \subsubsection{Sistema de Controle Híbrido}
 
-No segmento de controle, a LPA2v é utilizada em conjunto com um 
+No segmento de controle, a Lógica $E\tau$ é utilizada em conjunto com um 
 sistema Proporcional-Integral - PI de modo que 
 as ações convencionais são executadas pelo bloco PI, 
-mas são estruturadas utilizando a LPA2v no 
+mas são estruturadas utilizando a Lógica $E\tau$ no 
 tratamento dos sinais externos. 
 A implementação é feita por 
 \citeauthor{Marcelo}(\citeyear{Marcelo}) 
