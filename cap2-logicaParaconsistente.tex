@@ -150,6 +150,7 @@ mostrando assim que as noções de inconsistência (contraditoriedade) e trivial
 
 A Lógica Paraconsistente sendo apropriada para tratar dados inconsistentes foi utilizada em 1987, 
 por H. Blair e V. S. Subrahmanian para representar e codificar o funcionamento de bancos de dados inconsistentes. 
+\cite{Abe1992} 
 Pouco depois Costa, Subrahmanian e Vago propuseram a lógica paraconsistente anotada e sua extensão a uma lógica de predicados paraconsistente anotada de primeira ordem. 
 
 Nas Lógicas Paraconsistentes Anotadas, uma proposição $P$ utiliza um reticulado formado por pares ordenados tal que: 
@@ -185,7 +186,7 @@ respectivamente, e são representadas conforme Figura \ref{fig:reticuladoHasse};
 {\small Fonte: \cite{JoaoInacio} }
 \end{figure}
 
-Para toda proposição $P$ há um par de valores, chamada de anotação, $(\mu , \lambda )$, onde $\mu$ é o grau de evidência favorável e $\lambda $ é o grau de evidência desfavorável, representada como  $P_{( \mu , \lambda )}$ .
+Para toda proposição $P$ há um par de valores, chamada de anotação, $(\mu , \lambda )$, onde $\mu$ é o grau de evidência favorável e $\lambda $ é o grau de evidência desfavorável, representada como  $P_{( \mu , \lambda )}$ \cite{Abe2014} .
 
 %$P_{( \mu , \lambda )}$
 Como exemplificação, para uma proposição $P \equiv$ \emph{"A velocidade de rotação do motor atingiu o valor desejado."}, assume-se dois especialistas para realizarem a leitura dos valores da anotação. Em um sistema físico, os especialistas geralmente são sensores, como neste caso, poderia ser um encoder ou sensor óptico como contador de voltas associado a uma base de tempo.
@@ -224,24 +225,29 @@ Os graus de evidência podem assumir valores não extremos:
 $(\mu, \lambda ) = (0.8,0.3)$ : Crê-se com grau de evidência favorável de 80\% e um grau de evidencia desfavorável de 30\%  que \emph{A velocidade rotação do motor atingiu do valor desejado}.
 \end{itemize}
 
-Existe um operador de negação ($\sim $) sobre $\tau$ de forma que :
-\begin{center}
-\begin{equation}
-\sim  : \mid \tau \mid \rightarrow \mid \tau , \sim(\mu, \lambda ) = (\lambda, \mu )
-\end{equation}
-\end{center}
+\subsubsection{Operações Lógicas}
 
-Então,
-\begin{center}
-\begin{equation}
-P_{(0.8,0.3)} \leftrightarrow \textrm{"   "} \sim P_{(0.3,0.8)}
-\end{equation}
-\end{center}
+Algumas operações lógicas booleanas são definidas 
+\cite{JISFeAS} \cite{Abe2014}
+a partir de duas anotações 
+$(\mu _1, \lambda _1)$ e $(\mu _2, \lambda _2)$ 
+pertencentes a mesma proposição P, 
+aqui denominadas respectivamente $P_1$ e $P_2$:
 
 \begin{itemize}
-\item 
-$(\mu, \lambda ) = (0.8,0.3) = \sim (0.3,0.8)$ : Não crê-se que há um grau de evidência favorável de 30\% e um grau de evidencia desfavorável de 80\% que \emph{A velocidade de rotação do motor atingiu do valor desejado}.
+
+\item Negação: $\sim$$P _1$ = $(\lambda _1, \mu _1)$ ou 
+$\neg$$P _1$ = $(\lambda _1, \mu _1)$
+
+\item Disjunção: $P _1 \vee P _2 = 
+(min\{\mu _1, \mu _2\},max\{\lambda _1, \lambda _2\})$ 
+
+\item Conjunção: $P _1 \wedge P _2 = 
+(max\{\mu _1, \mu _2\},min\{\lambda _1, \lambda _2\})$ 
+
+
 \end{itemize}
+
 
 
 
