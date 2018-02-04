@@ -758,33 +758,37 @@ A Figura \ref{fig:acaoControleLigaDesliga} mostra o gráfico obtido no sistema d
 Todas estas oscilações podem representar perda de energia, pois o motor está recebendo energia em excesso sem necessidade, porém sua implementação é simples e não requer um conhecimento específico e aprofundado de controle.
 
 
+%
+%\begin{figure}[!htb]
+%\centering
+%\caption{Código da Ação de Controle Liga-Desliga}
+%\begin{minipage}{0.8\linewidth}
+%\begin{lstlisting}
+%long controlador_LigaDesliga{ long setpoint, long sensor }
+%{
+%  if( sensor > setpoint }
+%    return( 0 );
+%  else
+%    return( 100 );
+%}
+%\end{lstlisting}
+%\end{minipage}
+%\label{fig:codigoAcaoLigaDesliga}
 
-\begin{figure}[!htb]
-\centering
-\caption{Código da Ação de Controle Liga-Desliga}
-\begin{minipage}{0.8\linewidth}
-\begin{lstlisting}
-long controlador_LigaDesliga{ long setpoint, long sensor }
-{
-  if( sensor > setpoint }
-    return( 0 );
-  else
-    return( 100 );
-}
-\end{lstlisting}
-\end{minipage}
-\label{fig:codigoAcaoLigaDesliga}
+%{\small Fonte: Próprio autor}
+%\end{figure}
 
-{\small Fonte: Próprio autor}
-\end{figure}
-
-O código fonte que gerou o resultado obtido na Figura \ref{fig:acaoControleLigaDesliga} é  mostrado na Figura \ref{fig:codigoAcaoLigaDesliga}, sendo apresentada apenas a função que realiza função de controle, que neste caso tem como parâmetros de entrada os valores de \textit{\texttt{setpoint}} e do \textit{\texttt{sensor}} e o seu valor de retorno é o parâmetro de entrada da função de acionamento da modulação por largura de pulso (\textit{PWM - Pulse Width Modulation}), que neste caso utiliza apenas os valores extremos.
+%O código fonte que gerou o resultado obtido na Figura \ref{fig:acaoControleLigaDesliga} é  mostrado na Figura \ref{fig:codigoAcaoLigaDesliga}, sendo apresentada apenas a função que realiza função de controle, que neste caso tem como parâmetros de entrada os valores de \textit{\texttt{setpoint}} e do \textit{\texttt{sensor}} e o seu valor de retorno é o parâmetro de entrada da função de acionamento da modulação por largura de pulso (\textit{PWM - Pulse Width Modulation}), que neste caso utiliza apenas os valores extremos.
 
 
 
 \subsection{ Controlador Proporcional (P) } 
 
- No controle proporcional, o erro é multiplicado por uma constante \emph{kp} gerando o sinal \emph{u{t}}, que é a variável manipulada que atua sobre o sistema \emph{g(t)}.
+ No controle proporcional, 
+o erro é multiplicado por uma constante \emph{kp} 
+gerando o sinal \emph{u\{t\}}, 
+que é a variável manipulada que atua sobre o 
+sistema \emph{g(t)}.
 
 \begin{equation}
  u(t) = kp . e(t)
@@ -846,75 +850,75 @@ Variando o valor de $kp$ pode-se ver pela Figura \ref{fig:acaoP} que quanto maio
 {\small Fonte: Próprio autor}
 \end{figure}
 
-O controlador que foi implementada a função proporcional está apresentado na Figura \ref{fig:codigoControladorP}, onde pode-se verificar a utilização de variáveis do tipo ponto flutuante (\emph{float}) para obtenção de maior precisão nos cálculos e consequantemente, no controle. O nome das variáveis faz alusão a sua representação no diagrama de blocos da Figura \ref{fig:malhaFechadaP}.
+%O controlador que foi implementada a função proporcional está apresentado na Figura \ref{fig:codigoControladorP}, onde pode-se verificar a utilização de variáveis do tipo ponto flutuante (\emph{float}) para obtenção de maior precisão nos cálculos e consequantemente, no controle. O nome das variáveis faz alusão a sua representação no diagrama de blocos da Figura \ref{fig:malhaFechadaP}.
 
-A função implementada, declarada na linha 7 possui três parâmetros de entrada e possui um parâmetro de retorno, sendo:
-\begin{itemize}
-  \item $setpoint$ : recebe o valor de rotação desejado ao sistema, o valor de referência;
-  \item $max$ : representa o máximo valor que o sistema alcança;
-  \item $sensor$ : recebe o valor de rotação atual da planta;
-  \item $return $ : Parâmetro de retorno da função que assume um valor entre 0 e 100, pois é o parâmetro de entrada do controlador PWM que efetua o acionamento do motor.
+%A função implementada, declarada na linha 7 possui três parâmetros de entrada e possui um parâmetro de retorno, sendo:
+%\begin{itemize}
+%  \item $setpoint$ : recebe o valor de rotação desejado ao sistema, o valor de referência;
+%  \item $max$ : representa o máximo valor que o sistema alcança;
+%  \item $sensor$ : recebe o valor de rotação atual da planta;
+%  \item $return $ : Parâmetro de retorno da função que assume um valor entre 0 e 100, pois é o parâmetro de entrada do controlador PWM que efetua o acionamento do motor.
 
-\end{itemize}
+%\end{itemize}
 
 
 
-\begin{figure}[!htb]
-\centering
-\caption{Código da Ação de Controle Proporcional}
-\begin{minipage}{0.8\linewidth}
-\lstset{firstnumber=1}
-\begin{lstlisting}
-float kp = 0.1;
-float ki = 0.0002;
-float kd = 2.0;
-float yT, rT, eT, iT, dT, uT;
-long  Cout, pwmAlvo;
+%\begin{figure}[!htb]
+%\centering
+%\caption{Código da Ação de Controle Proporcional}
+%\begin{minipage}{0.8\linewidth}
+%\lstset{firstnumber=1}
+%\begin{lstlisting}
+%float kp = 0.1;
+%float ki = 0.0002;
+%float kd = 2.0;
+%float yT, rT, eT, iT, dT, uT;
+%long  Cout, pwmAlvo;
 
-long controlador{ long setpoint, long max, long sensor }
-{
-    rT = (float) setpoint;
-    yT = (float) sensor;
-    pwmAlvo = ((setpoint*100)/max);
+%long controlador{ long setpoint, long max, long sensor }
+%{
+%    rT = (float) setpoint;
+%    yT = (float) sensor;
+%    pwmAlvo = ((setpoint*100)/max);
 
     
-    eT = rT - yT;
+%    eT = rT - yT;
     
-    uT = kp*eT;
+%    uT = kp*eT;
 
-    Cout = pwmAlvo + uT;
+%    Cout = pwmAlvo + uT;
 
-    if( Cout < 0 )
-        Cout = 0;
-    else if( Cout >= 100 )
-        Cout = 100;
+%    if( Cout < 0 )
+%        Cout = 0;
+%    else if( Cout >= 100 )
+%        Cout = 100;
 
-    return( Cout );
-}
-\end{lstlisting}
-\end{minipage}
-\label{fig:codigoControladorP}
+%    return( Cout );
+%}
+%\end{lstlisting}
+%\end{minipage}
+%\label{fig:codigoControladorP}
 
-{\small Fonte: Próprio autor}
-\end{figure}
-
-
-Nas linhas 9 e 10 os parâmetros de entradas são convertidos em ponto flutuante para realização dos cálculos e atribuidos às respectivas variáveis auxiliares.
-
-A variável \emph{pwmAlvo} recebe o valor percentual da velocidade de referência, como a velocidade mínima é zero, basta dividir o \emph{setpoint} pelo valor \emph{max} e multiplicar por \emph{100} conforme feito na linha 11.
+%{\small Fonte: Próprio autor}
+%\end{figure}
 
 
-A linha 14 realiza o cálculo do erro, subtraindo do valor de referência (\emph{rT}) o valor do erro (\emph{ht}).
+%Nas linhas 9 e 10 os parâmetros de entradas são convertidos em ponto flutuante para realização dos cálculos e atribuidos às respectivas variáveis auxiliares.
 
-Na linha 18 a variável manipilada recebe o erro (\emph{eT}) sendo multiplicado proporcionalmente pelo coeficiente kp, que caracteriza esta configuração de controle.
+%A variável \emph{pwmAlvo} recebe o valor percentual da velocidade de referência, como a velocidade mínima é zero, basta dividir o \emph{setpoint} pelo valor \emph{max} e multiplicar por \emph{100} conforme feito na linha 11.
 
-A variável \emph{Cout}, é a variável com o valor que será o retorno da função, que serve de parâmetro de entrada ao gerador de sinal PWM que atua sobre o motor.
 
-\emph{Cout} recebe o valor da variável \emph{pwmAlvo} que é a aplicação de um degrau com valor de referência do sistema somado somada a \emph{uT} que possui o valor proporcional ao erro do sistema. 
+%A linha 14 realiza o cálculo do erro, subtraindo do valor de referência (\emph{rT}) o valor do erro (\emph{ht}).
 
-Inicialmente, considerando o sistema em repouso, o erro possui um valor alto, então, Cout é inicializada com um valor bem maior do que o necessário para gerar o valor de referência, ou seja, um valor de pwm referente a uma velocidade bem maior do que os \emph{25 rps} de referência da aquisição mostrada na Figura \ref{fig:acaoP}. Conforme o sistema começa a girar, e a velocidade aumenta, o erro diminui, o que diminui o incremento ao \emph{pwmAlvo}, até que este incremento seja zero quando o valor lido pelo sensor alcançar o valor de referência, que é o próprio valor do degrau que está em \emph{pwmAlvo}.
+%Na linha 18 a variável manipilada recebe o erro (\emph{eT}) sendo multiplicado proporcionalmente pelo coeficiente kp, que caracteriza esta configuração de controle.
 
-O código entre as linhas 20 e 23 são necessárias apenas para não gerar um valor incorreto para o parâmetro do PWM, o que poderia causar falhas no acionamento. 
+%A variável \emph{Cout}, é a variável com o valor que será o retorno da função, que serve de parâmetro de entrada ao gerador de sinal PWM que atua sobre o motor.
+
+%\emph{Cout} recebe o valor da variável \emph{pwmAlvo} que é a aplicação de um degrau com valor de referência do sistema somado somada a \emph{uT} que possui o valor proporcional ao erro do sistema. 
+
+%Inicialmente, considerando o sistema em repouso, o erro possui um valor alto, então, Cout é inicializada com um valor bem maior do que o necessário para gerar o valor de referência, ou seja, um valor de pwm referente a uma velocidade bem maior do que os \emph{25 rps} de referência da aquisição mostrada na Figura \ref{fig:acaoP}. Conforme o sistema começa a girar, e a velocidade aumenta, o erro diminui, o que diminui o incremento ao \emph{pwmAlvo}, até que este incremento seja zero quando o valor lido pelo sensor alcançar o valor de referência, que é o próprio valor do degrau que está em \emph{pwmAlvo}.
+
+%O código entre as linhas 20 e 23 são necessárias apenas para não gerar um valor incorreto para o parâmetro do PWM, o que poderia causar falhas no acionamento. 
 
 
 
@@ -945,25 +949,25 @@ A resposta apresentada pelo sistema está plotada na Figura \ref{fig:acaoI} e mo
 {\small Fonte: Próprio autor}
 \end{figure}
 
-A Figura \ref{fig:codigoControladorI} mostra o código da função que implementou o controlador com ação integral, responsáveis por gerar propriamente a ação de integração do erro.
+%A Figura \ref{fig:codigoControladorI} mostra o código da função que implementou o controlador com ação integral, responsáveis por gerar propriamente a ação de integração do erro.
 
 
-\begin{figure}[!htb]
-\centering
-\caption{Código da Ação de Controle Integral}
-\begin{minipage}{0.8\linewidth}
-\lstset{firstnumber=13}
-\begin{lstlisting}
+%\begin{figure}[!htb]
+%\centering
+%\caption{Código da Ação de Controle Integral}
+%\begin{minipage}{0.8\linewidth}
+%\lstset{firstnumber=13}
+%\begin{lstlisting}
 
-    eT = rT - yT;
-    iT += eT * i; 
-    uT = iT;
-\end{lstlisting}
-\end{minipage}
-\label{fig:codigoControladorI}
+%    eT = rT - yT;
+%    iT += eT * i; 
+%    uT = iT;
+%\end{lstlisting}
+%\end{minipage}
+%\label{fig:codigoControladorI}
 
-{\small Fonte: Próprio autor}
-\end{figure}
+%{\small Fonte: Próprio autor}
+%\end{figure}
 
 A ação de integração é uma somatória de pequenas amostras do erro, que somadas ao longo do tempo levam o sistema a um erro zero, porém demoram mais tempo para alcançar a estabilidade e facilmente geram sobressinal.
 
@@ -984,7 +988,91 @@ O controlador Proporcional Integral (PI) como o próprio nome indica, é a uniã
 u(t) = kp.e(t) + ki \int_{0}^{\infty} e(t) dt
 \end{equation}
 
+
 O intuito neste controlador é reduzir o tempo de resposta do sistema pelo controle proporcional e ao mesmo tempo gerar um erro nulo quando a estabilidade é atingida.
+
+
+
+
+
+\begin{figure}[!htb]
+\centering
+\caption{ Diagrama em blocos de sistema de controle em malha fechada utilizando notação matemática}
+\begin{tikzpicture}[scale=0.6]
+
+%\draw [lightgray](-3,0) grid (18, 2);
+%\draw [lightgray](-3,0) grid (18,-5);
+%\draw [semithick,red] (0,0) circle (0.1);
+
+\draw (-3,1) -- (0,1);
+\draw [fill]( 0,1) -- (-0.2, 1.1) -- ( -0.2,0.9) -- (0,1);
+\draw [semithick,black] (1,1) circle (1.0); % Somador
+\draw (2.0,1) -- (4,1);
+\draw [fill]( 4,1) -- ( 3.8, 1.1) -- ( 3.8,0.9) -- ( 4,1);
+\draw [black, thick](4,0) rectangle (6, 2) ; % Controlador P 
+\draw (6,1) -- (8,1);
+\draw [fill]( 8,1) -- (7.8, 1.1) -- ( 7.8,0.9) -- (8,1);
+\draw [semithick,black] (9,1) circle (1.0); % Somador 2
+\draw (10.0,1) -- (12,1);
+\draw [fill]( 12,1) -- (11.8, 1.1) -- (11.8,0.9) -- (12,1);
+\draw [black, thick](12,0) rectangle (15, 2) ; % Planta
+\draw (15,1) -- (18,1);
+\draw [fill](18,1) -- (17.8, 1.1) -- (17.8,0.9) -- (18,1);
+
+\draw (3,1) -- (3,-2) -- (4,-2);
+\draw [fill](4,-2) -- (3.8, -2.1) -- (3.8,-1.9) -- (4,-2);
+\draw [black, thick](4,-1) rectangle (6,-3) ; % Controlador I
+\draw (6,-2) -- (9,-2) -- (9,0);
+\draw [fill](9,0) -- (8.9, -0.2) -- (9.1,-0.2) -- (9,0);
+
+
+
+\draw [black, thick](7.5,-3) rectangle (10.5, -5) ; % Sensor
+\draw (16, 1) -- (16, -4) -- (10.5,-4);
+\draw ( 7.5,-4) -- ( 1, -4) -- (1,0);
+\draw [fill](1,0) -- (1.2,-0.2) -- (0.8,-0.2) -- (1,0);
+
+\node [above] at (-1.5,1){r(t)};
+\node at (0.4,1){+};
+\node at (1,0.4){-};
+\node [above] at (3.0,1){e(t)};
+\node at ( 5.0, 1){kp};
+\node at (5.0,-2) {ki};
+\node at (8.4,1){+};
+\node at (9,0.4){+};
+\node [above] at (11.0,1){u(t)};
+\node at (13.5, 1){g(t)};
+\node [above] at (17.0,1){c(t)};
+\node at ( 9.0,-4){h(t)};
+
+\end{tikzpicture}
+\label{fig:malhaFechadaPI}
+
+{\small Fonte: Próprio autor}
+\end{figure}
+
+Variando o valor de $kp$ pode-se ver pela Figura \ref{fig:acaoP} que quanto maior o seu valor, mais rápida é a resposta do sistema, ou seja, menor é o tempo necessário para alcançar o valor de referência, porém, depois de um determinado valor, o sistema apresenta um sobressinal, que pode ou não ser tolerável, dependendo das exigências da aplicação.
+
+\begin{figure}[!htb]
+\centering
+\caption{Ação de Controle Proporcional}
+\center\includegraphics[scale=1.4]{./imagens/acaoPI.eps}
+\label{fig:acaoP}
+
+{\small Fonte: Próprio autor}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
 
 \begin{figure}[!htb]
 \caption{Ação de Controle Proporcional Integral}
@@ -996,24 +1084,28 @@ O intuito neste controlador é reduzir o tempo de resposta do sistema pelo contr
 
 Como pode-se ver no gráfico da Figura \ref{fig:acaoPI} foi utilizado um valor de $ki = 0.1$ para obter uma subida em um tempo tido como bom, ou seja, subida mais rápida e sem gerar sobressinal, de acordo com os valores mostrados na Figura \ref{fig:acaoP}.
 
-\begin{figure}[!htb]
-\centering
-\caption{Código da Ação de Controle Proporcional Integral}
-\begin{minipage}{0.8\linewidth}
-\lstset{firstnumber=13}
-\begin{lstlisting}
 
-    eT = rT - yT;
-    iT += eT * i; 
-    uT = iT + p*eT;
-\end{lstlisting}
-\end{minipage}
-\label{fig:codigoControladorPI}
 
-{\small Fonte: Próprio autor}
-\end{figure}
 
-O código da Figura \ref{fig:codigoControladorPI} mostra a implementação das funções de controle proporcional e integral, sendo que a linha 15 mostra a somatória característica do controle integral.
+
+%\begin{figure}[!htb]
+%\centering
+%\caption{Código da Ação de Controle Proporcional Integral}
+%\begin{minipage}{0.8\linewidth}
+%\lstset{firstnumber=13}
+%\begin{lstlisting}
+
+%    eT = rT - yT;
+%    iT += eT * i; 
+%    uT = iT + p*eT;
+%\end{lstlisting}
+%\end{minipage}
+%\label{fig:codigoControladorPI}
+
+%{\small Fonte: Próprio autor}
+%\end{figure}
+
+%O código da Figura \ref{fig:codigoControladorPI} mostra a implementação das funções de controle proporcional e integral, sendo que a linha 15 mostra a somatória característica do controle integral.
 
 
 
