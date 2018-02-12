@@ -1053,21 +1053,14 @@ O intuito neste controlador é reduzir o tempo de resposta do sistema pelo contr
 
 Variando o valor de $kp$ pode-se ver pela Figura \ref{fig:acaoP} que quanto maior o seu valor, mais rápida é a resposta do sistema, ou seja, menor é o tempo necessário para alcançar o valor de referência, porém, depois de um determinado valor, o sistema apresenta um sobressinal, que pode ou não ser tolerável, dependendo das exigências da aplicação.
 
-\begin{figure}[!htb]
-\centering
-\caption{Ação de Controle Proporcional}
-\center\includegraphics[scale=1.4]{./imagens/acaoPI.eps}
-\label{fig:acaoP}
+%\begin{figure}[!htb]
+%\centering
+%\caption{Ação de Controle Proporcional}
+%\center\includegraphics[scale=1.4]{./imagens/acaoPI.eps}
+%\label{fig:acaoP}
 
-{\small Fonte: Próprio autor}
-\end{figure}
-
-
-
-
-
-
-
+%{\small Fonte: Próprio autor}
+%\end{figure}
 
 
 
@@ -1116,48 +1109,46 @@ Como pode-se ver no gráfico da Figura \ref{fig:acaoPI} foi utilizado um valor d
 
 
 
-\subsection{ Controlador Proporcional + Derivativo (PD) }
+%\subsection{ Controlador Proporcional + Derivativo (PD) }
 
-A ação de controle proporcional e derivativo propicia uma resposta mais rápida, pois a ação derivativa gera um grande erro se houver variações abruptas.
+%A ação de controle proporcional e derivativo propicia uma resposta mais rápida, pois a ação derivativa gera um grande erro se houver variações abruptas.
 
-\begin{equation}
-u(t) = kp.e(t) + kd. \frac{d e(t)}{dt}
-\end{equation}
+%\begin{equation}
+%u(t) = kp.e(t) + kd. \frac{d e(t)}{dt}
+%\end{equation}
 
-A figura \ref{fig:acaoPD} mostra que a resposta do sistema é a mais rápida dos ações de controle estudadas, e também gera o maior sobressinal. 
-
-
-\begin{figure}[!htb]
-\centering
-\caption{Ação de Controle Proporcional Derivativo}
-\center\includegraphics[scale=1.1]{./imagens/acaoPD.eps}
-\label{fig:acaoPD}
-
-{\small Fonte: Próprio autor}
-\end{figure}
-
- A linha 13 da Figura \ref{fig:codigoControladorPD} mostra como foi codificada a ação de controle Derivativa modificada.
-
-\begin{figure}[!htb]
-\centering
-\caption{Código da Ação de Controle Proporcional Derivativo}
-\begin{minipage}{0.8\linewidth}
-\lstset{firstnumber=13}
-\begin{lstlisting}
-    dT = (eT - (rT-yT)) * d;
-    eT = rT - yT;
-
-    uT = dT + p*eT;
-\end{lstlisting}
-\end{minipage}
-\label{fig:codigoControladorPD}
-
-{\small Fonte: Próprio autor}
-\end{figure}
-
-A ação de controle derivativa (PD) é modificada pois é utilizada a diferença do erro na iteração anterior com o erro com os dados atuais, diferente do que ocorre com o controlador PD teórico, onde a derivada implica na diferença entre o valor atual e uma pequena variação positiva do tempo, ou seja, uma amostra futura, que é impossível de ser obtida na pratica. 
+%A figura \ref{fig:acaoPD} mostra que a resposta do sistema é a mais rápida dos ações de controle estudadas, e também gera o maior sobressinal. 
 
 
+%\begin{figure}[!htb]
+%\centering
+%\caption{Ação de Controle Proporcional Derivativo}
+%\center\includegraphics[scale=1.1]{./imagens/acaoPD.eps}
+%\label{fig:acaoPD}
+
+%{\small Fonte: Próprio autor}
+%\end{figure}
+
+% A linha 13 da Figura \ref{fig:codigoControladorPD} mostra como foi codificada a ação de controle Derivativa modificada.
+
+%\begin{figure}[!htb]
+%\centering
+%\caption{Código da Ação de Controle Proporcional Derivativo}
+%\begin{minipage}{0.8\linewidth}
+%\lstset{firstnumber=13}
+%\begin{lstlisting}
+%    dT = (eT - (rT-yT)) * d;
+%    eT = rT - yT;
+%
+%    uT = dT + p*eT;
+%\end{lstlisting}
+%\end{minipage}
+%\label{fig:codigoControladorPD}
+
+%{\small Fonte: Próprio autor}
+%\end{figure}
+
+%A ação de controle derivativa (PD) é modificada pois é utilizada a diferença do erro na iteração anterior com o erro com os dados atuais, diferente do que ocorre com o controlador PD teórico, onde a derivada implica na diferença entre o valor atual e uma pequena variação positiva do tempo, ou seja, uma amostra futura, que é impossível de ser obtida na pratica. 
 
 
 
@@ -1166,51 +1157,53 @@ A ação de controle derivativa (PD) é modificada pois é utilizada a diferenç
 
 
 
-\subsection{ Controlador Proporcional + Integral + Derivativo (PID) }
-
-O controlador Proporcional Integral Derivativo é uma das configurações mais utilizadas por sua versatilidade, unindo as características que permitem ajustar o tempo de subida, o sobressinal e o erro de estado estacionário, conforme a necessidade e a aplicação.
-
-\begin{equation}
-u(t) = kp.e(t) + ki \int_{0}^{\infty} e(t) dt + kd. \frac{d e(t)}{dt}
-\end{equation}
-
-O controlador PID pode ser implementado de diversas formas, pode ter o parâmetro proporcional influenciando diretamente as demais ações, ou não, como neste caso onde as ações de controle são utilizadas de forma independentes, e o erro é utilizado para cada uma das partes da soma do sinal da variável manipulada ($u(t)$).
-
-\begin{figure}[!htb]
-\centering
-\caption{Ação de Controle Proporcional Integral Derivativo}
-\center\includegraphics[scale=1.4]{./imagens/acaoPID.eps}
-\label{fig:acaoPID}
-
-{\small Fonte: Próprio autor}
-\end{figure}
-
-Os dois sinais utilizando o controle PID utilizou parâmetros já testados nos controladores anteriores para obter um resultado desejado, onde o sistema responde de forma bem rápida ao estímulo de entrada, tendo um tempo de subida entre 3 e 4 segundos para atingir a estabilidade com erro de estado estacionário menor do que 2\%, sem gerar sobressinal.
 
 
-Em comparação ao sinal de controle em malha aberta, que a estabilidade é alcançada em um tempo de aproximadamente 12 segundos, o ganho de velocidade é consideravel para o sistema estudado, pois foi reduzido a pelo menos um terço do tempo original.
+%\subsection{ Controlador Proporcional + Integral + Derivativo (PID) }
 
-A Figura \ref{fig:codigoControladorPID} mostra a codificação completa dos parâmetros do PID, onde pode-se perceber que sua implementação é simples, apesar da teoria ser complexa. 
+%O controlador Proporcional Integral Derivativo é uma das configurações mais utilizadas por sua versatilidade, unindo as características que permitem ajustar o tempo de subida, o sobressinal e o erro de estado estacionário, conforme a necessidade e a aplicação.
 
-\begin{figure}[!htb]
-\centering
-\caption{Código da Ação de Controle Proporcional Integral Derivativo}
-\begin{minipage}{0.8\linewidth}
-\lstset{firstnumber=13}
-\begin{lstlisting}
-    dT = (eT - (rT-yT)) * d;
-    eT = rT - yT;
-    iT += eT * i; 
-    uT = p*eT + iT + dT;
-\end{lstlisting}
-\end{minipage}
-\label{fig:codigoControladorPID}
+%\begin{equation}
+%u(t) = kp.e(t) + ki \int_{0}^{\infty} e(t) dt + kd. \frac{d e(t)}{dt}
+%\end{equation}
 
-{\small Fonte: Próprio autor}
-\end{figure}
+%O controlador PID pode ser implementado de diversas formas, pode ter o parâmetro proporcional influenciando diretamente as demais ações, ou não, como neste caso onde as ações de controle são utilizadas de forma independentes, e o erro é utilizado para cada uma das partes da soma do sinal da variável manipulada ($u(t)$).
+
+%\begin{figure}[!htb]
+%\centering
+%\caption{Ação de Controle Proporcional Integral Derivativo}
+%\center\includegraphics[scale=1.4]{./imagens/acaoPID.eps}
+%\label{fig:acaoPID}
+
+%{\small Fonte: Próprio autor}
+%\end{figure}
+
+%Os dois sinais utilizando o controle PID utilizou parâmetros já testados nos controladores anteriores para obter um resultado desejado, onde o sistema responde de forma bem rápida ao estímulo de entrada, tendo um tempo de subida entre 3 e 4 segundos para atingir a estabilidade com erro de estado estacionário menor do que 2\%, sem gerar sobressinal.
 
 
-Para o microcontrolador efetuar as subtrações é algo que requer pouco processamento, mas as multiplicações são bem mais complexas e exigem mais memória e tempo de processamento, e é claro que trabalhando em ponto flutuante esta complexidade também é muito grande. O controlador utilizado possui uma unidade de processamento de ponto flutuante, o que possibilitou uma performance capaz de efetuar todos os cálculos sem afetar a leitura de velocidade do sistema.
+%Em comparação ao sinal de controle em malha aberta, que a estabilidade é alcançada em um tempo de aproximadamente 12 segundos, o ganho de velocidade é consideravel para o sistema estudado, pois foi reduzido a pelo menos um terço do tempo original.
+
+%A Figura \ref{fig:codigoControladorPID} mostra a codificação completa dos parâmetros do PID, onde pode-se perceber que sua implementação é simples, apesar da teoria ser complexa. 
+
+%\begin{figure}[!htb]
+%\centering
+%\caption{Código da Ação de Controle Proporcional Integral Derivativo}
+%\begin{minipage}{0.8\linewidth}
+%\lstset{firstnumber=13}
+%\begin{lstlisting}
+%    dT = (eT - (rT-yT)) * d;
+%    eT = rT - yT;
+%    iT += eT * i; 
+%    uT = p*eT + iT + dT;
+%\end{lstlisting}
+%\end{minipage}
+%\label{fig:codigoControladorPID}
+
+%{\small Fonte: Próprio autor}
+%\end{figure}
+
+
+%Para o microcontrolador efetuar as subtrações é algo que requer pouco processamento, mas as multiplicações são bem mais complexas e exigem mais memória e tempo de processamento, e é claro que trabalhando em ponto flutuante esta complexidade também é muito grande. O controlador utilizado possui uma unidade de processamento de ponto flutuante, o que possibilitou uma performance capaz de efetuar todos os cálculos sem afetar a leitura de velocidade do sistema.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

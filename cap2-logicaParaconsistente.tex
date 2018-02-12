@@ -315,7 +315,7 @@ e temos que:
 \begin{center}
 \begin{equation}
 G _{ct} = \mu + \lambda - 1
-\label{eq:grauIncerteza}
+\label{eq:grauContradicao}
 \end{equation}
 \end{center}
 
@@ -717,7 +717,21 @@ G_{CR} = (D-1)
 \end{center}
 
 
-Tanto o Grau de Evidência Real quanto os estados ou regiões do reticulado 
+O Grau de Evidência Real é representado por $\mu_{ER}$ 
+e é utilizado para converter o $Gc$ ou $G_{CR}$ 
+em uma variável dentro do intervalo fechado $[0,1]$, 
+permitindo que o resultado de um bloco LPA$E\tau$ 
+possa ser utilizado como entrada em outro bloco. 
+Para a conversão é efetuada a equação \ref{eq:muer}:
+
+\begin{equation}
+\mu_{ER} = \frac{Gc + 1}{2}
+\label{eq:muer}
+\end{equation}
+
+
+Tanto o Grau de Certeza Real quanto o Grau de Evidência Real 
+ou os estados ou regiões do reticulado 
 podem ser utilizados para realizar o controle dos mais diversos tipos de sistemas, 
 dependendo apenas do tipo de controle e de sistema que deve ser implementado. 
 
