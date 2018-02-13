@@ -941,7 +941,7 @@ para cada valor de patamar pode haver um erro considerável,
 inclusive sendo maior do que o valor permitido pela 
 tolerância. 
 
-Assim para reduzir as contradições 
+Assim para reduzir o grau de contradição
 em decorrência dessa não linearidade, 
 é somado ao $\mu_0$ um valor de correção denominado $\delta$.
 
@@ -1014,8 +1014,16 @@ Figura \ref{fig:regiaoAtivaMuDelta}.
 
 A região ativa então pode ser dividida em 
 tantas partes quantas forem necessárias 
-para garantir um $\delta$ satisfatório para tal região.
+para garantir um $\delta$ satisfatório para tal região,
+pois tal valor não garante erro nulo para toda extensão
+possível.
 
+
+
+
+
+%######################################
+\begin{comment}
 
 
 \begin{figure}[!h]
@@ -1083,6 +1091,102 @@ para garantir um $\delta$ satisfatório para tal região.
 \end{figure}
 
 
+\end{comment}
+%######################################
+
+
+
+Para gerar um divisão de valores alvo, 
+em que o erro seja de no máximo 5\%, 
+foi gerada uma tabela que tem como valor inicial
+o 10, pois é assumido que para o sistema em estudo,
+valores abaixo são considerados zona morta.
+
+A cada incremento de 10\% aproximadamente, 
+é gerado o próximo elemento, até o máximo valor menor do que
+100, equivalente à 100\% do valor máximo de saída.
+
+Sendo assim segue a 
+Tabela \ref{tab:correcaoDelta} 
+com os respectivos valores alvo, 
+os limites inferiores e superiores, 
+que são calculados baseados em decremento de 5\% e
+incremento de 5\%, respectivamente, ao valor alvo.
+
+Para todo valor alvo, uma variação positiva ou negativa
+de 5\% está enquadrada dentro dos limites motrados na Tabela.
+
+Esses intervalos abrangem todo o intervalo entre 
+o valor 10 e o 100, mínimo e máximo, 
+de modo a qualquer valor desejado fique 
+dentro de algum intervalo, 
+e possua um valor alvo bem próximo.
+
+
+\begin{table}[h]
+\centering
+\caption{Valores de correção para a condição de contradição}
+\label{tab:correcaoDelta}
+
+\begin{tabular}{c|c|c||c}
+\hline
+%Intervalo de amostras  &  erro médio relativo \\ \hline
+Limite Inferior & Alvo & Limite Superior & Valor de Correção\\ \hline
+\hline
+%0 a 1 $\tau$ & 83,40 \% \\ \hline
+10,0 & 10 & 10,7 & $\delta_0$ \\ \hline
+10,7 & 11 & 11,7 & $\delta_1$ \\ \hline
+11,7 & 12 & 12,8 & $\delta_2$ \\ \hline
+12,8 & 13 & 14,3 & $\delta_3$ \\ \hline
+14,3 & 15 & 15,8 & $\delta_4$ \\ \hline
+15,8 & 16 & 17,3 & $\delta_5$ \\ \hline
+17,3 & 18 & 19,4 & $\delta_6$ \\ \hline
+19,4 & 20 & 21,4 & $\delta_7$ \\ \hline
+21,4 & 22 & 23,5 & $\delta_8$ \\ \hline
+23,5 & 24 & 26,0 & $\delta_9$ \\ \hline
+26,0 & 27 & 29,1 & $\delta_{10}$ \\ \hline
+29,1 & 30 & 32,2 & $\delta_{11}$ \\ \hline
+32,2 & 33 & 35,2 & $\delta_{12}$ \\ \hline
+35,2 & 36 & 38,3 & $\delta_{13}$ \\ \hline
+38,3 & 39 & 41,9 & $\delta_{14}$ \\ \hline
+41,9 & 43 & 46,0 & $\delta_{15}$ \\ \hline
+46,0 & 47 & 50,0 & $\delta_{16}$ \\ \hline
+50,0 & 51 & 54,6 & $\delta_{17}$ \\ \hline
+54,6 & 56 & 60,2 & $\delta_{18}$ \\ \hline
+60,2 & 62 & 66,4 & $\delta_{19}$ \\ \hline
+66,4 & 68 & 73,0 & $\delta_{20}$ \\ \hline
+73,0 & 75 & 80,2 & $\delta_{21}$ \\ \hline
+80,2 & 82 & 88,3 & $\delta_{22}$ \\ \hline
+88,3 & 91 &100,0 & $\delta_{23}$ \\ \hline
+
+\end{tabular}
+
+{\vspace{0.2cm} \small Fonte: Próprio autor}
+\end{table}
+
+
+Para cada valor alvo, há um valor $\delta$ associado, 
+que é um valor de correção.
+Tomando como exemplo o valor de referência 25\%, 
+no momento inicial o vai haver uma grande contradição,
+então o reticulado vai ter como saída o valor 1, 
+do estado de valor máximo apresentado na 
+Figura \ref{fig:regiaoAtivaMuDelta}.
+
+O sistema então está com potência máxima, 
+vencendo a inércia do sistema que estava em repouso.
+O grau de contradição é reduzido conforme 
+o sistema se aproxiima do ponto de operação desejado,
+e quando o seu valor é menor do que 
+o parâmetro de limite, nesse caso estabelecido em 0,10,
+a saída assume o valor equivalente ao $\mu_0$, ou seja,
+o valor de referência, então: $\mu_0 = 0,25$, porém 
+é acrescido o valor do $\delta_9$, 
+que refere-se ao intervalo em que se encontra o 25\%.
+
+Assim a saída do controlador LPA$E\tau$ é 
+$\mu_0 + \delta_9$
+para um valor de referência de 25\% do valor máximo.
 
 
 
@@ -1092,6 +1196,28 @@ para garantir um $\delta$ satisfatório para tal região.
 
 
 
+
+
+\section{O fator de correção $\delta$}
+
+Um temporizador é implementado de modo a 
+gerar um primeiro intevalo de 3 segundos para 
+partida e acomodação do sistema, 
+em seguida a cada 1 segundo é feita uma verificação
+do grau de contradição, 
+e como resultado dessa verificação, 
+um incremento do fator de correção $\delta$ 
+que está em operação é realizada. 
+
+Assim, de forma adaptativa, 
+os valores de $\delta$ sempre estão sendo atualizados
+para variações que possam ocorrer no processo. 
+
+Caso o tempo de 1 segundo seja muito alto para um 
+determinado processo, 
+para as perturbações envolvidas no processo,
+o tempo pode ser alterado para gerar uma resposta 
+mais rápida ou mais lenta. 
 
 
 
