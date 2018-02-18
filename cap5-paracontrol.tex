@@ -8,7 +8,11 @@ não esgotando as formas e tentativas que poderão se seguir
 no decorrer da pesquisa.
 
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{A proposição e a anotação}
+
 Como ponto de partida, 
 dado o sistema a ser controlado apresentado anteriormente, 
 tendo como variável controlada 
@@ -18,20 +22,17 @@ a proposição adotada então foi:
 "P: A velocidade de rotação é máxima."
 
 Tal proposição permite que toda extensão de velocidades 
-seja representa pelos Graus de evidência, 
-sem que para uma dada velocidade de rotação ocorra que 
-$Gct=0$ e $Gc = -0,5$,
-onde mesmo não havendo contradição, 
-a região de operação no reticulado não é o estado verdadeiro.
+seja representa pelos Graus de evidência.
 
 Os graus de evidência adotados são: 
 
 \begin{itemize}
-\item Grau de evidência favorável($\mu_0$): 
+\item Grau de evidência favorável 0 ($\mu_0$): 
 O valor de referência, ou seja, 
-o valor desejado para a velocidade de rotação do sistema,
+o valor desejado para a velocidade de rotação do 
+disco acoplado ao eixo do motor(sistema),
 também chamado de \emph{setpoint}.
-\item Grau de evidência favorável($\mu_1$): 
+\item Grau de evidência favorável 1 ($\mu_1$): 
 O valor lido pelo sensor de rotação, ou seja, a variável controlada.
 Esse valor é convertido em 
 Grau de evidência desfavorável($\lambda$),
@@ -41,13 +42,15 @@ para os devidos cálculos da LPA$E\tau$.
 O diagrama da Figura \ref{fig:diagramaBlocosLPAEt} apresenta 
 a planta do sistema $g(t)$ tendo como saída a 
 variável controlada $c(t)$, 
-velocidade de rotação do disco acoplado ao eixo do motor, 
+que é a velocidade de rotação do disco 
+acoplado ao eixo do motor, 
 e como entrada a variável manipulada $u(t)$, 
 que é o parâmetro do \emph{PWM} 
 que produz a sinal aplicado à planta.
 
 
-\begin{figure}[!h]
+
+\begin{figure}[!h]%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%fg
 \centering
 \caption{Diagrama de blocos do controle utilizando a LPA$E\tau$}
 \begin{tikzpicture}[scale=1.0]
@@ -76,19 +79,29 @@ que produz a sinal aplicado à planta.
 \node (Kn2) at (2.5,1.5) {$K_n$};
 
 % LPAEt
-\node [fill=black, circle] (LPA0) at (5,4.0) { };
-\node [fill=black, circle] (LPA1) at (8,1.0) { };
+\node [fill=black, circle] (LPA0) at (4,4.0) { };
+\node [fill=black, circle] (LPA1) at (7,1.0) { };
 \draw[thick] (LPA0) rectangle (LPA1);
 \fill[white, nearly transparent] (LPA0) rectangle (LPA1);
-\draw [thick] (6.5,4.0) -- (8.0,2.5) -- (6.5,1.0) -- (5.0,2.5) -- (6.5,4.0);
-\node (LPA2v) at (6.5,2.5) {$LPAE\tau$};
-\node [fill=black, circle] (LPAu0)  at (5.0,3.5) { };
-\node [fill=black, circle] (LPAu1)  at (5.0,1.5) { };
-\node [fill=black, circle] (LPAgc)  at (8.0,3.5) { };
-\node [fill=black, circle] (LPAs)   at (8.0,2.5) { };
-\node [fill=black, circle] (LPAgct) at (8.0,1.5) { };
-\node (LPA2vu0)  at (4.4,3.7) {$\mu _0$};
-\node (LPA2vu1)  at (4.4,1.7) {$\mu _1$};
+\draw [thick] (5.5,4.0) -- (7.0,2.5) -- (5.5,1.0) -- (4.0,2.5) -- (5.5,4.0);
+\node (LPA2v) at (5.5,2.5) {$LPAE\tau$};
+\node [fill=black, circle] (LPAu0)  at (4.0,3.5) { };
+\node [fill=black, circle] (LPAu1)  at (4.0,1.5) { };
+\node [fill=black, circle] (LPAgc)  at (7.0,3.5) { };
+\node [fill=black, circle] (LPAs)   at (7.0,2.5) { };
+\node [fill=black, circle] (LPAgct) at (7.0,1.5) { };
+\node (LPA2vu0)  at (3.4,3.7) {$\mu _0$};
+\node (LPA2vu1)  at (3.4,1.7) {$\mu _1$};
+
+% Kn u(t)
+\node [fill=black, circle] (KU0) at (8.0,3.0) { };
+\node [fill=black, circle] (KU1) at (9.0,2.0) { };
+\draw[thick] (KU0) rectangle (KU1);
+\fill[white, nearly transparent] (KU0) rectangle (KU1);
+\node [fill=black, circle] (KUin)  at (8.0,2.5) { };
+\node [fill=black, circle] (KUout) at (9.0,2.5) { };
+\node (Ku2) at (8.5,2.5) {$K_u$};
+
 
 % Planta
 \node [fill=black, circle] (GT0) at (10,4.0) { };
@@ -110,6 +123,7 @@ que produz a sinal aplicado à planta.
 % GT -> fim
 \draw [->, thick] (GTout) -- (15,2.5);
 \node (ct) at (14.0,2.8) {$c(t)$};
+\node (ct) at (1.0,1.8) {$c(t)$};
 
 % normalização 0..1 -> LPA2v u0
 \draw [->, thick] (KSPout) -- (LPAu0);
@@ -117,9 +131,13 @@ que produz a sinal aplicado à planta.
 % normalização 0..1 -> LPA2v u1
 \draw [->, thick] (KSout) -- (LPAu1);
 
-% LPAEt -> GT
-\draw [->, thick] (LPAs) -- (GTin);
-\node (ut) at (9.0,2.8) {$u(t)$};
+% LPAEt -> Ku
+\draw [->, thick] (LPAs) -- (KUin);
+\node (ut) at (7.5,2.8) {$\mu_{ER}\delta$};
+
+% Ku -> GT
+\draw [->, thick] (KUout) -- (GTin);
+\node (ut) at (9.5,2.8) {$u(t)$};
 
 % GT -> Kn Sensor
 \draw [->, thick] (GTout) -- (14.0,2.5) -- (14.0,0.0) -- (1.0,0.0) -- (1.0,1.5) -- (KSin);
@@ -130,12 +148,14 @@ que produz a sinal aplicado à planta.
 
 {\vspace{0.2cm} \small Fonte: Próprio autor}
 \end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 
 A variável manipulada $u(t)$ é produzida pelo 
 bloco controlador $LPAE\tau$, 
 e este recebe seus parâmetros no formato dos 
-graus de evidência favoráveis $\mu_0$ ee $\mu_1$.
+graus de evidência favoráveis $\mu_0$ e $\mu_1$.
 Sendo o parâmetro $\mu_1$ 
 convertido internamente em $\lambda$ 
 como grau de evidência desfavorável.
@@ -148,26 +168,40 @@ LPA$E\tau$.
 Para adequação da escala das grandezas 
 de referência $r(t)$ e da variável controlada $c(t)$
 ao intervalo de trabalho dos parâmetros da LPA$E\tau$, 
-é inserido um bloco de normalização do sinal em cada entrada.
+é inserido um bloco de normalização do sinal em cada entrada,
+bem como na saída.
 
 
 Para a normalização os blocos $K_n$ realizam as seguinte operações:
 
-\begin{equation}
+\begin{equation}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% eq
 \mu_0 = \frac{ r(t)}{c(t)_{\text{máx}}} \ \ \ \ \ \ \ \ \mu_1 = \frac{c(t)}{c(t)_{\text{máx}}}
-\end{equation}
+\end{equation}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 onde:
 
 $c(t)_{\text{máx}}$: é a velocidade máxima produzida pelo sistema.
 
 
+Para a normalização do bloco $K_u$ é realizada a seguinte operação:
+
+\begin{equation}
+u(t) = \mu_{ER}\delta . 100
+\end{equation}
+
+onde:
+
+$\mu_{ER}\delta$: valor contido no intervalo fechado [0, 1].
+
+$u(t)$: valor contido no intervalo [0, 100] 
+referente ao parâmetro(\%) do acionamento PWM.
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
+
 
 \section{Ação de controle Liga-Desliga utilizando a LPA$E\tau$}
 
@@ -175,8 +209,65 @@ Assim como no capítulo sobre Ação de Controle,
 o tipo mais simples de controlador, o Liga-Desliga,
 pode ser implementado utilizando a 
 LPA$E\tau$, 
-dividindo o reticulado conforme 
+dividindo o reticulado em duas partes conforme 
 Figura \ref{fig:reticuladoEtOnOff}.
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[!h]%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%fg
+\centering
+\caption{Representação do reticulado da LPA$E\tau$ dividido em duas partes}
+\begin{tikzpicture}[scale=0.60]
+\tikzset{ >=latex, inner sep=0pt, outer sep=0pt,  }
+
+%\draw [lightgray, dashed](0,0) grid (10,10);
+
+\node [fill=black, circle] (V) at (9,5) {:};
+\node [fill=black, circle] (F) at (1,5) {:};
+\node [fill=black, circle] (T) at (5,9) {:};
+\node [fill=black, circle] (L) at (5,1) {:};
+
+\draw [->, thick] (V)   -- (10,5);
+\draw [    thick] (0,5) -- (F);
+\draw [->, thick] (T)   -- (5,10);
+\draw [    thick] (5,0) -- (L);
+
+\draw [thick] (V) -- (T);
+\draw [thick] (T) -- (F);
+\draw [thick] (F) -- (L);
+\draw [thick] (L) -- (V);
+
+\draw [gray,thick] (V) -- (F);
+
+\node at (10,4.5) {$G_{c}$};
+\node at (5.5,10) {$G_{ct}$};
+
+\node at (4.2,9.2) {$+1$};
+\node at (9.0,5.8) {$+1$};
+\node at (5.8,1.0) {$-1$};
+\node at (0.7,4.2) {$-1$};
+
+\node at (9.0,4.3) {V};
+\node at (1.0,5.7) {F};
+\node at (5.5,9.2) {$\top$};
+\node at (4.5,1.0) {$\bot$};
+
+\node at (5.0,6.5) {\Large{Ligar}};
+\node at (5.0,3.5) {\Large{Desligar}};
+
+\end{tikzpicture}
+\label{fig:reticuladoEtOnOff}
+
+{\small Fonte: Próprio autor }
+\end{figure}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
 
 Utilizando o $Gct$ como variável condicionante:
 
@@ -190,22 +281,30 @@ o Grau de contradição encontra-se na condição de
 \textit{Inconsistência}, conforme exposto na Equação 
 \ref{eq:grauInconsistenciaIndefinicao}.
 
-Utilizando a Equação \ref{eq:grauContradicao} 
-( $Gct = \mu + \lambda - 1 $ ) e 
-substituindo 
-$\mu$ por $\mu_0$ e $\lambda$ por $(1-\mu_1)$, 
+Substituindo $\mu$ por $\mu_0$ e 
+$\lambda$ por $(1-\mu_1)$, 
+utilizando a Equação \ref{eq:grauContradicao} 
+( $Gct = \mu + \lambda - 1 $ )
 temos:
 
-\begin{equation}
+
+
+\begin{equation}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Eq
 Gct = \mu_0 + (1-\mu_1) -1
-\end{equation}
+\end{equation}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 
 simplificando temos então:
 
-\begin{equation}
+
+
+\begin{equation}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Eq
 Gct = \mu_0 - \mu_1
 \label{eq:gctmu0mu1}
-\end{equation}
+\end{equation}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 
 Supondo que o \emph{especialista 0} afirme que 
 o valor da variável controlada é 25\% do valor máximo, 
@@ -215,14 +314,19 @@ seu valor é de 20\% do valor máximo,
 o grau de evidência favorável 1 é $\mu_1 = 0,20$. 
 Substituindo $\mu_0$ e $\mu_1$ em \ref{eq:gctmu0mu1}:
 
-\begin{equation}
-Gct = 0,25 - 0,20 = 0,05
-\end{equation}
 
-O Grau de Contradição positivo é mostrado no 
-reticulado da LPA$E\tau$ na Figura \ref{fig:gctpos},
-onde, nota-se o ponto de operação do sistema
-acima da Reta perfeitamente definida.
+
+\begin{equation}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Eq
+Gct = 0,25 - 0,20 = 0,05
+\end{equation}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+O ponto de operação do sistema 
+localiza-se, então, acima da reta perfeitamente definida,
+para todo grau de contradição positivo, 
+como é mostrado na Figura \ref{fig:gctpos}.
+
 
 
 \item $Gct < 0 $: 
@@ -243,31 +347,34 @@ seu valor é de 30\% do valor máximo,
 o grau de evidência favorável 2 é $\mu_1 = 0,30$.
 Substituindo $\mu_0$ e $\mu_1$ em \ref{eq:gctmu0mu1}:
 
-\begin{equation}
-Gct = 0,25 - 0,30 = -0,05
-\end{equation}
 
-O Grau de Contradição negativo é mostrado no 
-reticulado da LPA$E\tau$ na Figura \ref{fig:gctneg},
-onde, nota-se o ponto de operação do sistema
-abaixo da Reta perfeitamente definida.
+
+\begin{equation}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Eq
+Gct = 0,25 - 0,30 = -0,05
+\end{equation}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+O ponto de operação do sistema 
+localiza-se, então, abaixo da reta perfeitamente definida,
+para todo grau de contradição negativo,
+como é mostrado na Figura \ref{fig:gctneg}.
+
+
 
 
 \end{itemize}
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-
-\begin{figure}[!htb]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Fg
+\begin{figure}[!htb]%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \centering
 \caption{Representação do reticulado da LPA$E\tau$ para ação de controle Liga-Desliga}
 \subfloat[$Gct$ positivo ($\mu_0 > \mu_1$)]{\label{fig:gctpos}
 
-\begin{tikzpicture}[scale=0.75]
+\begin{tikzpicture}[scale=0.7]
 \tikzset{ >=latex, inner sep=0pt, outer sep=0pt,  }
 %\draw [lightgray, dashed](0,0) grid (10,10);
 
@@ -276,18 +383,6 @@ abaixo da Reta perfeitamente definida.
 \node [fill=black, circle] (T) at (5,9) {:};
 \node [fill=black, circle] (L) at (5,1) {:};
 
-%\node [fill=black, circle] (N) at (5,7) { };
-%\node [fill=black, circle] (S) at (5,3) { };
-%\node [fill=black, circle] (E) at (7,5) { };
-%\node [fill=black, circle] (W) at (3,5) { };
-
-%\node [fill=black, circle] (NE) at (7,7) { };
-%\node [fill=black, circle] (SE) at (7,3) { };
-%\node [fill=black, circle] (NW) at (3,7) { };
-%\node [fill=black, circle] (SW) at (3,3) { };
-
-%\draw [dashed] (F) -- (V);
-%\draw [dashed] (T) -- (L);
 \draw [->, thick] (V)   -- (10,5);
 \draw [    thick] (0,5) -- (F);
 \draw [->, thick] (T)   -- (5,10);
@@ -298,10 +393,7 @@ abaixo da Reta perfeitamente definida.
 \draw [thick] (F) -- (L);
 \draw [thick] (L) -- (V);
 
-%\draw [gray,dashed] (T) -- (L);
 \draw [gray,thick] (V) -- (F);
-%\draw[thick] (SW) rectangle (NE);
-%\fill[nearly transparent] (SW) rectangle (NE);
 
 \node at (10,4.5) {$G_{c}$};
 \node at (5.5,10) {$G_{ct}$};
@@ -315,13 +407,6 @@ abaixo da Reta perfeitamente definida.
 \node at (1.0,5.5) {F};
 \node at (5.5,9.2) {$\top$};
 \node at (4.5,1.0) {$\bot$};
-
-%\node at (5.0,7.0) {\Large{Ligar}};
-%\node at (5.0,6.0) {\large{PWM = 100\%}};
-
-%\node at (5.0,3.0) {\Large{Desligar}};
-%\node at (5.0,3.0) {\large{PWM = 0\%}};
-
 
 \node [fill=red, circle] (MU) at (3.0,5.3) {x};
 
@@ -336,18 +421,6 @@ abaixo da Reta perfeitamente definida.
 \node [fill=black, circle] (T) at (5,9) {:};
 \node [fill=black, circle] (L) at (5,1) {:};
 
-%\node [fill=black, circle] (N) at (5,7) { };
-%\node [fill=black, circle] (S) at (5,3) { };
-%\node [fill=black, circle] (E) at (7,5) { };
-%\node [fill=black, circle] (W) at (3,5) { };
-
-%\node [fill=black, circle] (NE) at (7,7) { };
-%\node [fill=black, circle] (SE) at (7,3) { };
-%\node [fill=black, circle] (NW) at (3,7) { };
-%\node [fill=black, circle] (SW) at (3,3) { };
-
-%\draw [dashed] (F) -- (V);
-%\draw [dashed] (T) -- (L);
 \draw [->, thick] (V)   -- (10,5);
 \draw [    thick] (0,5) -- (F);
 \draw [->, thick] (T)   -- (5,10);
@@ -358,10 +431,7 @@ abaixo da Reta perfeitamente definida.
 \draw [thick] (F) -- (L);
 \draw [thick] (L) -- (V);
 
-%\draw [gray,dashed] (T) -- (L);
 \draw [gray,thick] (V) -- (F);
-%\draw[thick] (SW) rectangle (NE);
-%\fill[nearly transparent] (SW) rectangle (NE);
 
 \node at (10,4.5) {$G_{c}$};
 \node at (5.5,10) {$G_{ct}$};
@@ -376,12 +446,6 @@ abaixo da Reta perfeitamente definida.
 \node at (5.5,9.2) {$\top$};
 \node at (4.5,1.0) {$\bot$};
 
-%\node at (5.0,7.0) {\Large{Ligar}};
-%\node at (5.0,6.0) {\large{PWM = 100\%}};
-
-%\node at (5.0,3.0) {\Large{Desligar}};
-%\node at (5.0,3.0) {\large{PWM = 0\%}};
-
 \node [fill=blue, circle] (MU1) at (3.0,4.7) {x};
 
 \end{tikzpicture}}
@@ -389,7 +453,10 @@ abaixo da Reta perfeitamente definida.
 \label{fig:sistPrimeiraOrdem}
 
 {\small Fonte: Próprio autor}
-\end{figure}
+\end{figure}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 
 
 
@@ -410,6 +477,55 @@ para a condição em que o $Gct$ define o estado
 de Ligar ou Desligar o sistema é mostrado na 
 Figura \ref{fig:reticuladoEtOnOff}.
 
+A opção pela ação de controle Liga-Desliga
+é interessante do ponto de vista da velocidade 
+de resposta ao degrau, 
+porém apresenta uma oscilação que, 
+a depender da dinâmica do sistema que está sendo trabalhado,
+pode gerar uma amplitude maior do que o aceitável.
+%como pôde ser visto na 
+%Figura \ref{fig:acaoControleLigaDesliga}.
+
+%Outra estratégia simples é a 
+%utilização do sistema sem realimentação, 
+%aplicando à saída o valor proporcional desejado.
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+\section{A variável manipulada e a equivalência do controle em malha aberta}
+
+Uma outra estratégia de controle simples, 
+é a implementação equivalente a um controle em malha aberta,
+onde é aplicado à entrada da planta, 
+através da variável manipulada,
+um valor proporcional ao valor desejado na saída,
+que é a variável controlada, 
+porém a planta controlada necessita apresentar um 
+comportamento linear. 
+
+Para a implementação da saída do bloco 
+LPA$E\tau$ de modo equivalente ao sistema em malha aberta,
+assumindo não haver contradição, 
+e para a Proposição adotada: 
+\emph{"P: A velocidade de rotação é máxima"}, 
+temos a Reta Perfeitamente Definida como referencial. 
+
+A Figura \ref{fig:gc25} mostra o ponto de operação 
+para uma velocidade de 25\% da proposição, 
+e a Figura \ref{fig:gc90} mostra o ponto de operação
+para a velocidade de 90\% da proposição.
+
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -417,12 +533,13 @@ Figura \ref{fig:reticuladoEtOnOff}.
 
 
 
-\begin{figure}[!h]
+\begin{figure}[!htb]
 \centering
-\caption{Representação do reticulado da LPA$E\tau$ dividido em duas partes}
-\begin{tikzpicture}[scale=0.8]
-\tikzset{ >=latex, inner sep=0pt, outer sep=0pt,  }
+\caption{Representação do reticulado da LPA$E\tau$}
+\subfloat[$Gc = -0,50 \ \ \ \mu_{ER} = 0,25$]{\label{fig:gc25}
 
+\begin{tikzpicture}[scale=0.75]
+\tikzset{ >=latex, inner sep=0pt, outer sep=0pt,  }
 %\draw [lightgray, dashed](0,0) grid (10,10);
 
 \node [fill=black, circle] (V) at (9,5) {:};
@@ -430,18 +547,6 @@ Figura \ref{fig:reticuladoEtOnOff}.
 \node [fill=black, circle] (T) at (5,9) {:};
 \node [fill=black, circle] (L) at (5,1) {:};
 
-%\node [fill=black, circle] (N) at (5,7) { };
-%\node [fill=black, circle] (S) at (5,3) { };
-%\node [fill=black, circle] (E) at (7,5) { };
-%\node [fill=black, circle] (W) at (3,5) { };
-
-%\node [fill=black, circle] (NE) at (7,7) { };
-%\node [fill=black, circle] (SE) at (7,3) { };
-%\node [fill=black, circle] (NW) at (3,7) { };
-%\node [fill=black, circle] (SW) at (3,3) { };
-
-%\draw [dashed] (F) -- (V);
-%\draw [dashed] (T) -- (L);
 \draw [->, thick] (V)   -- (10,5);
 \draw [    thick] (0,5) -- (F);
 \draw [->, thick] (T)   -- (5,10);
@@ -452,10 +557,7 @@ Figura \ref{fig:reticuladoEtOnOff}.
 \draw [thick] (F) -- (L);
 \draw [thick] (L) -- (V);
 
-%\draw [gray,dashed] (T) -- (L);
 \draw [gray,thick] (V) -- (F);
-%\draw[thick] (SW) rectangle (NE);
-%\fill[nearly transparent] (SW) rectangle (NE);
 
 \node at (10,4.5) {$G_{c}$};
 \node at (5.5,10) {$G_{ct}$};
@@ -470,52 +572,61 @@ Figura \ref{fig:reticuladoEtOnOff}.
 \node at (5.5,9.2) {$\top$};
 \node at (4.5,1.0) {$\bot$};
 
-\node at (5.0,7.0) {\Large{Ligar}};
-%\node at (5.0,6.0) {\large{PWM = 100\%}};
+\node [fill=purple, circle] (MU) at (3.0,5.0) {x};
 
-\node at (5.0,3.0) {\Large{Desligar}};
-%\node at (5.0,3.0) {\large{PWM = 0\%}};
+\end{tikzpicture} }
+\subfloat[$Gc = 0,80 \ \ \ \mu_{ER} = 0,90$]{\label{fig:gc90}
+\begin{tikzpicture}[scale=0.75]
+\tikzset{ >=latex, inner sep=0pt, outer sep=0pt,  }
 
+\node [fill=black, circle] (V) at (9,5) {:};
+\node [fill=black, circle] (F) at (1,5) {:};
+\node [fill=black, circle] (T) at (5,9) {:};
+\node [fill=black, circle] (L) at (5,1) {:};
 
-\end{tikzpicture}
-\label{fig:reticuladoEtOnOff}
+\draw [    thick] (0,5) -- (F);
+\draw [->, thick] (T)   -- (5,10);
+\draw [    thick] (5,0) -- (L);
 
-{\small Fonte: Próprio autor }
+\draw [thick] (V) -- (T);
+\draw [thick] (T) -- (F);
+\draw [thick] (F) -- (L);
+\draw [thick] (L) -- (V);
+
+\draw [gray,thick] (V) -- (F);
+
+\node at (10,4.5) {$G_{c}$};
+\node at (5.5,10) {$G_{ct}$};
+
+\node at (4.5,9.2) {$+1$};
+\node at (9.0,5.5) {$+1$};
+\node at (5.5,1.0) {$-1$};
+\node at (1.0,4.5) {$-1$};
+
+\node at (9.0,4.5) {V};
+\node at (1.0,5.5) {F};
+\node at (5.5,9.2) {$\top$};
+\node at (4.5,1.0) {$\bot$};
+
+\node [fill=purple, circle] (MU1) at (8.2,5.0) {x};
+
+\end{tikzpicture}}
+
+\label{fig:sistPrimeiraOrdem}
+
+{\small Fonte: Próprio autor}
 \end{figure}
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-A opção pela ação de controle Liga-Desliga
-é interessante do ponto de vista da velocidade 
-de resposta ao degrau, 
-porém apresenta uma oscilação que, 
-a depender da dinâmica do sistema que está sendo trabalhado,
-pode gerar uma amplitude maior do que o aceitável,
-como pôde ser visto na 
-Figura \ref{fig:acaoControleLigaDesliga}.
-
-Outra estratégia simples é a 
-utilização do sistema sem realimentação, 
-aplicando à saída o valor proporcional desejado.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\section{A variável manipulada}
 
-Para a implementação da saída do bloco 
-LPA$E\tau$ de modo equivalente ao sistema em malha aberta,
-assumindo não haver contradição, 
-e para a Proposição adotada: 
-\emph{"P: A velocidade de rotação é máxima"}, 
-temos a Reta Perfeitamente Definida como referencial. 
-
-A Figura \ref{fig:gc25} mostra o ponto de operação 
-para uma velocidade de 25\% da proposição, 
-e a Figura \ref{fig:gc90} mostra o ponto de operação
-para a velocidade de 90\% da proposição.
+\vspace{3cm}
 
 Assim, considerando o Grau de Contradição nulo:
 
@@ -559,167 +670,37 @@ pelo motor no sistema proposto.
 
 
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\begin{figure}[!htb]
-\centering
-\caption{Representação do reticulado da LPA$E\tau$}
-\subfloat[$Gc = -0,50 \ \ \ \mu_{ER} = 0,25$]{\label{fig:gc25}
-
-\begin{tikzpicture}[scale=0.75]
-\tikzset{ >=latex, inner sep=0pt, outer sep=0pt,  }
-%\draw [lightgray, dashed](0,0) grid (10,10);
-
-\node [fill=black, circle] (V) at (9,5) {:};
-\node [fill=black, circle] (F) at (1,5) {:};
-\node [fill=black, circle] (T) at (5,9) {:};
-\node [fill=black, circle] (L) at (5,1) {:};
-
-%\node [fill=black, circle] (N) at (5,7) { };
-%\node [fill=black, circle] (S) at (5,3) { };
-%\node [fill=black, circle] (E) at (7,5) { };
-%\node [fill=black, circle] (W) at (3,5) { };
-
-%\node [fill=black, circle] (NE) at (7,7) { };
-%\node [fill=black, circle] (SE) at (7,3) { };
-%\node [fill=black, circle] (NW) at (3,7) { };
-%\node [fill=black, circle] (SW) at (3,3) { };
-
-%\draw [dashed] (F) -- (V);
-%\draw [dashed] (T) -- (L);
-\draw [->, thick] (V)   -- (10,5);
-\draw [    thick] (0,5) -- (F);
-\draw [->, thick] (T)   -- (5,10);
-\draw [    thick] (5,0) -- (L);
-
-\draw [thick] (V) -- (T);
-\draw [thick] (T) -- (F);
-\draw [thick] (F) -- (L);
-\draw [thick] (L) -- (V);
-
-%\draw [gray,dashed] (T) -- (L);
-\draw [gray,thick] (V) -- (F);
-%\draw[thick] (SW) rectangle (NE);
-%\fill[nearly transparent] (SW) rectangle (NE);
-
-\node at (10,4.5) {$G_{c}$};
-\node at (5.5,10) {$G_{ct}$};
-
-\node at (4.5,9.2) {$+1$};
-\node at (9.0,5.5) {$+1$};
-\node at (5.5,1.0) {$-1$};
-\node at (1.0,4.5) {$-1$};
-
-\node at (9.0,4.5) {V};
-\node at (1.0,5.5) {F};
-\node at (5.5,9.2) {$\top$};
-\node at (4.5,1.0) {$\bot$};
-
-%\node at (5.0,7.0) {\Large{Ligar}};
-%\node at (5.0,6.0) {\large{PWM = 100\%}};
-
-%\node at (5.0,3.0) {\Large{Desligar}};
-%\node at (5.0,3.0) {\large{PWM = 0\%}};
 
 
-\node [fill=purple, circle] (MU) at (3.0,5.0) {x};
 
-\end{tikzpicture} }
-\subfloat[$Gc = 0,80 \ \ \ \mu_{ER} = 0,90$]{\label{fig:gc90}
-\begin{tikzpicture}[scale=0.75]
-\tikzset{ >=latex, inner sep=0pt, outer sep=0pt,  }
-%\draw [lightgray, dashed](0,0) grid (10,10);
-
-\node [fill=black, circle] (V) at (9,5) {:};
-\node [fill=black, circle] (F) at (1,5) {:};
-\node [fill=black, circle] (T) at (5,9) {:};
-\node [fill=black, circle] (L) at (5,1) {:};
-
-%\node [fill=black, circle] (N) at (5,7) { };
-%\node [fill=black, circle] (S) at (5,3) { };
-%\node [fill=black, circle] (E) at (7,5) { };
-%\node [fill=black, circle] (W) at (3,5) { };
-
-%\node [fill=black, circle] (NE) at (7,7) { };
-%\node [fill=black, circle] (SE) at (7,3) { };
-%\node [fill=black, circle] (NW) at (3,7) { };
-%\node [fill=black, circle] (SW) at (3,3) { };
-
-%\draw [dashed] (F) -- (V);
-%\draw [dashed] (T) -- (L);
-\draw [->, thick] (V)   -- (10,5);
-\draw [    thick] (0,5) -- (F);
-\draw [->, thick] (T)   -- (5,10);
-\draw [    thick] (5,0) -- (L);
-
-\draw [thick] (V) -- (T);
-\draw [thick] (T) -- (F);
-\draw [thick] (F) -- (L);
-\draw [thick] (L) -- (V);
-
-%\draw [gray,dashed] (T) -- (L);
-\draw [gray,thick] (V) -- (F);
-%\draw[thick] (SW) rectangle (NE);
-%\fill[nearly transparent] (SW) rectangle (NE);
-
-\node at (10,4.5) {$G_{c}$};
-\node at (5.5,10) {$G_{ct}$};
-
-\node at (4.5,9.2) {$+1$};
-\node at (9.0,5.5) {$+1$};
-\node at (5.5,1.0) {$-1$};
-\node at (1.0,4.5) {$-1$};
-
-\node at (9.0,4.5) {V};
-\node at (1.0,5.5) {F};
-\node at (5.5,9.2) {$\top$};
-\node at (4.5,1.0) {$\bot$};
-
-%\node at (5.0,7.0) {\Large{Ligar}};
-%\node at (5.0,6.0) {\large{PWM = 100\%}};
-
-%\node at (5.0,3.0) {\Large{Desligar}};
-%\node at (5.0,3.0) {\large{PWM = 0\%}};
-
-\node [fill=purple, circle] (MU1) at (8.2,5.0) {x};
-
-\end{tikzpicture}}
-
-\label{fig:sistPrimeiraOrdem}
-
-{\small Fonte: Próprio autor}
-\end{figure}
-
-
-\section{A região de parada}
+\section{A região de parada - zona morta}
 
 O sistema possui uma região de operação 
 que não é possível realizar o controle, 
 pois é a região onde a inércia do sistema parado
-impede a movimentação do eixo do motor, 
+impede a movimentação do eixo do motor,
+denominada de Zona Morta,
 o que deixa de acontecer em torno dos 10\% do valor do PWM,
 de acordo com testes realizados.
 
-Sendo assim, foi definida uma região de para o controlador 
-aplicar potência máxima ao sistema, 
-e tal região pode ser vista na 
-Figura \ref{fig:zonaMorta} e 
-denominada como Zona Morta, 
-pois para qualquer variação dentro dessa faixa, 
-não há variação de velocidade no motor.
+A Figura \ref{fig:zonaMorta} mostra essa região:
 
 
-\begin{figure}[!h]
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Fg
+\begin{figure}[!h]%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \centering
 \caption{Representação da zona morta no reticulado da LPA$E\tau$}
 \begin{tikzpicture}[scale=0.80]
 \tikzset{ >=latex, inner sep=0pt, outer sep=0pt,  }
 
-\draw [lightgray, dashed](0,0) grid (10,10);
+%\draw [lightgray, dashed](0,0) grid (10,10);
 
 \node [fill=black, circle] (V) at (9,5) {:};
 \node [fill=black, circle] (F) at (1,5) {:};
@@ -735,9 +716,6 @@ não há variação de velocidade no motor.
 \draw [thick] (T) -- (F);
 \draw [thick] (F) -- (L);
 \draw [thick] (L) -- (V);
-
-%\draw[thick] (SW) rectangle (NE);
-%\fill[nearly transparent] (SW) rectangle (NE);
 
 \node at (10,4.5) {$G_{c}$};
 \node at (5.5,10) {$G_{ct}$};
@@ -761,13 +739,9 @@ não há variação de velocidade no motor.
 
 {\small Fonte: Próprio autor }
 \end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-A região denominada Zona Morta, 
-representa uma região em que o ponto de operação do sistema
-estará no momento inicial de partida do sistema, 
-em que a variável de referência acabar de ser setada e
-a variável controlada ainda estiver na condição nula, 
-pelo sistema estar saindo da condição de repouso. 
+
 
 
 
@@ -779,13 +753,16 @@ A Figura \ref{fig:travamentoEixo} mostra a região
 que pode sinalizar tal anormalidade.
 
 
-\begin{figure}[!h]
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Fg
+\begin{figure}[!h]%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \centering
 \caption{Representação da região de travamento no reticulado da LPA$E\tau$}
 \begin{tikzpicture}[scale=0.80]
 \tikzset{ >=latex, inner sep=0pt, outer sep=0pt,  }
 
-\draw [lightgray, dashed](0,0) grid (10,10);
+%\draw [lightgray, dashed](0,0) grid (10,10);
 
 \node [fill=black, circle] (V) at (9,5) {:};
 \node [fill=black, circle] (F) at (1,5) {:};
@@ -802,9 +779,6 @@ que pode sinalizar tal anormalidade.
 \draw [thick] (F) -- (L);
 \draw [thick] (L) -- (V);
 
-%\draw[thick] (SW) rectangle (NE);
-%\fill[nearly transparent] (SW) rectangle (NE);
-
 \node at (10,4.5) {$G_{c}$};
 \node at (5.5,10) {$G_{ct}$};
 
@@ -818,7 +792,6 @@ que pode sinalizar tal anormalidade.
 \node at (5.5,9.2) {$\top$};
 \node at (4.5,1.0) {$\bot$};
 
-
 \draw [fill, purple, nearly transparent] (1.5,5.5) -- (5.0,9.0) -- (5.2,8.8) -- (1.5,5.5);
 \draw [dashed, purple] (5.2,8.8) -- (1.5,5.5);
 \draw [thick] (5.0,9.0) -- (1.0,5.0);
@@ -828,6 +801,10 @@ que pode sinalizar tal anormalidade.
 
 {\small Fonte: Próprio autor }
 \end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
 
 
 Nesta condição o controlador pode tomar a dicisão de 
@@ -840,18 +817,28 @@ a depender do tipo de sistema a ser controlado.
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
 \section{ A região de operação }
 
 Para a região de operação, 
 foi estipulado e verificado de forma empírica 
 um valor de grau de contradição adequado para 
 atender os requisitos de desempenho do sistema, 
-que foi um grau de contradição contido no 
-intervalo $[-0,1;0,1]$. 
+que foi um grau de contradição menor do que 0,1 ($Gct < 1$) 
+e maior do que -0,05 ($Gct > -0,05$). 
 
 
 
-\begin{figure}[!h]
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Fg
+\begin{figure}[!h]%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \centering
 \caption{Representação da região ativa no reticulado da LPA$E\tau$}
 \begin{tikzpicture}[scale=0.80]
@@ -874,9 +861,6 @@ intervalo $[-0,1;0,1]$.
 \draw [thick] (F) -- (L);
 \draw [thick] (L) -- (V);
 
-%\draw[thick] (SW) rectangle (NE);
-%\fill[nearly transparent] (SW) rectangle (NE);
-
 \node at (10,4.5) {$G_{c}$};
 \node at (5.5,10) {$G_{ct}$};
 
@@ -892,14 +876,10 @@ intervalo $[-0,1;0,1]$.
 
 \draw [fill, red,nearly transparent] (1.0,5.0) -- (1.5,5.5) -- (1.5,4.5) -- (1.0,5.0);
 \draw [fill, purple, nearly transparent] (1.5,5.5) -- (5.0,9.0) -- (5.2,8.8) -- (1.5,5.5);
-\draw [fill, blue, nearly transparent] (5.0,1.0) -- (8.0,4.0) -- (2.0,4.0) -- (5.0,1.0);
+\draw [fill, blue, nearly transparent] (5.0,1.0) -- (8.5,4.5) -- (1.5,4.5) -- (5.0,1.0);
 \draw [fill, green, nearly transparent] (5.2,8.8) -- (2.1,6.0) -- (8.0,6.0) -- (5.2,8.8);
 
-
-%\draw [dashed, purple] (5.2,8.8) -- (1.5,5.5);
 \draw [thick] (5.0,9.0) -- (1.0,5.0);
-%\draw [gray,thick] (V) -- (F);
-
 
 \node at (5.0,7.0) {1};
 \node at (5.0,5.0) {$\mu_0$};
@@ -910,13 +890,15 @@ intervalo $[-0,1;0,1]$.
 
 {\small Fonte: Próprio autor }
 \end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 
 
 
 Os valores de $Gct > 0,1$ geram na saída o valor máximo,
-1,0. Na região oposta, para $Gct < -0,1$ a saída assume
- o valor nulo, 0. 
+$1,0$. Na região oposta, para $Gct < -0,05$ a saída assume
+ o valor nulo, $0,0$. 
 
 Aplicando um degrau à entrada do sistema, 
 podemos perceber o gráfico da 
@@ -927,13 +909,20 @@ este não apresenta problema por estar
 dentro da tolerância aceitável. 
 
 
-\begin{figure}[!htb]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Img
+\begin{figure}[!htb]%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \caption{Ação de controle utilizando LPA$E\tau$}
 \vspace{-1cm}\center\includegraphics[scale=1.6]{./imagens/LPAEt-gct100.eps}
 \label{fig:acaoLPAEtgct100}
 
 {\small Fonte: Próprio autor}
 \end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
 
 Como a relação entre o valor de referência e a 
 velocidade de rotação do motor não é perfeitamente linear,
@@ -950,7 +939,11 @@ fica da seguinte forma mostrada na
 Figura \ref{fig:regiaoAtivaMuDelta}. 
 
 
-\begin{figure}[!h]
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Fig
+\begin{figure}[!h]%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \centering
 \caption{Representação da região ativa no reticulado da LPA$E\tau$}
 \begin{tikzpicture}[scale=0.80]
@@ -973,9 +966,6 @@ Figura \ref{fig:regiaoAtivaMuDelta}.
 \draw [thick] (F) -- (L);
 \draw [thick] (L) -- (V);
 
-%\draw[thick] (SW) rectangle (NE);
-%\fill[nearly transparent] (SW) rectangle (NE);
-
 \node at (10,4.5) {$G_{c}$};
 \node at (5.5,10) {$G_{ct}$};
 
@@ -991,40 +981,37 @@ Figura \ref{fig:regiaoAtivaMuDelta}.
 
 \draw [fill, red,nearly transparent] (1.0,5.0) -- (1.5,5.5) -- (1.5,4.5) -- (1.0,5.0);
 \draw [fill, purple, nearly transparent] (1.5,5.5) -- (5.0,9.0) -- (5.2,8.8) -- (1.5,5.5);
-\draw [fill, blue, nearly transparent] (5.0,1.0) -- (8.0,4.0) -- (2.0,4.0) -- (5.0,1.0);
+\draw [fill, blue, nearly transparent] (5.0,1.0) -- (8.5,4.5) -- (1.5,4.5) -- (5.0,1.0);
 \draw [fill, green, nearly transparent] (5.2,8.8) -- (2.1,6.0) -- (8.0,6.0) -- (5.2,8.8);
 
-
-%\draw [dashed, purple] (5.2,8.8) -- (1.5,5.5);
 \draw [thick] (5.0,9.0) -- (1.0,5.0);
-%\draw [gray,thick] (V) -- (F);
-
 
 \node at (5.0,7.0) {1};
 \node at (5.0,5.0) {$\mu_0 + \delta$};
 \node at (5.0,3.0) {0};
 
-
-\draw [dashed, gray] (2.5,6.0) -- (2.5,4.0);
-\draw [dashed, gray] (3.5,6.0) -- (3.5,4.0);
-\draw [dashed, gray] (6.5,6.0) -- (6.5,4.0);
-\draw [dashed, gray] (7.5,6.0) -- (7.5,4.0);
-\draw [dashed, lightgray] (4.5,6.0) -- (4.5,4.0);
-\draw [dashed, lightgray] (5.5,6.0) -- (5.5,4.0);
-
+\draw [dashed, gray] (2.5,6.0) -- (2.5,4.5);
+\draw [dashed, gray] (3.5,6.0) -- (3.5,4.5);
+\draw [dashed, gray] (6.5,6.0) -- (6.5,4.5);
+\draw [dashed, gray] (7.5,6.0) -- (7.5,4.5);
+\draw [dashed, lightgray] (4.5,6.0) -- (4.5,4.5);
+\draw [dashed, lightgray] (5.5,6.0) -- (5.5,4.5);
 
 \end{tikzpicture}
 \label{fig:regiaoAtivaMuDelta}
 
 {\small Fonte: Próprio autor }
 \end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 
 
 
 A região ativa então pode ser dividida em 
 tantas partes quantas forem necessárias 
 para garantir um $\delta$ satisfatório para tal região,
-pois tal valor não garante erro nulo para toda extensão
+pois esse valor não garante erro nulo para toda extensão
 possível.
 
 
@@ -1143,30 +1130,30 @@ e possua um valor alvo bem próximo.
 Limite Inferior & Alvo & Limite Superior & Valor de Correção\\ \hline
 \hline
 %0 a 1 $\tau$ & 83,40 \% \\ \hline
-10,0 & 10 & 10,7 & $\delta_0$ \\ \hline
-10,7 & 11 & 11,7 & $\delta_1$ \\ \hline
-11,7 & 12 & 12,8 & $\delta_2$ \\ \hline
-12,8 & 13 & 14,3 & $\delta_3$ \\ \hline
-14,3 & 15 & 15,8 & $\delta_4$ \\ \hline
-15,8 & 16 & 17,3 & $\delta_5$ \\ \hline
-17,3 & 18 & 19,4 & $\delta_6$ \\ \hline
-19,4 & 20 & 21,4 & $\delta_7$ \\ \hline
-21,4 & 22 & 23,5 & $\delta_8$ \\ \hline
-23,5 & 24 & 26,0 & $\delta_9$ \\ \hline
-26,0 & 27 & 29,1 & $\delta_{10}$ \\ \hline
-29,1 & 30 & 32,2 & $\delta_{11}$ \\ \hline
-32,2 & 33 & 35,2 & $\delta_{12}$ \\ \hline
-35,2 & 36 & 38,3 & $\delta_{13}$ \\ \hline
-38,3 & 39 & 41,9 & $\delta_{14}$ \\ \hline
-41,9 & 43 & 46,0 & $\delta_{15}$ \\ \hline
-46,0 & 47 & 50,0 & $\delta_{16}$ \\ \hline
-50,0 & 51 & 54,6 & $\delta_{17}$ \\ \hline
-54,6 & 56 & 60,2 & $\delta_{18}$ \\ \hline
-60,2 & 62 & 66,4 & $\delta_{19}$ \\ \hline
-66,4 & 68 & 73,0 & $\delta_{20}$ \\ \hline
-73,0 & 75 & 80,2 & $\delta_{21}$ \\ \hline
-80,2 & 82 & 88,3 & $\delta_{22}$ \\ \hline
-88,3 & 91 &100,0 & $\delta_{23}$ \\ \hline
+ 9,5 & 10 & 10,5 & $\delta_0$ \\ \hline
+10,5 & 11 & 11,5 & $\delta_1$ \\ \hline
+11,5 & 12 & 12,5 & $\delta_2$ \\ \hline
+12,5 & 13 & 14,0 & $\delta_3$ \\ \hline
+14,0 & 15 & 15,5 & $\delta_4$ \\ \hline
+15,5 & 16 & 17,0 & $\delta_5$ \\ \hline
+17,0 & 18 & 19,0 & $\delta_6$ \\ \hline
+19,0 & 20 & 21,0 & $\delta_7$ \\ \hline
+21,0 & 22 & 23,0 & $\delta_8$ \\ \hline
+23,4 & 24 & 25,4 & $\delta_9$ \\ \hline
+25,4 & 27 & 28,4 & $\delta_{10}$ \\ \hline
+28,4 & 30 & 31,4 & $\delta_{11}$ \\ \hline
+31,4 & 33 & 34,4 & $\delta_{12}$ \\ \hline
+34,4 & 36 & 37,4 & $\delta_{13}$ \\ \hline
+37,4 & 39 & 40,9 & $\delta_{14}$ \\ \hline
+40,9 & 43 & 44,9 & $\delta_{15}$ \\ \hline
+44,9 & 47 & 48,9 & $\delta_{16}$ \\ \hline
+48,9 & 51 & 53,4 & $\delta_{17}$ \\ \hline
+53,4 & 56 & 58,9 & $\delta_{18}$ \\ \hline
+58,9 & 62 & 64,9 & $\delta_{19}$ \\ \hline
+64,9 & 68 & 71,3 & $\delta_{20}$ \\ \hline
+71,3 & 75 & 78,3 & $\delta_{21}$ \\ \hline
+78,3 & 82 & 86,3 & $\delta_{22}$ \\ \hline
+86,3 & 91 &100,0 & $\delta_{23}$ \\ \hline
 
 \end{tabular}
 
@@ -1181,11 +1168,10 @@ no momento inicial o vai haver uma grande contradição,
 então o reticulado vai ter como saída o valor 1, 
 do estado de valor máximo apresentado na 
 Figura \ref{fig:regiaoAtivaMuDelta}.
-
 O sistema então está com potência máxima, 
 vencendo a inércia do sistema que estava em repouso.
 O grau de contradição é reduzido conforme 
-o sistema se aproxiima do ponto de operação desejado,
+o sistema se aproxima do ponto de operação desejado,
 e quando o seu valor é menor do que 
 o parâmetro de limite, nesse caso estabelecido em 0,10,
 a saída assume o valor equivalente ao $\mu_0$, ou seja,
@@ -1201,7 +1187,8 @@ para um valor de referência de 25\% do valor máximo.
 
 
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
@@ -1232,38 +1219,117 @@ mais rápida ou mais lenta.
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
-
-
-
-
-
-
-
-
-
-
-%!@#
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\newpage
 
 
 \section{Resultados}
 
+A Figura \ref{fig:acaoLPAEtDelta} mostra a aquisição feita
+de cinco(5) degraus de acionamento
+realizados sequencialmente, e como pode-se ver,
+há um sobressinal maior na resposta do primeiro degrau,
+sendo atenuado nos demais, 
+pois houve um carregamento do registrador 
+$\delta$ correspondente a correção da velocidade desejada.
 
 
-\begin{figure}[!htb]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Fig
+\begin{figure}[!htb]%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \caption{Ação de controle utilizando LPA$E\tau$}
 \vspace{-1cm}\center\includegraphics[scale=1.6]{./imagens/LPAEt-delta.eps}
 \label{fig:acaoLPAEtDelta}
 
 {\small Fonte: Próprio autor}
 \end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+Ajustando os limiares, foi possível chegar ao resultado mostrado na Figura \ref{fig:LPAEterro}, 
+onde pode-se comparar o resultado em dois momentos
+distintos, no primeiro e no segundo ciclo, 
+comparativamente ao modelo gerado no 
+Capítulo 4 deste trabalho.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Fig
+\begin{figure}[!htb]%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\caption{Erro na Ação de controle utilizando LPA$E\tau$}
+\vspace{-1cm}\center\includegraphics[scale=1.6]{./imagens/LPAEt-erro.eps}
+\label{fig:LPAEterro}
+
+{\small Fonte: Próprio autor}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+A Figura \ref{fig:LPAEterro} mostra alguns parâmetros de 
+referência, como o valor de referência, 
+$r(t) = 25.0$ e linhas tracejadas indicando a 
+tolerância adotada como critério de desempenho de 
+$\pm $5\% além da curva do modelo do sistema.
+
+O resultado obtido com o Controlador utilizando a 
+LPA$E\tau$ proposta, é apresentada em duas partes,
+um para cada ciclo de operação, 
+pois, no primeiro ciclo, a variável de correção $\delta$
+ainda não foi carregada, 
+e o sistema apresenta um tempo de correção da contradição, 
+já do segundo ciclo em diante, 
+a resposta é mais rápida e mais acertiva pois já há um
+valor de correção adequado, 
+levando em consideração o ciclo anterior. 
+Mesmo que não seja o mais adequado, 
+deve ser o mais próximo do valor desejado, 
+permitindo uma correção mais rápida, 
+como se vê na resposta dos dois ciclos.
+
+
+Para evidenciar o ganho de performance, 
+foi calculado o erro relativo percentual médio,
+da mesma forma como foi realizado para obtenção do modelo
+do sistema em estudo, 
+apresentado no Capítulo 4 deste trabalho.
+
+A Tabela \ref{tab:ErroLPAEt} mostra para cada ciclo de 
+acionamento do sistema, 
+dois valores relativos ao período completo da amostragem e
+desconsiderando o tempo relativo ao tempo de subida do sinal,
+em que para ambos os ciclos, ocorre em $t = 0,88 s$, 
+momento em que o sistema alcança o valor desejado, 
+de referência.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Tab
+\begin{table}[h]%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\centering
+\caption{Erro Relativo Percentual do controlador LPA$E\tau$}
+\label{tab:ErroLPAEt}
+
+\begin{tabular}{c|c|c}
+\hline
+Ciclo de Atuação & Intervalo de amostras  &  erro médio relativo \\ \hline
+\hline
+1º & 0.00 a 17,00 s &  5,44 \% \\ \hline
+1º & 0,88 a 17,00 s &  1,90 \% \\ \hline
+2º & 0,00 a 17,00 s &  4,41 \% \\ \hline
+2º & 0,88 a 17,00 s &  0,82 \% \\ \hline
+\end{tabular}
+
+{\vspace{0.2cm} \small Fonte: Próprio autor}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Como pode ser visto, há um ganho percentual de 
+aproximadamento 1\% entre a atuação do primeiro 
+para o segundo ciclo de acionamento. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1274,16 +1340,16 @@ mais rápida ou mais lenta.
 
 
 
-\section{Etapas a serem desenvolvidas}
+%\section{Etapas a serem desenvolvidas}
 
-\begin{itemize}
-\item Estudar a LPA2v;
-\item Implementar um controlador utilizando LPA2v;
-	\begin{itemize}
-	\item Estabelecer a configuração do sistema;
-	\item Descrever o controlador e parâmetros de ajuste;
-	\end{itemize}
-\item Otimizar parâmetros e analisar performance;
-\end{itemize}
+%\begin{itemize}
+%\item Estudar a LPA2v;
+%\item Implementar um controlador utilizando LPA2v;
+%	\begin{itemize}
+%	\item Estabelecer a configuração do sistema;
+%	\item Descrever o controlador e parâmetros de ajuste;
+%	\end{itemize}
+%\item Otimizar parâmetros e analisar performance;
+%\end{itemize}
 
 
