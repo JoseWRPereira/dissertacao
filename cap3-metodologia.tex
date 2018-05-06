@@ -1,10 +1,16 @@
+Para o desenvolvimento deste trabalho foram dadas prioridade e preferência para a utilização de um sistema embarcado de núcleo ARM, com o intúito de desenvolver as capacidades de operar tal tecnologia de processamento, trabalhando com sistema eletrônico simples de fácil acesso mas que atende às necessidades do projeto, bem como a utilização de ferramentas de uso livre.
 
 
 
-\section{ Construção de um sistema físico para controle }
 
- O sistema físico, ou protótipo, foi desenvolvido utilizando a placa de desenvolvimento da Texas Instruments, modelo $Tiva^{TM}$ TM4C123GH6PM, drive para acionamento do motor utilizando PWM, motor DC acoplado a um CD, com uma etiqueta, Figura \ref{fig:discoSensor}, para acionar o sensor óptico e servir de indicador para contagem de giros do motor. Fonte de alimentação chaveada de 12V 10W. A maior parte do sistema pode ser visto na Figura \ref{fig:discoSensorGeral} .
 
+
+
+
+
+\section{Materiais}
+
+O protótipo físico foi constuído baseado em um microcontrolador da família Texas Instruments, modelo $Tiva^{TM}$ TM4C123GH6PM, drive para acionamento do tipo \emph{Pulse Width Modulation}(PWM) do motor com circuito integrado de tecnologia CMOS (IRF540), motor de corrente contínua acoplado a um CD, com uma etiqueta, Figura \ref{fig:discoSensor}, para acionar o sensor óptico e servir de indicador para contagem de giros do motor. Fonte de alimentação chaveada de 12V 10W. A maior parte do sistema pode ser visto na Figura \ref{fig:discoSensorGeral} .
 
 
 \begin{figure}[!htb]
@@ -22,8 +28,42 @@
 {\small Figure: Próprio autor}
 \end{figure}
 
+As ferramentas de software utilizadas foram:
 
-\section{ Obtenção de um modelo do processo }
+\begin{itemize}
+\item Sistema Operacional GNU/Linux Debian 8(Jessie);
+\item GNOME Shell;
+\item Editores de texto e códigos fonte VIM e Emacs;
+\item Compilador GCC para ARM (arm-none-eabi-gcc);
+\item GNU Make;
+\item Processador de texto \LaTeX - pdfTEX; 
+\item Pacotes geradores de figuras TikZ, PGF e GNU pic(Groff);
+\item Gerador de gráficos GNUPlot;
+\item Teminal de comunicação Minicom;
+\item Gravador para microcontrolador ARM LM4Flash.
+\end{itemize}
+
+
+
+
+
+\section{ Métodos }
+
+Os métodos utilizados para a validação do objetivo do projeto devem aferir quão próximo o resultado obtido empiricamente foi do objetivo esperado, de modo que as expectativas referentes aos objetivos propostos sejam atendidos ou sua negação seja devidamente exclarecidas. 
+
+Basicamente foram realizados os seguintes passos:
+
+\begin{itemize}
+\item Levantamento de um modelo matemático do sistema protótipo utilizado;
+\item Aferição da qualidade desse modelo, com erro percentual médio menor do que 5\%, considerando um sistema não crítico;
+\item Definição dos requisitos de desempenho do sistema;
+\item Comparação dos resultados obtidos empiricamente com os requisitos de desempenho do sistema.
+\end{itemize}
+
+
+
+
+\subsection{ Obtenção de um modelo do processo }
 
 Para melhor compreensão dos modelos dinâmicos dos sistemas, é utilizado o Diagrama de blocos do comportamento do sistema em malha aberta, conforme Figura \ref{fig:AcaoMalhaAberta}\cite{Ogata}.
 
@@ -333,10 +373,11 @@ Para a equação no formato canônico tanto o numerador quanto o denominador sã
 \end{equation}
 
 
-Baseado no gráfico mostrado na Figura \ref{fig:acaoMalhaAberTau}, o valor de tempo em que o motor assume a velocidade de referência é aproximadamente $5\tau$, 12,5 s, e como objetivo para uma primeira versão da implementação do controle utilizando LPA2v é proposto que o sistema reduza o tempo de alcance da velocidade alvo em um tempo de no máximo $1\tau$, ou seja, $2,5 s$.
+Baseado no gráfico mostrado na Figura \ref{fig:acaoMalhaAberTau}, o valor de tempo em que o motor assume a velocidade de referência é aproximadamente $5\tau$, 12,5 s, e como objetivo para uma primeira versão da implementação do controle utilizando LPA$E\tau$ é proposto que o sistema reduza o tempo de alcance da velocidade alvo em um tempo de no máximo $1\tau$, ou seja, $2,5 s$.
 
 
-\subsection{ Qualidade do modelo }
+
+\subsubsection{ Qualidade do modelo }
 
 A qualidade do modelo é relativa ao erro aceitável para o sistema estudado. Para o modelo obtido neste estudo foi aplicada o cálculo de Erro Relativo Percentual, e foram feitas análises em trechos diferentes em função da não linearidade inicial apresentada pelo comportamento do motor da planta em estudo.
 
@@ -444,3 +485,13 @@ Assim, considera-se que o modelo utilizado é bom e representa razoavelmente bem
 
 
 
+\subsection{Requisitos de desempenho do sistema}
+
+
+Os principais e mais comuns requisitos de desempenho dos sistemas são:
+
+\begin{itemize}
+\item Velocidade de resposta:
+\item Presença ou não de oscilações na estabilização:
+\item Erro de regime estacionário: é a exatidão da resposta do sistema em relação ao valor desejado, assume-se um valor aceitável para o sistema, nesse caso não crítico, de 5\%.
+\end{itemize}
