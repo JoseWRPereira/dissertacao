@@ -173,22 +173,33 @@
 %%%------------------------------------ Dedicatória
 \newcommand{\dedicatoria}[1]
 {
-  \begin{titlepage}
-  \thispagestyle{empty}
-  \hspace{1cm}
-  \vfill
-  \begin{flushright}
-    \begin{minipage}{0.6\textwidth}
-    \textrm
-    {
-      \textit
-      {
-	#1
-      }
-    }    
-    \end{minipage}
-  \end{flushright}
+  \begin{titlepage} 
+    \thispagestyle{empty}
+    \titlepage
+    \begin{center}%
+        \huge \textbf{Dedicatória}
+    \end{center}%
+    \null
+    \hspace{1cm} #1
+    \endtitlepage
   \end{titlepage}
+
+%  \begin{titlepage}
+%  \thispagestyle{empty}
+%  \hspace{1cm}
+%  \vfill
+%  \begin{flushright}
+%    \begin{minipage}{0.6\textwidth}
+%    \textrm
+%    {
+%      \textit
+%      {
+%	#1
+%      }
+%    }    
+%    \end{minipage}
+%  \end{flushright}
+%  \end{titlepage}
 }
 
 %%%------------------------------------ Agradecimentos

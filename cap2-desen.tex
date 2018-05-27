@@ -58,1201 +58,32 @@ contribuindo com uma nova e eficiente forma de trabalho.
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{A LPA$E\tau$ e suas aplicações}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Os Sistemas Inteligentes estão cada vez mais presentes em diversas aplicações modernas, e segundo \citeauthor{JISF2011}(\citeyear{JISF2011}), há um predomínio de Lógicas Não-Clássicas no suporte à tomada de decisão desses sistemas. O sucesso na aplicação de técnicas como a Lógica $E\tau$, que é uma extensão da Lógica Paraconsistente Anotada, se dá em grande medida pelo uso de algorítmos baseados em estudos dos reticulados representativos e efetiva tradução matemática gerando um modelo eficiente aplicado em situações reais.
 
-Assumindo que a lógica filosófica trata da descrição formal da linguagem natural e define a sua estrutura de declaração, então, sendo encontrada a linguagem adequada é possível traduzir o raciocínio formal em LPA, modelando raciocínios com a possibilidade de tratar contradições ou incoerências, e trabalhar com situações reais, da mesma forma que o Modelo Clássico, que aplica regras computacionais, a Lógica $E\tau$ possui um conjunto de axiomas e regras de inferência que possibilitam um raciocínio válido em situações reais.
 
 
-\subsection{Robótica}
 
-Os algorítmos baseados no estudo do Reticulado Representativo gera Estados Lógicos Paraconsistentes através da descrição do algorítmo Para-Analisador da LPA$E\tau$, possibilitando que o sistema receba informação através dos graus de evidência ($\mu, \lambda$), processe os graus de certeza e contradição ($G_c$ e $G_{ct}$) e chegue a uma conclusão, de alta contradição e busque por mais dados ou um alto grau de certeza, que de um modo geral, implica em tomar uma ação. 
 
-Os Graus de Certeza e Contradição podem gerar um Grau de Certeza Real, que pode servir de entrada para outra célula ou Nó de Análise Paraconsistente (NAP), possibilitando uma rede de análises para a tomada de decisão, como apresentado na construção e aperfeiçoamentos realizados no Robô Emmy, \cite{JoaoInacio}\cite{ClaudioRodrigoTorres} desenvolvendo e aplicando tais técnicas ao sistema de movimentação.
+\section{Lógica Não-Convencional}
 
 
-\subsection{Engenharia de Produção}
 
-A LPA$E\tau$ pode ser aplicada em diversas áreas sendo um outro exemplo a sua aplicação na área de engenharia de produção, como é mostrado no artigo de \citeauthor{FabioIsraelJair}(\citeyear{FabioIsraelJair}), que mostram um estudo para avaliação do projeto de uma fábrica, como são selecionadas as variáveis relevantes, ou fatores, como são chamados, níveis de exigência para tomada de decisão, 
-atribuição de pesos aos fatores de decisão, para obtenção dos graus de crença e descrença. 
-Construção de uma base de dados, sua pesquisa e obtenção dos resultados, análise e fidedignidade utilizando um Método de Análise pelo Baricentro.
 
-
-\subsection{Logística}
-
-No segmento logístico pode-se citar a dissertação do Profº Me. Vander Célio Nunes (\cite{Vander}), que aplicou a Lógica $E\tau$ ao processo de paletização através da medição de peças e do tratamento de incertezas relacionadas a possibilidade de seu depósito ou encaixe na pilha de palets, levando à otimização de cargas armazenadas em um determinado espaço. 
-O seu trabalho, utilizando uma célula de manufatura com um braço robótico industrial, permite a extrapolação da sua aplicação para portos e armazens de containers.
-
-
-
-\subsection{Medicina}
-
-Em aplicações de apoio à medicina através de algoritmos para auxílio de diagnóstico de patologias como em \citeauthor{MauricioCM}(\citeyear{MauricioCM}), onde a Lógica Paraconsistente é aplicada na análise de mamografias.
-
-
-
-\subsection{Sistema de Controle Híbrido}
-
-No segmento de controle, a Lógica $E\tau$ é utilizada em conjunto com um sistema Proporcional-Integral - PI de modo que as ações convencionais são executadas pelo bloco PI, mas são estruturadas utilizando a Lógica $E\tau$ no tratamento dos sinais externos. 
-A implementação é feita por \citeauthor{Marcelo}(\citeyear{Marcelo}) em uma planta de controle de nível e um controlador lógico programável. 
-O sistema Híbrido é posto em operação e comparado com técnicas consagradas como o controle puramente PI, ajustado com o método de Ziegler-Nichols e com o método interno do controlador. 
-
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Representação dos Sistemas - Diagrama de Blocos}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-Os sistemas de controle são geralmente representados através de diagramas de blocos ou fluxo de sinais, como na Figura \ref{fig:processo}, convenientes ao seu desenvolvimento e análise. 
-É composto por uma caixa representando o sistema a ser controlado, setas no sentido da caixa representando as entradas do processo e setas no sentido para fora da caixa para indicar a saída do sistema.
-
-
-Em um sistema real podem haver muitas variáveis de entrada e de saída, mas a abordagem clássica de controle isola apenas uma das variáveis de entrada e uma de saída, ficando o sistema conhecido pela sigla em inglês SISO (\emph{Single In Single Out} - Única Entrada e Única Saída).
-
-
-\begin{figure}[!htb]
-\centering
-\caption{ Diagrama de blocos de sistema de controle}
-\begin{tikzpicture}[scale=1]
-%\draw [lightgray](0,0) grid (9,2);
-\draw (0,1) -- (3,1);
-\draw [black, thick](3,0) rectangle (6, 2) ; 
-\draw (6,1) -- (9,1);
-\draw [fill](3,1) -- (2.8, 1.1) -- (2.8,0.9) -- (3,1);
-\draw [fill](9,1) -- (8.8, 1.1) -- (8.8,0.9) -- (9,1);
-\node at (4.5, 1){Sistema};
-\node [above] at (1.5,1){Valor de};
-\node [below] at (1.5,1){Referência};
-\node [above] at (7.5,1){Variável};
-\node [below] at (7.5,1){Controlada};
-\end{tikzpicture}
-\label{fig:processo}
-
-{\small Fonte: \cite{Ogata} }
-\end{figure}
-
-
-O diagrama de blocos mostrado na Figura \ref{fig:processo} é uma simplificação ao máximo de um sistema de controle, contém apenas o bloco representando o sistema, uma entrada, para o valor de referência, e uma saída com o valor da variável controlada.
-
-
-Em \citeauthor{Ogata}(\citeyear{Ogata}) % - Capítulo 3.3 - 
-são encontradas definições, comentários sobre vantagens, aplicações e procedimento para construção de Diagramas de blocos, assim como a representação de sistemas em malha aberta, malha fechada, perturbações, técnicas e regras da álgebra de blocos.
-
-
-O diagrama de blocos mostrado na Figura \ref{fig:processo} é uma simplificação ao máximo de um sistema de controle, contém apenas o bloco representando o sistema, uma entrada, para o valor de referência, e uma saída com o valor da variável controlada. A Figura \ref{fig:malhaAberta}, divide os bloco do sistema em dois: controlador e planta. Neste caso, um sistema de controle em malha aberta, ou seja, não há uma reinserção do sinal de saída à entrada, chamada de realimentação ou retroalimentação. Assim, a entrada possui o valor de resposta desejada, que alimenta o processo e a saída apresenta a resposta real, porém nada garante que a resposta real está coerente ao valor de entrada.
-
-\begin{figure}[!htb]
-\centering
-\caption{ Diagrama de blocos de sistema de controle em malha aberta}
-\begin{tikzpicture}[scale=1]
-%\draw [lightgray](0,0) grid (15,2);
-\draw (0,1) -- (3,1);
-\draw [black, thick](3,0) rectangle (6, 2) ; 
-\draw (6,1) -- (9,1);
-\draw [black, thick](9,0) rectangle (12, 2) ; 
-\draw (12,1) -- (15,1);
-
-\draw [fill]( 3,1) -- ( 2.8, 1.1) -- ( 2.8,0.9) -- ( 3,1);
-\draw [fill]( 9,1) -- ( 8.8, 1.1) -- ( 8.8,0.9) -- ( 9,1);
-\draw [fill](15,1) -- (14.8, 1.1) -- (14.8,0.9) -- (15,1);
-
-\node at ( 4.5, 1){Controlador};
-\node at (10.5, 1){Planta};
-\node [above] at ( 1.5,1){Valor de};
-\node [below] at ( 1.5,1){Referência};
-\node [above] at ( 7.5,1){Variável};
-\node [below] at ( 7.5,1){Manipulada};
-\node [above] at (13.5,1){Variável};
-\node [below] at (13.5,1){Controlada};
-\end{tikzpicture}
-\label{fig:malhaAberta}
-
-{\small Fonte: \cite{Ogata}}
-\end{figure}
-
-O diagrama da Figura \ref{fig:malhaFechada} apresenta realimentação, ou seja, uma amostra da resposta real é lida por um elemento sensor e é reinserida à entrada da malha, aonde é realizada a comparação entre resposta real e desejada, a diferença entre ambos os valores é chamado de Erro do Sistema e é baseado nesse valor que o controlador tem condições de efetuar as devidas correções, geralmente, afim de manter o sistema estável no valor de resposta desejada.
-
-\begin{figure}[!htb]
-\centering
-\caption{ Diagrama em blocos de sistema de controle em malha fechada}
-\begin{tikzpicture}[scale=0.8]
-%\draw [lightgray](-3,0) grid (17, 2);
-%\draw [lightgray](-3,0) grid (17,-3);
-%\draw [semithick,red] (0,0) circle (0.1);
-
-\draw (-3,1) -- (0,1);
-\draw [fill]( 0,1) -- (-0.2, 1.1) -- ( -0.2,0.9) -- (0,1);
-\draw [semithick,black] (1,1) circle (1.0); % Somador
-\draw (2.0,1) -- (4,1);
-\draw [fill]( 4,1) -- ( 3.8, 1.1) -- ( 3.8,0.9) -- ( 4,1);
-\draw [black, thick](4,0) rectangle (7, 2) ; % Controlador 
-\draw (7,1) -- (11,1);
-\draw [fill]( 11,1) -- (10.8, 1.1) -- (10.8,0.9) -- (11,1);
-\draw [black, thick](11,0) rectangle (14, 2) ; % Planta
-\draw (14,1) -- (17,1);
-\draw [fill](17,1) -- (16.8, 1.1) -- (16.8,0.9) -- (17,1);
-
-\draw [black, thick](7.5,-1) rectangle (10.5, -3) ; % Sensor
-\draw (14.4, 1) -- (14.4, -2) -- (10.5,-2);
-\draw ( 7.5,-2) -- ( 1, -2) -- (1,0);
-\draw [fill](1,0) -- (1.2,-0.2) -- (0.8,-0.2) -- (1,0);
-
-\node [above] at (-1.5,1){Valor de};
-\node [below] at (-1.5,1){Referência};
-\node at (0.4,1){+};
-\node at (1,0.4){-};
-\node [above] at (3.0,1){Erro};
-\node at ( 5.5, 1){Controlador};
-\node [above] at (9.0,1){Variável};
-\node [below] at (9.0,1){Manipulada};
-\node at (12.5, 1){Planta};
-\node [above] at (16.0,1){Variável};
-\node [below] at (16.0,1){Controlada};
-\node at ( 9.0,-2){Sensor};
-
-\end{tikzpicture}
-\label{fig:malhaFechada}
-
-{\small Fonte: \cite{Ogata}}
-\end{figure}
-
-
-Como notação para os elementos do diagrama de blocos, são adotadas letras para representar matematicamente as relações entre as grandezas conforme Figura \ref{fig:malhaFechadaLetras}
-
-
-\begin{figure}[!htb]
-\centering
-\caption{ Diagrama em blocos de sistema de controle em malha fechada utilizando notação matemática}
-\begin{tikzpicture}[scale=0.8]
-%\draw [lightgray](-3,0) grid (17, 2);
-%\draw [lightgray](-3,0) grid (17,-3);
-%\draw [semithick,red] (0,0) circle (0.1);
-
-\draw (-3,1) -- (0,1);
-\draw [fill]( 0,1) -- (-0.2, 1.1) -- ( -0.2,0.9) -- (0,1);
-\draw [semithick,black] (1,1) circle (1.0); % Somador
-\draw (2.0,1) -- (4,1);
-\draw [fill]( 4,1) -- ( 3.8, 1.1) -- ( 3.8,0.9) -- ( 4,1);
-\draw [black, thick](4,0) rectangle (7, 2) ; % Controlador 
-\draw (7,1) -- (11,1);
-\draw [fill]( 11,1) -- (10.8, 1.1) -- (10.8,0.9) -- (11,1);
-\draw [black, thick](11,0) rectangle (14, 2) ; % Planta
-\draw (14,1) -- (17,1);
-\draw [fill](17,1) -- (16.8, 1.1) -- (16.8,0.9) -- (17,1);
-
-\draw [black, thick](7.5,-1) rectangle (10.5, -3) ; % Sensor
-\draw (14.4, 1) -- (14.4, -2) -- (10.5,-2);
-\draw ( 7.5,-2) -- ( 1, -2) -- (1,0);
-\draw [fill](1,0) -- (1.2,-0.2) -- (0.8,-0.2) -- (1,0);
-
-\node [above] at (-1.5,1){r(t)};
-\node at (0.4,1){+};
-\node at (1,0.4){-};
-\node [above] at (3.0,1){e(t)};
-\node at ( 5.5, 1){f(t)};
-\node [above] at (9.0,1){u(t)};
-\node at (12.5, 1){g(t)};
-\node [above] at (16.0,1){c(t)};
-\node at ( 9.0,-2){h(t)};
-
-\end{tikzpicture}
-\label{fig:malhaFechadaLetras}
-
-{\small Fonte: \cite{Ogata}}
-\end{figure}
-
-
-\nomenclature{r(t)}{Valor de Referência em função do tempo}%
-\nomenclature{e(t)}{Erro em função do tempo}%
-\nomenclature{f(t)}{Modelo do Controlador em função do tempo}%
-\nomenclature{u(t)}{Variável manipulada}%
-\nomenclature{g(t)}{Modelo da Planta do sistema}%
-\nomenclature{c(t)}{Variável Controlada}%
-\nomenclature{h(t)}{Modelo do elemento sensor}%
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Controle Clássico}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Os sistemas de controle clássicos possuem a predileção por tratar sistemas monovariáveis, lineares e invariantes no tempo, mas esta não é a condição mais provável para um sistema físico. 
-Ao longo do tempo foram desenvolvidas ferramentas, como a Transformada de Laplace, para contornar algumas dificuldades inerentes ao equacionamento dos modelos matemáticos e também métodos como o dos lugares das raízes ou resposta de frequência.
-
-Os sistemas de controle modernos possuem o índice de desempenho em termos de variáveis de estado, e possuem técnicas para tratar sistemas multivariáveis, não lineares e variantes no tempo.
-
-A forma prática de trabalhar com sistemas de controle clássicos é através de modelos matemáticos para descrever a dinâmica dos sistemas a partir das leis físicas que regem seus comportamento e desempenho.
-As variáveis dos sistemas articulam-se dinamicamente e são expressas matematicamente utilizando, geralmente, equações diferencias, e podem ser relações lineares ou não lineares. 
-Para sistemas não lineares é habitual que seja feita a linearização do sistema, ou de uma região que se queira controlar, utilizando como ferramenta a Série de Taylor. 
-
-Outra ferramenta extremamente importante é a Transformada de Laplace que converte uma equação diferencial no domínio do tempo em uma equação algébrica no domínio da frequência, facilitando a manipulação matemática na utilização dos métodos de controle. 
-
-A relação das variáveis de saída com a de entrada do sistema, é denominada de Função de Transferência(FT) \nomenclature{FT}{Função de Transferência}%
-e apresenta as características dinâmicas do sistema.
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Modelagem matemática}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-A maioria dos sitemas físicos pode ser modelado matematicamente através de equações diferenciais parciais e é comum que os sistemas apresentem comportamento exponencial, e também apresentam não linearidades, que dependendo da aplicação, podem ser aproximadas em regiões específicas de operação e as equações sofrem transformadas para simplificar a manipulação e resolução dos problemas encontrados nos diversos sistemas assim como o apresentado neste estudo.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Sistema Linear}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Quase que a totalidade dos processos naturais apresentam aspectos não lineares, porém a técnica de controle clássico trabalha apenas com sistemas lineares, assim exitem duas opções para trabalhar com sistemas não lineares: mudar o método de controle para uma ténica não convencional ou linearizar em torno de um ponto de operação. 
-A linearização é o processo de encontrar um modelo linear que atenda bem a aproximação do modelo não linear em questão \cite{Ogata}.
-
-%Lyapunov ??? provou que em uma região próxima ao ponto de operação um sistema não linear pode ser estável.
-
-Dado um sistema \emph{S(t)} para uma entrada $u(t) = u_1(t)$ tem-se uma saída $y(t) = y_1(t)$ e para uma entrada $u(t) = u_2(t)$ tem-se uma saída $y(t) = y_2(t)$.
-
-\begin{figure}[!htb]
-\centering
-\caption{ Sistema simples}
-\begin{tikzpicture}[scale=0.8]
-%\draw [lightgray](0,0) grid (20, 2);
-
-\draw (0,1) -- (3,1);
-\draw [fill]( 3,1) -- ( 2.8, 1.1) -- ( 2.8,0.9) -- ( 3,1);
-\draw [black, thick](3,0) rectangle (6, 2) ; % S1 
-\draw (6,1) -- (9,1);
-\draw [fill]( 9,1) -- (8.8, 1.1) -- (8.8,0.9) -- (9,1);
-
-\draw (11,1) -- (14,1);
-\draw [fill]( 14,1) -- ( 13.8, 1.1) -- ( 13.8,0.9) -- ( 14,1);
-\draw [black, thick](14,0) rectangle (17, 2) ; % S2
-\draw (17,1) -- (20,1);
-\draw [fill]( 20,1) -- (19.8, 1.1) -- (19.8,0.9) -- (20,1);
-
-
-\node [above] at (1.5,1){$u_1(t)$};
-\node at ( 4.5, 1){S(t)};
-\node [above] at (7.5,1){$y_1(t)$};
-
-\node [above] at (12.5,1){$u_2(t)$};
-\node at ( 15.5, 1){S(t)};
-\node [above] at (18.5,1){$y_2(t)$};
-
-\end{tikzpicture}
-\label{fig:sistemaSimples}
-
-{\small Fonte: \cite{Ogata}}
-\end{figure}
-
-Assim para a região linear próxima ao ponto de operação, uma combinação linear na entrada $u(t) = \alpha u_1(t) + \beta u_2(t)$ produz $y(t) = \alpha y_1(t) + \beta y_2(t), \forall \alpha ,  \beta \in \Re $, que é o princípio da superposição ilustrado na Figura \ref{fig:principioSuperposicao}.
-
-
-\begin{figure}[!htb]
-\centering
-\caption{ Princípio da Superposição}
-\begin{tikzpicture}[scale=0.8]
-%\draw [lightgray](0,0) grid (11, 2);
-
-\draw (0,1) -- (4,1);
-\draw [fill]( 4,1) -- ( 3.8, 1.1) -- ( 3.8,0.9) -- ( 4,1);
-\draw [black, thick](4,0) rectangle (7, 2) ; % S1 
-\draw (7,1) -- (11,1);
-\draw [fill]( 11,1) -- (10.8, 1.1) -- (10.8,0.9) -- (11,1);
-
-\node [above] at (2,1){$\alpha u_1(t) + \beta u_2(t)$};
-\node at ( 5.5, 1){S(t)};
-\node [above] at (9,1){$\alpha y_1(t) + \beta y_2(t)$};
-
-\end{tikzpicture}
-\label{fig:principioSuperposicao}
-
-{\small Fonte: \cite{Ogata}}
-\end{figure}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Linearização}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Para o processo de linearização de um sinal, uma forma comumente utilizada é através da Série de Taylor, onde dado um plano cartesiano e uma função \emph{f} com um ponto qualquer com coordenadas \emph{x} e \emph{y} com pequenas variações $\overline{x}$ e $\overline{y}$, temos que:
-
-\begin{center}
-\begin{equation}
-y = \overline{y} + 
-\frac{df}{dx} \left| \frac{ }{ } _{\overline{x}} \right. \, (x - \overline{x}) + 
-\frac{1}{2!} \frac{d²f}{dx²} \left| \frac{ }{ } _{\overline{x}} \right. \, (x - \overline{x})² +
-\frac{1}{3!} \frac{d³f}{dx³} \left| \frac{ }{ } _{\overline{x}} \right. \, (x - \overline{x})³ + ...
-\label{eqn:SerieTaylor}
-\end{equation}
-\end{center}
-
-A Série de Taylor é truncada após o segundo membro da somatória, pois $(x - \overline{x}^n )$ é cada vez menor na medida em que o expoente aumenta, fazendo com que tal parcela da somatória tenda a zero, assim despreza-se tais termos e tem-se:
-
-\begin{center}
-\begin{equation}
-y = \overline{y} + 
-\frac{df}{dx} \left| \frac{ }{ } _{\overline{x}} \right. \, (x - \overline{x})
-\label{eqn:SerieTaylorTruncada}
-\end{equation}
-\end{center}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Transformada de Laplace}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- 
-A Transformada de Laplace é utilizada em controle como uma ferramenta matemática para facilitar a solução de equações diferenciais lineares, utilizando uma variável complexa \emph{s}, operações como derivação e integração podem ser substituidas por operações algébricas no plano complexo, domínio da frequência, e após a resolução realiza-se a Transformada Inversa de Laplace para retornar a solução para o domínio do tempo.
-
-A definição e sua dedução de forma rigorosa podem ser encontradas em \cite{Ogata} e não será discutida neste trabalho, mas vale aqui apresentar apenas a sua definição e uma parte da tabela de conversão.
-
-A Transformada de Laplace é definida como:
-
-\begin{equation}
-\mathscr{L}\{f(t)\} = F(s) = \int_{0}^{\infty} f(t) e^{-st} dt
-\label{eq:transfLaplace}
-\end{equation} 
-
-Onde:
-
-\setlength{\parindent}{2cm}
-$\mathscr{L}$ : Operador da Transformada de Laplace 
-
-$f(t)$ : função da variável $t$ tal que $f(t) = 0$ para $t < 0$ 
-
-$F(s)$ : Transformada de Laplace de $f(t)$
-
-$s$ : variável complexa
-\\
-
-\setlength{\parindent}{0cm}
-A Transformada Inversa de Laplace é definida como:
-
-\begin{equation}
-\mathscr{L}^{-1} \{F(s)\} =  \frac{1}{2 \pi j} \int_{c-j\infty}^{c+j\infty}F(s) e^{st} ds  \text{ , para } t > 0
-\label{eq:transfInvLaplace}
-\end{equation}
-
-Onde:
-
-\setlength{\parindent}{2cm}
-$\mathscr{L}^{-1}$ : Operador da Transformada Inversa de Laplace
-
-$c$ : Número real constante, abscissa da convergência.
-
-\setlength{\parindent}{1cm}
-
-Dificilmente a Transformada Inversa de Laplace é utilizada, podendo ser utilizado o método de frações parciais ou a tabela de conversão.
-
-A Tabela \ref{tab:Laplace} mostra alguns pares de Transformadas de Laplace, e uma tabela mais completa pode ser encontrada no Capítulo 2 de \cite{Ogata}. 
-
-\begin{table}[h]
-\centering
-\caption{Pares de Transformadas de Laplace}
-\label{tab:Laplace}
-\begin{tabular}{c|c}
-\hline
-$f(t)$ & $F(s)$ \\
-\hline
-\hline
-Impulso unitário $\delta(t)$ 		& $1$ 			\\ \hline
-Degrau unitário $1(t)$ 			& $\frac{1}{s}$		\\ \hline
-$t$ 					& $\frac{1}{s^2}$ 	\\ \hline
-$\frac{t^{n-1}}{(n-1)!} (n=1,2,3,...)$ 	& $\frac{1}{s^n}$ 	\\ \hline
-$t^n (n=1,2,3,...)$ 			& $\frac{n!}{s^{n+1}}$ 	\\ \hline
-$e^{-at}$ 				& $\frac{1}{s+a}$ 	\\ \hline
-$t^n e^{-at} (n=1,2,3,...)$ 		& $\frac{n!}{(s+a)^{n+1}}$ \\\hline
-$\frac{1}{a} (1-e^{-at})$ 		& $\frac{1}{s(s+a)}$ 	\\ \hline
-$\frac{1}{b-a}(e^{-at}-e^{-bt})$ 	& $\frac{1}{(s+a)(s+b)}$ \\ \hline
-\end{tabular}
-\end{table}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Ação de Controle}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-A ação de controle é a forma como se busca atender os chamados requisitos de desempenho do sistema, que de um modo geral se efetuam através de modificações das características da relação entrada/saída para se obter os valores desejados dessa relação, ou ainda ajustar o comportamento da saída para uma dada entrada específica.
-
-
-Os principais e mais comuns requisitos de desempenho dos sistemas são associados a velocidade de resposta, presença ou não de oscilações na estabilização e a exatidão da resposta do sistema em relação ao valor desejado, chamada de erro de regime estacionário.
-
-
-O erro de regime estacionário, mostrada na Figura \ref{fig:funcaoResposta}, é uma medida que vai tender a zero em sistemas ideais, mas que na realidade não alcança o valor zero, assim assume-se um valor aceitável, 5\% do valor da resposta desejada para sistemas não críticos e 2\% para sistemas de maior grau de criticidade, para assumir que o sistema entrou em estabilidade, e a resposta real é aceita como tendo atingido o valor de resposta desejada. 
-
-
-
-\begin{figure}[!htb]
-\centering
-\caption{Gráfico da função Resposta}
-\begin{tikzpicture}[scale=1.00]
-%\draw [lightgray, dashed](0,0) grid (8.8,5.8);
-
-\draw [->] (0,0) -- (9,0); 
-\draw [fill] (0,6.2) -- (-0.1, 5.8) -- (0.1,5.8) -- (0,6.2);
-
-\draw [->] (0,0) -- (0,6);
-\draw [fill] (9.2,0) -- (8.8,0.1) -- (8.8,-0.1)--(9.2,0.0);
-
-\draw [purple, ->] (7.5,4.0) -- (7.5,4.6); 
-\draw [purple, fill] (7.5,4.8) -- (7.4,4.5) -- (7.6,4.5)--(7.5,4.8);
-
-\draw [purple, ->] (7.5,6.0) -- (7.5,5.2); 
-\draw [purple, fill] (7.5,5.0) -- (7.4,5.3) -- (7.6,5.3)--(7.5,5.0);
-
-\node at (9.0,-0.5) {$t$};
-\node at (0.2,6.5) {$r(t)$};
-
-\draw [blue, ultra thick] (0.0,5.0) -- (9.0,5.0);
-\draw [blue, ultra thick] (0.0,0.0) -- (0.0,5.0);
-
-\draw [red, ultra thick] (0,0) to [out=85, in=180] (6,4.8);
-
-\draw [purple, ultra thick] (6,4.8) -- (9,4.8);
-
-\node at (2.0,5.4)[blue]{{resposta desejada}};
-\node at (3.0,2.2)[red]{{resposta transiente}};
-\node at (7.0,3.4)[purple]{{Erro de Regime Estacionário}};
-
-\end{tikzpicture} 
-\label{fig:funcaoResposta}
-
-{\small Fonte: \cite{dorf2011modern} }
-\end{figure}
-
-
-
-
-Para realizar o controle de um sistema é necessário que estejam bem definidos os seus requisitos, que são os objetivos a serem atendidos. 
-Quando um sistema por si só já atende aos requisitos, não há a necessidade de controle. 
-De forma oposta, é projetado o sistema de controle, que pode ser em malha aberta ou fechada, clássico ou moderno, convencional ou não-convencional, dependendo das características físicas do sistema. 
-
-
-Para a execução de um sistema de controle podem ser verificados requisitos do sistema de duas formas básicas, sendo a primeira através dos testes e levantamento empírico da sua curva de resposta ou através de seu modelo matemático, quando trabalha-se com elementos já bem estudados e com a equação que representa seu comportamento empírico bem estabelecida por diversos estudos anteriores.
-
-
-Em \citeauthor{dorf2011modern}(\citeyear{dorf2011modern}) 
-%- Capítulo 7.6 - \emph{PID Controllers} 
-é abordado o controlador PID, uma das principais soluções e a mais encontrada em aplicações industriais segundo \citeauthor{Ogata}(\citeyear{Ogata}), que trata do mesmo tema e as versões de PID modificados no Capítulo 10 de seu trabalho. 
-Ações de controle do tipo PID são responsáveis por controlar a planta e atender aos requisitos de desempenho desejados ao sistema.
-
-
-
-
-
-%\newpage
-
-O controle em malha aberta é o sistema mais simples de ser implementado, não possui realimentação, ou seja, o controlador não possui uma indicação da variável controlada, não sendo possível a sua correção caso haja alguma interferência, oscilação, ruído, ou mesmo que o sistema não apresente baixo rendimento.
-
-\begin{figure}[!htb]
-\centering
-\caption{ Sistema de controle em malha aberta}
-\begin{tikzpicture}[scale=1.0]
-%\draw [lightgray](0,0) grid (15,2);
-\draw (0,1) -- (3,1);
-\draw [black, thick](3,0) rectangle (6, 2) ; 
-\draw (6,1) -- (9,1);
-\draw [black, thick](9,0) rectangle (12, 2) ; 
-\draw (12,1) -- (15,1);
-
-\draw [fill]( 3,1) -- ( 2.8, 1.1) -- ( 2.8,0.9) -- ( 3,1);
-\draw [fill]( 9,1) -- ( 8.8, 1.1) -- ( 8.8,0.9) -- ( 9,1);
-\draw [fill](15,1) -- (14.8, 1.1) -- (14.8,0.9) -- (15,1);
-
-\node at ( 4.5, 1.4){Controlador};
-\node at ( 4.5, 0.6){f(t)};
-\node at (10.5, 1.4){Planta};
-\node at (10.5, 0.6){g(t)};
-\node [above] at ( 1.5,1){r(t)};
-\node [above] at ( 7.5,1){u(t)};
-\node [above] at (13.5,1){c(t)};
-\end{tikzpicture}
-\label{fig:AcaoMalhaAberta}
-
-{\small Fonte: \cite{Ogata}}
-\end{figure}
-
-O sistema físico aqui estudado possui comportamento exponencial que pode ser descrito pela equação \ref{eq:ftSistOrdem1a}. 
-
-
-
-
-\begin{equation}
-	 \frac{d c(t)}{dt} + c(t) = r(t) \rightarrow  \mathscr{L} \to \frac{C(s)}{R(s)} = \frac{K}{s + a} 
-\label{eq:ftSistOrdem1a}
-\end{equation}
-
-%\begin{equation}
-%\therefore \frac{C(s)}{R(s)} = \frac{k}{s+a}
-%\label{eq:ftSistOrdem1}
-%\end{equation}
-
-Onde:
-
-\setlength{\parindent}{2cm}
-
-$t$ : tempo,$ r(t) = 0$ , para t $<$ 0;
-
-$\mathscr{L}$ : Operador de Laplace;
-
-$c(t)$ : Variável controlada no domínio do tempo;
-
-$C(s)$ : Variável controlada no domínio da frequência;
-
-$r(t)$ : Valor de referência (\emph{setpoint}) no domínio do tempo;
-
-$R(s)$ : Valor de referência (\emph{setpoint}) no domínio da frequência.
-
-$K$ : Constantede proporcionalidade;
-
-$s$ : Variável complexa de Laplace;
-
-$a$ : Polo da função.
-\setlength{\parindent}{1cm}
-
-Sendo assim, para um estímulo de entrada do tipo \textbf{degrau}, conforme Tabela \ref{tab:Laplace}, com amplitude \textbf{A}, temos $ R(s) = \frac{A}{s}$ e aplicando a Transformada Inversa de Laplace:
-
-\begin{equation}
-C(s) = \frac{K}{s+a} \frac{A}{s} \rightarrow \mathscr{L}^{-1} \to c(t) = \frac{K A}{a} (1 - e^{-at})
-\label{eq:degrauAa}
-\end{equation}
-
-A Figura \ref{fig:degrauAa}
-mostra um sinal do tipo degrau com amplitude \textbf{A} aplicado ao sistema de teste, que responde conforme um conforme um sistema de primeira ordem como mostrado na Figura \ref{fig:cRegimea}. A partir de um determinado instante de tempo, entra em regime constante ($c_{reg}$), alcançando o valor de referência dado pelo degrau de amplitude A. Assim quando $ t \rightarrow \infty $  então $ c_{reg} \rightarrow A $:
-
-
-\begin{figure}
-\centering
-\caption{Sistema de Primeira Ordem}
-\subfloat[Sinal de entrada tipo degrau com amplitude A]{\label{fig:degrauAa}
-\begin{tikzpicture}[scale=0.8]
-\draw [lightgray, dashed](0,0) grid (8.8,5.8);
-\draw [->] (0,0) -- (9,0);
-\draw [fill] (0,6.2) -- (-0.1, 5.8) -- (0.1,5.8) -- (0,6.2);
-\draw [->] (0,0) -- (0,6);
-\draw [fill] (9.2,0) -- (8.8,0.1) -- (8.8,-0.1)--(9.2,0.0);
-\node at (9.0,-0.5) {$t$};
-\node at (0.2,6.5) {$r(t)$};
-\draw [red, ultra thick] (0.0,5.0) -- (9.0,5.0);
-\draw [red, ultra thick] (0.0,0.0) -- (0.0,5.0);
-\node at (-0.5,5.0)[red]{$A$};
-\end{tikzpicture} }
-\subfloat[Resposta transitória e regime de acomodação]{\label{fig:cRegimea}
-\begin{tikzpicture}[scale=0.8]
-\draw [lightgray, dashed](0,0) grid (8.8,5.8);
-\draw [->] (0,0) -- (9,0);
-\draw [fill] (0,6.2) -- (-0.1, 5.8) -- (0.1,5.8) -- (0,6.2);
-\draw [->] (0,0) -- (0,6);
-\draw [fill] (9.2,0) -- (8.8,0.1) -- (8.8,-0.1)--(9.2,0.0);
-\node at (9.0,-0.5) {$t$};
-\node at (0.2,6.5) {$c(t)$};
-\node at (-0.5,5.0)[blue]{$C_{reg}$};
-\draw [blue, ultra thick] (0,0) to [out=85, in=180] (6,5);
-\draw [blue, ultra thick] (6,5) -- (9,5);
-\end{tikzpicture}}
-\label{fig:sistPrimeiraOrdem}
-
-{\small Fonte: \cite{Ogata}}
-\end{figure}
-
-%\begin{equation}
-%c_{reg} = \lim_{t \rightarrow \infty} \frac{KA}{a}(1-e^{-at}) = \frac{KA}{a}
-%\label{eq:cregime}
-%\end{equation}
-
-Aplicando o Teorema do Valor Final pode-se ver que o \emph{$c_{reg}$} estabiliza em um valor constante como mostrado pela Equação \ref{eq:teoremaValorFinal}:
-
-\begin{equation}
-C_{reg} = \lim_{s \rightarrow 0} sC(s) = \lim_{s \rightarrow 0} s\ \frac{K}{s+a}\frac{A}{s} = \frac{KA}{a}
-\label{eq:teoremaValorFinal}
-\end{equation}
-
-Matematicamente, quanto maior o valor de \emph{t} na Equação \ref{eq:degrauAa}, o resultado de sua exponenencial tende a zero, levando a um resultado que depende apenas das constantes, como mostrado na Equação \ref{eq:teoremaValorFinal}. 
-
-Tomando $t= \frac{1}{a} = a^{-1} = \tau$ para gerar um valor conhecido em $e^{-at}$, da Equação \ref{eq:degrauAa} temos:
-
-
-\begin{equation}
-c(a^-1) = \frac{KA}{a}(1-e^{-(a.a^{-1})}) = \frac{KA}{a}(1-e^{-1}) = \frac{KA}{a}.0,63 = 0,63 . C_{reg}
-\end{equation}
-
-A Figura \ref{fig:constTempoa} mostra a constante de tempo $\tau$, que é atingida quando o sistema alcança 63\% do seu valor de regime. Como sabemos que $\tau = \frac{1}{a}$, então o polo do sistema, que leva o denominador da Equação \ref{eq:degrauAa} a zero, é:
-
-\begin{equation}
-a = \frac{1}{\tau}
-\end{equation}
-
-
-
-\begin{figure}
-\centering
-\caption{Constante de tempo}
-\begin{tikzpicture}[scale=1.0]
-\draw [lightgray, dashed](0,0) grid (8.8,5.8);
-
-\draw [->] (0,0) -- (9,0);
-\draw [fill] (0,6.2) -- (-0.1, 5.8) -- (0.1,5.8) -- (0,6.2);
-\draw [->] (0,0) -- (0,6);
-\draw [fill] (9.2,0) -- (8.8,0.1) -- (8.8,-0.1)--(9.2,0.0);
-
-\node at (9.0,-0.5) {$t$};
-\node at (0.2,6.5) {$c(t)$};
-
-\node at (-0.5,5.0)[blue]{$C_{reg}$};
-\node at (-1,5.0*0.63)[purple]{$0,63.c_{reg}$};
-\draw [purple, ultra thick, dashed] (0.0,5.0*0.63) -- (1.45,5.0*0.63)
-						   -- (1.45,0.0);
-\draw [blue, ultra thick] (0,0) to [out=85, in=180] (6,5);
-\draw [blue, ultra thick] (6,5) -- (9,5);
-
-\draw [<->] (0.0,-0.4) -- (1.45,-0.4); 
-\node at (1.45/2,-0.7){$\tau$};
-
-\end{tikzpicture}
-\label{fig:constTempoa}
-
-{\small Fonte: \cite{Ogata}}
-\end{figure}
-
-Portanto:
-
-\begin{equation}
-K = \frac{ac_{reg}}{A}
-\label{eq:calcK}
-\end{equation}
-
-%\begin{tikzpicture}
-%\begin{axis}
-%\addplot[title=Gráfico de uma função, 
-%	xlabel = {$x$}, ylabel={$y$},
-% 	red!70!blue, very thick, samples=200,
-%	domain=-3:3]{x/(x^4-3*x^2+4)};
-%\end{axis}
-%\end{tikzpicture}
-
-
-\subsection{ Duas posições ou Liga-Desliga }
-É o tipo de ação de controle mais simples de ser implementado, porém o de menor precisão, pois opera com potência máxima até que o sensor atinja um determinado valor limite, mudando a ação para potência mínima, geralmente zero.
-
-\begin{figure}[!htb]
-\centering
-\caption{Ação de Controle Liga-Desliga}
-\center\includegraphics[scale=1]{./imagens/acaoControle-ligaDesliga.eps}
-\label{fig:acaoControleLigaDesligaa}
-
-{\small Fonte: Próprio autor}
-\end{figure}
-
-A Figura \ref{fig:acaoControleLigaDesligaa} mostra o gráfico obtido no sistema de teste, onde a velocidade de rotação do motor oscila entre os valores de 25 e 30 rps, sendo o valor desejado em 25 rps. 
-Todas estas oscilações podem representar perda de energia, pois o motor está recebendo energia em excesso sem necessidade, porém sua implementação é simples e não requer um conhecimento específico e aprofundado de controle.
-
-
-%
-%\begin{figure}[!htb]
-%\centering
-%\caption{Código da Ação de Controle Liga-Desliga}
-%\begin{minipage}{0.8\linewidth}
-%\begin{lstlisting}
-%long controlador_LigaDesliga{ long setpoint, long sensor }
-%{
-%  if( sensor > setpoint }
-%    return( 0 );
-%  else
-%    return( 100 );
-%}
-%\end{lstlisting}
-%\end{minipage}
-%\label{fig:codigoAcaoLigaDesliga}
-
-%{\small Fonte: Próprio autor}
-%\end{figure}
-
-%O código fonte que gerou o resultado obtido na Figura \ref{fig:acaoControleLigaDesliga} é  mostrado na Figura \ref{fig:codigoAcaoLigaDesliga}, sendo apresentada apenas a função que realiza função de controle, que neste caso tem como parâmetros de entrada os valores de \textit{\texttt{setpoint}} e do \textit{\texttt{sensor}} e o seu valor de retorno é o parâmetro de entrada da função de acionamento da modulação por largura de pulso (\textit{PWM - Pulse Width Modulation}), que neste caso utiliza apenas os valores extremos.
-
-
-
-\subsection{ Controlador Proporcional (P) } 
-
- No controle proporcional, 
-o erro é multiplicado por uma constante \emph{kp} 
-gerando o sinal \emph{u\{t\}}, 
-que é a variável manipulada que atua sobre o 
-sistema \emph{g(t)}.
-
-\begin{equation}
- u(t) = kp . e(t)
-\label{eq:acaoP}
-\end{equation}
-
-
-O diagrama de blocos da Figura \ref{fig:malhaFechadaP} mostra o bloco \emph{kp} que tem seu comportamento descrito pela Equação \ref{eq:acaoP} e que atua diretamente sobre o sistema através da variável manipulada $u(t)$.
-
-\begin{figure}[!htb]
-\centering
-\caption{ Diagrama em blocos de sistema de controle em malha fechada utilizando notação matemática}
-\begin{tikzpicture}[scale=0.6]
-%\draw [lightgray](-3,0) grid (17, 2);
-%\draw [lightgray](-3,0) grid (17,-3);
-%\draw [semithick,red] (0,0) circle (0.1);
-
-\draw (-3,1) -- (0,1);
-\draw [fill]( 0,1) -- (-0.2, 1.1) -- ( -0.2,0.9) -- (0,1);
-\draw [semithick,black] (1,1) circle (1.0); % Somador
-\draw (2.0,1) -- (4,1);
-\draw [fill]( 4,1) -- ( 3.8, 1.1) -- ( 3.8,0.9) -- ( 4,1);
-\draw [black, thick](4,0) rectangle (7, 2) ; % Controlador 
-\draw (7,1) -- (11,1);
-\draw [fill]( 11,1) -- (10.8, 1.1) -- (10.8,0.9) -- (11,1);
-\draw [black, thick](11,0) rectangle (14, 2) ; % Planta
-\draw (14,1) -- (17,1);
-\draw [fill](17,1) -- (16.8, 1.1) -- (16.8,0.9) -- (17,1);
-
-\draw [black, thick](7.5,-1) rectangle (10.5, -3) ; % Sensor
-\draw (14.4, 1) -- (14.4, -2) -- (10.5,-2);
-\draw ( 7.5,-2) -- ( 1, -2) -- (1,0);
-\draw [fill](1,0) -- (1.2,-0.2) -- (0.8,-0.2) -- (1,0);
-
-\node [above] at (-1.5,1){r(t)};
-\node at (0.4,1){+};
-\node at (1,0.4){-};
-\node [above] at (3.0,1){e(t)};
-\node at ( 5.5, 1){kp};
-\node [above] at (9.0,1){u(t)};
-\node at (12.5, 1){g(t)};
-\node [above] at (16.0,1){c(t)};
-\node at ( 9.0,-2){h(t)};
-
-\end{tikzpicture}
-\label{fig:malhaFechadaP}
-
-{\small Fonte: Próprio autor}
-\end{figure}
-
-Variando o valor de $kp$ pode-se ver pela Figura \ref{fig:acaoP} que quanto maior o seu valor, mais rápida é a resposta do sistema, ou seja, menor é o tempo necessário para alcançar o valor de referência, porém, depois de um determinado valor, o sistema apresenta um sobressinal, que pode ou não ser tolerável, dependendo das exigências da aplicação.
-
-\begin{figure}[!htb]
-\centering
-\caption{Ação de Controle Proporcional}
-\center\includegraphics[scale=1.4]{./imagens/acaoP.eps}
-\label{fig:acaoP}
-
-{\small Fonte: Próprio autor}
-\end{figure}
-
-%O controlador que foi implementada a função proporcional está apresentado na Figura \ref{fig:codigoControladorP}, onde pode-se verificar a utilização de variáveis do tipo ponto flutuante (\emph{float}) para obtenção de maior precisão nos cálculos e consequantemente, no controle. O nome das variáveis faz alusão a sua representação no diagrama de blocos da Figura \ref{fig:malhaFechadaP}.
-
-%A função implementada, declarada na linha 7 possui três parâmetros de entrada e possui um parâmetro de retorno, sendo:
-%\begin{itemize}
-%  \item $setpoint$ : recebe o valor de rotação desejado ao sistema, o valor de referência;
-%  \item $max$ : representa o máximo valor que o sistema alcança;
-%  \item $sensor$ : recebe o valor de rotação atual da planta;
-%  \item $return $ : Parâmetro de retorno da função que assume um valor entre 0 e 100, pois é o parâmetro de entrada do controlador PWM que efetua o acionamento do motor.
-
-%\end{itemize}
-
-
-
-%\begin{figure}[!htb]
-%\centering
-%\caption{Código da Ação de Controle Proporcional}
-%\begin{minipage}{0.8\linewidth}
-%\lstset{firstnumber=1}
-%\begin{lstlisting}
-%float kp = 0.1;
-%float ki = 0.0002;
-%float kd = 2.0;
-%float yT, rT, eT, iT, dT, uT;
-%long  Cout, pwmAlvo;
-
-%long controlador{ long setpoint, long max, long sensor }
-%{
-%    rT = (float) setpoint;
-%    yT = (float) sensor;
-%    pwmAlvo = ((setpoint*100)/max);
-
-    
-%    eT = rT - yT;
-    
-%    uT = kp*eT;
-
-%    Cout = pwmAlvo + uT;
-
-%    if( Cout < 0 )
-%        Cout = 0;
-%    else if( Cout >= 100 )
-%        Cout = 100;
-
-%    return( Cout );
-%}
-%\end{lstlisting}
-%\end{minipage}
-%\label{fig:codigoControladorP}
-
-%{\small Fonte: Próprio autor}
-%\end{figure}
-
-
-%Nas linhas 9 e 10 os parâmetros de entradas são convertidos em ponto flutuante para realização dos cálculos e atribuidos às respectivas variáveis auxiliares.
-
-%A variável \emph{pwmAlvo} recebe o valor percentual da velocidade de referência, como a velocidade mínima é zero, basta dividir o \emph{setpoint} pelo valor \emph{max} e multiplicar por \emph{100} conforme feito na linha 11.
-
-
-%A linha 14 realiza o cálculo do erro, subtraindo do valor de referência (\emph{rT}) o valor do erro (\emph{ht}).
-
-%Na linha 18 a variável manipilada recebe o erro (\emph{eT}) sendo multiplicado proporcionalmente pelo coeficiente kp, que caracteriza esta configuração de controle.
-
-%A variável \emph{Cout}, é a variável com o valor que será o retorno da função, que serve de parâmetro de entrada ao gerador de sinal PWM que atua sobre o motor.
-
-%\emph{Cout} recebe o valor da variável \emph{pwmAlvo} que é a aplicação de um degrau com valor de referência do sistema somado somada a \emph{uT} que possui o valor proporcional ao erro do sistema. 
-
-%Inicialmente, considerando o sistema em repouso, o erro possui um valor alto, então, Cout é inicializada com um valor bem maior do que o necessário para gerar o valor de referência, ou seja, um valor de pwm referente a uma velocidade bem maior do que os \emph{25 rps} de referência da aquisição mostrada na Figura \ref{fig:acaoP}. Conforme o sistema começa a girar, e a velocidade aumenta, o erro diminui, o que diminui o incremento ao \emph{pwmAlvo}, até que este incremento seja zero quando o valor lido pelo sensor alcançar o valor de referência, que é o próprio valor do degrau que está em \emph{pwmAlvo}.
-
-%O código entre as linhas 20 e 23 são necessárias apenas para não gerar um valor incorreto para o parâmetro do PWM, o que poderia causar falhas no acionamento. 
-
-
-
-
-
-
-
-
-\subsection{ Controlador Integral (I) }
-
-O controlador integral atua acumulando o erro do sistema, conforme equação descrita abaixo:
-
-
-\begin{equation}
-u(t) = ki \int_{0}^{\infty} e(t) dt
-\end{equation}
-
-A resposta apresentada pelo sistema está plotada na Figura \ref{fig:acaoI} e mostra que ao aumentar o valor do coeficiente \emph{ki} o sistema começou a oscilar e demorou mais para estabilizar dentro de um valor limite próximo ao valor de referência. 
-
-\begin{figure}[!h]
-\centering
-\caption{Ação de Controle Integral}
-\center\includegraphics[scale=1.3]{./imagens/acaoI.eps}
-\label{fig:acaoI}
-
-{\small Fonte: Próprio autor}
-\end{figure}
-
-%A Figura \ref{fig:codigoControladorI} mostra o código da função que implementou o controlador com ação integral, responsáveis por gerar propriamente a ação de integração do erro.
-
-
-%\begin{figure}[!htb]
-%\centering
-%\caption{Código da Ação de Controle Integral}
-%\begin{minipage}{0.8\linewidth}
-%\lstset{firstnumber=13}
-%\begin{lstlisting}
-
-%    eT = rT - yT;
-%    iT += eT * i; 
-%    uT = iT;
-%\end{lstlisting}
-%\end{minipage}
-%\label{fig:codigoControladorI}
-
-%{\small Fonte: Próprio autor}
-%\end{figure}
-
-A ação de integração é uma somatória de pequenas amostras do erro, que somadas ao longo do tempo levam o sistema a um erro zero, porém demoram mais tempo para alcançar a estabilidade e facilmente geram sobressinal.
-
-
-
-
-
-
-
-
-
-
-\subsection{ Controlador Proporcional + Integral (PI) }
-
-O controlador Proporcional Integral (PI) como o próprio nome indica, é a união das ações de controle que levam seu nome, e busca unir as suas propriedades.
- 
-\begin{equation}
-u(t) = kp.e(t) + ki \int_{0}^{\infty} e(t) dt
-\end{equation}
-
-
-O intuito neste controlador é reduzir o tempo de resposta do sistema pelo controle proporcional e ao mesmo tempo gerar um erro nulo quando a estabilidade é atingida.
-
-
-
-
-
-\begin{figure}[!htb]
-\centering
-\caption{ Diagrama em blocos de sistema de controle em malha fechada utilizando notação matemática}
-\begin{tikzpicture}[scale=0.6]
-
-%\draw [lightgray](-3,0) grid (18, 2);
-%\draw [lightgray](-3,0) grid (18,-5);
-%\draw [semithick,red] (0,0) circle (0.1);
-
-\draw (-3,1) -- (0,1);
-\draw [fill]( 0,1) -- (-0.2, 1.1) -- ( -0.2,0.9) -- (0,1);
-\draw [semithick,black] (1,1) circle (1.0); % Somador
-\draw (2.0,1) -- (4,1);
-\draw [fill]( 4,1) -- ( 3.8, 1.1) -- ( 3.8,0.9) -- ( 4,1);
-\draw [black, thick](4,0) rectangle (6, 2) ; % Controlador P 
-\draw (6,1) -- (8,1);
-\draw [fill]( 8,1) -- (7.8, 1.1) -- ( 7.8,0.9) -- (8,1);
-\draw [semithick,black] (9,1) circle (1.0); % Somador 2
-\draw (10.0,1) -- (12,1);
-\draw [fill]( 12,1) -- (11.8, 1.1) -- (11.8,0.9) -- (12,1);
-\draw [black, thick](12,0) rectangle (15, 2) ; % Planta
-\draw (15,1) -- (18,1);
-\draw [fill](18,1) -- (17.8, 1.1) -- (17.8,0.9) -- (18,1);
-
-\draw (3,1) -- (3,-2) -- (4,-2);
-\draw [fill](4,-2) -- (3.8, -2.1) -- (3.8,-1.9) -- (4,-2);
-\draw [black, thick](4,-1) rectangle (6,-3) ; % Controlador I
-\draw (6,-2) -- (9,-2) -- (9,0);
-\draw [fill](9,0) -- (8.9, -0.2) -- (9.1,-0.2) -- (9,0);
-
-
-
-\draw [black, thick](7.5,-3) rectangle (10.5, -5) ; % Sensor
-\draw (16, 1) -- (16, -4) -- (10.5,-4);
-\draw ( 7.5,-4) -- ( 1, -4) -- (1,0);
-\draw [fill](1,0) -- (1.2,-0.2) -- (0.8,-0.2) -- (1,0);
-
-\node [above] at (-1.5,1){r(t)};
-\node at (0.4,1){+};
-\node at (1,0.4){-};
-\node [above] at (3.0,1){e(t)};
-\node at ( 5.0, 1){kp};
-\node at (5.0,-2) {ki};
-\node at (8.4,1){+};
-\node at (9,0.4){+};
-\node [above] at (11.0,1){u(t)};
-\node at (13.5, 1){g(t)};
-\node [above] at (17.0,1){c(t)};
-\node at ( 9.0,-4){h(t)};
-
-\end{tikzpicture}
-\label{fig:malhaFechadaPI}
-
-{\small Fonte: Próprio autor}
-\end{figure}
-
-Variando o valor de $kp$ pode-se ver pela Figura \ref{fig:acaoP} que quanto maior o seu valor, mais rápida é a resposta do sistema, ou seja, menor é o tempo necessário para alcançar o valor de referência, porém, depois de um determinado valor, o sistema apresenta um sobressinal, que pode ou não ser tolerável, dependendo das exigências da aplicação.
-
-%\begin{figure}[!htb]
-%\centering
-%\caption{Ação de Controle Proporcional}
-%\center\includegraphics[scale=1.4]{./imagens/acaoPI.eps}
-%\label{fig:acaoP}
-
-%{\small Fonte: Próprio autor}
-%\end{figure}
-
-
-
-
-
-
-\begin{figure}[!htb]
-\caption{Ação de Controle Proporcional Integral}
-\center\includegraphics[scale=1.2]{./imagens/acaoPI.eps}
-\label{fig:acaoPI}
-
-{\small Fonte: Próprio autor}
-\end{figure}
-
-Como pode-se ver no gráfico da Figura \ref{fig:acaoPI} foi utilizado um valor de $ki = 0.1$ para obter uma subida em um tempo tido como bom, ou seja, subida mais rápida e sem gerar sobressinal, de acordo com os valores mostrados na Figura \ref{fig:acaoP}.
-
-
-
-
-
-%\begin{figure}[!htb]
-%\centering
-%\caption{Código da Ação de Controle Proporcional Integral}
-%\begin{minipage}{0.8\linewidth}
-%\lstset{firstnumber=13}
-%\begin{lstlisting}
-
-%    eT = rT - yT;
-%    iT += eT * i; 
-%    uT = iT + p*eT;
-%\end{lstlisting}
-%\end{minipage}
-%\label{fig:codigoControladorPI}
-
-%{\small Fonte: Próprio autor}
-%\end{figure}
-
-%O código da Figura \ref{fig:codigoControladorPI} mostra a implementação das funções de controle proporcional e integral, sendo que a linha 15 mostra a somatória característica do controle integral.
-
-
-
-
-
-
-
-
-
-
-%\subsection{ Controlador Proporcional + Derivativo (PD) }
-
-%A ação de controle proporcional e derivativo propicia uma resposta mais rápida, pois a ação derivativa gera um grande erro se houver variações abruptas.
-
-%\begin{equation}
-%u(t) = kp.e(t) + kd. \frac{d e(t)}{dt}
-%\end{equation}
-
-%A figura \ref{fig:acaoPD} mostra que a resposta do sistema é a mais rápida dos ações de controle estudadas, e também gera o maior sobressinal. 
-
-
-%\begin{figure}[!htb]
-%\centering
-%\caption{Ação de Controle Proporcional Derivativo}
-%\center\includegraphics[scale=1.1]{./imagens/acaoPD.eps}
-%\label{fig:acaoPD}
-
-%{\small Fonte: Próprio autor}
-%\end{figure}
-
-% A linha 13 da Figura \ref{fig:codigoControladorPD} mostra como foi codificada a ação de controle Derivativa modificada.
-
-%\begin{figure}[!htb]
-%\centering
-%\caption{Código da Ação de Controle Proporcional Derivativo}
-%\begin{minipage}{0.8\linewidth}
-%\lstset{firstnumber=13}
-%\begin{lstlisting}
-%    dT = (eT - (rT-yT)) * d;
-%    eT = rT - yT;
-%
-%    uT = dT + p*eT;
-%\end{lstlisting}
-%\end{minipage}
-%\label{fig:codigoControladorPD}
-
-%{\small Fonte: Próprio autor}
-%\end{figure}
-
-%A ação de controle derivativa (PD) é modificada pois é utilizada a diferença do erro na iteração anterior com o erro com os dados atuais, diferente do que ocorre com o controlador PD teórico, onde a derivada implica na diferença entre o valor atual e uma pequena variação positiva do tempo, ou seja, uma amostra futura, que é impossível de ser obtida na pratica. 
-
-
-
-
-
-
-
-
-
-
-%\subsection{ Controlador Proporcional + Integral + Derivativo (PID) }
-
-%O controlador Proporcional Integral Derivativo é uma das configurações mais utilizadas por sua versatilidade, unindo as características que permitem ajustar o tempo de subida, o sobressinal e o erro de estado estacionário, conforme a necessidade e a aplicação.
-
-%\begin{equation}
-%u(t) = kp.e(t) + ki \int_{0}^{\infty} e(t) dt + kd. \frac{d e(t)}{dt}
-%\end{equation}
-
-%O controlador PID pode ser implementado de diversas formas, pode ter o parâmetro proporcional influenciando diretamente as demais ações, ou não, como neste caso onde as ações de controle são utilizadas de forma independentes, e o erro é utilizado para cada uma das partes da soma do sinal da variável manipulada ($u(t)$).
-
-%\begin{figure}[!htb]
-%\centering
-%\caption{Ação de Controle Proporcional Integral Derivativo}
-%\center\includegraphics[scale=1.4]{./imagens/acaoPID.eps}
-%\label{fig:acaoPID}
-
-%{\small Fonte: Próprio autor}
-%\end{figure}
-
-%Os dois sinais utilizando o controle PID utilizou parâmetros já testados nos controladores anteriores para obter um resultado desejado, onde o sistema responde de forma bem rápida ao estímulo de entrada, tendo um tempo de subida entre 3 e 4 segundos para atingir a estabilidade com erro de estado estacionário menor do que 2\%, sem gerar sobressinal.
-
-
-%Em comparação ao sinal de controle em malha aberta, que a estabilidade é alcançada em um tempo de aproximadamente 12 segundos, o ganho de velocidade é consideravel para o sistema estudado, pois foi reduzido a pelo menos um terço do tempo original.
-
-%A Figura \ref{fig:codigoControladorPID} mostra a codificação completa dos parâmetros do PID, onde pode-se perceber que sua implementação é simples, apesar da teoria ser complexa. 
-
-%\begin{figure}[!htb]
-%\centering
-%\caption{Código da Ação de Controle Proporcional Integral Derivativo}
-%\begin{minipage}{0.8\linewidth}
-%\lstset{firstnumber=13}
-%\begin{lstlisting}
-%    dT = (eT - (rT-yT)) * d;
-%    eT = rT - yT;
-%    iT += eT * i; 
-%    uT = p*eT + iT + dT;
-%\end{lstlisting}
-%\end{minipage}
-%\label{fig:codigoControladorPID}
-
-%{\small Fonte: Próprio autor}
-%\end{figure}
-
-
-%Para o microcontrolador efetuar as subtrações é algo que requer pouco processamento, mas as multiplicações são bem mais complexas e exigem mais memória e tempo de processamento, e é claro que trabalhando em ponto flutuante esta complexidade também é muito grande. O controlador utilizado possui uma unidade de processamento de ponto flutuante, o que possibilitou uma performance capaz de efetuar todos os cálculos sem afetar a leitura de velocidade do sistema.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\section{Requisitos de desempenho do sistema}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%Os sistemas de controle buscam atender os chamados requisitos de desempenho do sistema, que de um modo geral se efetuam através de modificações das características da relação entrada/saída para se obter os valores desejados dessa relação, ou ainda ajustar o comportamento da saída para uma dada entrada específica.
-
-%Os principais e mais comuns requisitos de desempenho dos sistemas são associados a velocidade de resposta, presença ou não de oscilações e a exatidão da resposta do sistema em relação ao valor desejado, chamada de erro de regime estacionário.
-
-%O erro de regime estacionário, mostrada na Figura \ref{fig:funcaoResposta}, é uma medida que vai tender a zero em sistemas ideais, mas que na realidade não alcança o valor zero, assim assume-se um valor aceitável, 5\% do valor da resposta desejada para sistemas não críticos e 2\% para sistemas de maior grau de criticidade, para assumir que o sistema entrou em estabilidade, e a resposta real é aceita como tendo atingido o valor de resposta desejada. 
-
-%\begin{figure}[!htb]
-%\centering
-%\caption{Gráfico da função Resposta}
-%\center\includegraphics[scale=1]{./imagens/C400grafico.eps}
-%\label{fig:funcaoResposta}
-
-%{\small Fonte: Próprio autor}
-%\end{figure}
-
-%Para realizar o controle de um sistema é necessário que estejam bem definidos os seus requisitos, que são os objetivos a serem atendidos. Quando um sistema por si só já atende aos requisitos, não há a necessidade de controle. De forma oposta, é projetado o sistema de controle, que pode ser em malha aberta ou fechada, clássico ou moderno dependendo das características físicas do sistema. 
-
-%Para a execução de um sistema de controle podem ser verificados requisitos do sistema de duas formas básicas, sendo a primeira através dos testes e levantamento empírico da sua curva de resposta ou através de seu modelo matemático, quando trabalha-se com elementos já bem estudados e com a equação que representa seu comportamento empírico bem estabelecida por diversos estudos anteriores.
-
-
-
-%\newpage
-
-
-
-
-
-
-\section{Controle moderno e Lógica Não-Convencional}
-
-
-
-
-O controle moderno trata de sistemas multivariáveis, 
-não lineares ou variantes no tempo 
-de forma mais apropriada do que o controle clássico, 
-reduzindo a complexidade das expressões para que 
-haja a possibilidade de um processamento satisfatório.
-Dentro do universo do controle moderno, 
-existe ainda o controle convencional que utiliza a 
-análise de sistemas de controle no espaço de estados, 
-que utiliza n-equações de primeira ordem 
-combinadas em uma equação diferencial vetor-matricial, 
-de forma a simplificar e possibilitar 
-o trabalho com uma quantidade de variáveis alta 
-sem que haja um grande impacto no processamento.  
-\cite{Ogata} 
-Existem ainda o controle não convencional, 
+%O controle moderno trata de sistemas multivariáveis, 
+%não lineares ou variantes no tempo 
+%de forma mais apropriada do que o controle clássico, 
+%reduzindo a complexidade das expressões para que 
+%haja a possibilidade de um processamento satisfatório.
+%Dentro do universo do controle moderno, 
+%existe ainda o controle convencional que utiliza a 
+%análise de sistemas de controle no espaço de estados, 
+%que utiliza n-equações de primeira ordem 
+%combinadas em uma equação diferencial vetor-matricial, 
+%de forma a simplificar e possibilitar 
+%o trabalho com uma quantidade de variáveis alta 
+%sem que haja um grande impacto no processamento
+%\cite{Ogata}.
+O controle não convencional, 
 que também é classificado como controle moderno e que
 apresenta uma grande diversidade de técnicas, 
 tais como o controle adaptativo, 
@@ -2649,10 +1480,9 @@ O sistema possui uma região de operação
 que não é possível realizar o controle, 
 pois é a região onde a inércia do sistema parado
 impede a movimentação do eixo do motor,
-denominada de Zona Morta,
-o que deixa de acontecer em torno dos 10\% do valor do PWM,
-de acordo com testes realizados.
-
+denominada de Zona Morta, 
+%o que deixa de acontecer em torno dos 10\% do valor do PWM.
+e é estipulado, inicialmente, um valor em torno dos 10\% do valor máximo de rotação.
 A Figura \ref{fig:zonaMorta} mostra essa região:
 
 
@@ -2784,10 +1614,10 @@ a depender do tipo de sistema a ser controlado.
 \section{ A região de operação }
 
 Para a região de operação, 
-foi estipulado e verificado de forma empírica 
-um valor de grau de contradição adequado para 
-atender os requisitos de desempenho do sistema, 
-que foi um grau de contradição menor do que 0,1 ($Gct < 1$) 
+foi estipulado um valor de grau de contradição
+%para atender os requisitos de desempenho do sistema,
+podendo ser alterado posteriormente após testes empíricos.
+O grau de contradição está definido entre o intervalo menor do que 0,1 ($Gct < 1$) 
 e maior do que -0,05 ($Gct > -0,05$). 
 
 
@@ -2853,43 +1683,62 @@ e maior do que -0,05 ($Gct > -0,05$).
 
 
 
-Os valores de $Gct > 0,1$ geram na saída o valor máximo,
-$1,0$. Na região oposta, para $Gct < -0,05$ a saída assume
- o valor nulo, $0,0$. 
+Os valores de $Gct \ge  0,1$ geram na saída o seu valor máximo,
+$1,0$. Desta forma o sistema controlado recebe sinal máximo de
+acionamento, gerando a resposta mais rápida possível até que alcance
+um grau de contradição menor do que 0,1, correspondente a um erro
+menor do que $10\%$.
 
-Aplicando um degrau à entrada do sistema, 
-podemos perceber o gráfico da 
-Figura \ref{fig:acaoLPAEtgct100} 
-que o tempo de acomodação é reduzido drasticamente, 
-apesar do sobressinal gerado, 
-este não apresenta problema por estar 
-dentro da tolerância aceitável. 
+
+Na região oposta, para $Gct \le -0,05$ a saída assume
+o valor nulo, $0,0$. Assim quando o sistema controlado estiver com
+uma velocidade acima do desejado, acima de $5\%$,o desligamento
+controlado da saída possibilita a redução mais rápida possível na
+velocidade controlada, considerando que não há uma alimentação
+reversa para atuar ativamente na redução da velocidade.
+ 
+
+
+
+
+ 
+%%% Cap Resultados
+%Aplicando um degrau à entrada do sistema, 
+%podemos perceber o gráfico da 
+%Figura \ref{fig:acaoLPAEtgct100} 
+%que o tempo de acomodação é reduzido drasticamente, 
+%apesar do sobressinal gerado, 
+%este não apresenta problema por estar 
+%dentro da tolerância aceitável. 
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Img
-\begin{figure}[!htb]%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\caption{Ação de controle utilizando LPA$E\tau$}
-\vspace{-1cm}\center\includegraphics[scale=1.6]{./imagens/LPAEt-gct100.eps}
-\label{fig:acaoLPAEtgct100}
+%\begin{figure}[!htb]%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\caption{Ação de controle utilizando LPA$E\tau$}
+%\vspace{-1cm}\center\includegraphics[scale=1.6]{./imagens/LPAEt-gct100.eps}
+%\label{fig:acaoLPAEtgct100}
 
-{\small Fonte: Próprio autor}
-\end{figure}
+%{\small Fonte: Próprio autor}
+%\end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+Considerando a janela entre o $Gct < 0,10$ e $Gct > -0,05$ como a
+região em que o controlador irá atuar ativamente, fora do corte e da
+saturação, na variável manipilada do sistema controlado.
 
-
-
-
-Como a relação entre o valor de referência e a 
+A variável manipilada assume assim o valor da entrada $\mu_0$,
+enviando à saída um valor proporcional ao valor desejado.
+Mas como a relação entre o valor de referência e a 
 velocidade de rotação do motor não é perfeitamente linear,
-para cada valor de patamar pode haver um erro considerável,
+para cada região ou patamar da valocidade do motor,
+pode haver um erro considerável,
 inclusive sendo maior do que o valor permitido pela 
 tolerância. 
 
 Assim para reduzir o grau de contradição
 em decorrência dessa não linearidade, 
-é somado ao $\mu_0$ um valor de correção denominado $\delta$.
+é somado ao $\mu_0$ um valor de correção denominado $\delta$(delta).
 
 Então a representação do reticulado da LPA$E\tau$ 
 fica da seguinte forma mostrada na 
@@ -2903,7 +1752,7 @@ Figura \ref{fig:regiaoAtivaMuDelta}.
 \begin{figure}[!h]%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \centering
 \caption{Representação da região ativa no reticulado da LPA$E\tau$}
-\begin{tikzpicture}[scale=0.80]
+\begin{tikzpicture}[scale=0.70]
 \tikzset{ >=latex, inner sep=0pt, outer sep=0pt,  }
 
 %\draw [lightgray, dashed](0,0) grid (10,10);
@@ -3121,12 +1970,12 @@ Limite Inferior & Alvo & Limite Superior & Valor de Correção\\ \hline
 Para cada valor alvo, há um valor $\delta$ associado, 
 que é um valor de correção.
 Tomando como exemplo o valor de referência 25\%, 
-no momento inicial o vai haver uma grande contradição,
-então o reticulado vai ter como saída o valor 1, 
+no momento inicial há uma grande contradição,
+então o reticulado assume na saída o valor 1, 
 do estado de valor máximo apresentado na 
 Figura \ref{fig:regiaoAtivaMuDelta}.
-O sistema então está com potência máxima, 
-vencendo a inércia do sistema que estava em repouso.
+Ao sistema então é aplicada a potência máxima, 
+vencendo a inércia do repouso.
 O grau de contradição é reduzido conforme 
 o sistema se aproxima do ponto de operação desejado,
 e quando o seu valor é menor do que 
@@ -3153,24 +2002,40 @@ para um valor de referência de 25\% do valor máximo.
 
 \section{O fator de correção $\delta$}
 
-Um temporizador é implementado de modo a 
-gerar um primeiro intevalo de 3 segundos para 
-partida e acomodação do sistema, 
-em seguida a cada 1 segundo é feita uma verificação
-do grau de contradição, 
-e como resultado dessa verificação, 
-um incremento do fator de correção $\delta$ 
-que está em operação é realizada. 
+O fator de correção $\delta$ tem a finalidade de corrigir a variável
+manipilada de modo a zerar a diferença entre a variável controlada e a
+variável de referência. A correção aqui empregada é de ajuste fino da
+variável manipilada.
+
+A correção se dá por um algorítmo que faz a leitura de forma cíclica
+do grau de contradição e atualiza o $\delta$ correspondente ao patamar
+em execução.
+
+A dificuldade aqui encontrada é no fato de que a atualização do
+$\delta$ somente pode ocorrer após a estabilização do sinal no patamar
+após a mudança de velocidade, seja em um primeiro momento de
+acionamento com a velocidade saído do zero para um valor desejado de
+referência, como entre valores desejados diferentes de zero e
+diferentes entre si. 
+
+%Um temporizador é implementado de modo a 
+%gerar um primeiro intevalo de 3 segundos para 
+%partida e acomodação do sistema, 
+%em seguida a cada 1 segundo é feita uma verificação
+%do grau de contradição, 
+%e como resultado dessa verificação, 
+%um incremento do fator de correção $\delta$ 
+%que está em operação é realizada. 
 
 Assim, de forma adaptativa, 
 os valores de $\delta$ sempre estão sendo atualizados
 para variações que possam ocorrer no processo. 
 
-Caso o tempo de 1 segundo seja muito alto para um 
-determinado processo, 
-para as perturbações envolvidas no processo,
-o tempo pode ser alterado para gerar uma resposta 
-mais rápida ou mais lenta. 
+%Caso o tempo de 1 segundo seja muito alto para um 
+%determinado processo, 
+%para as perturbações envolvidas no processo,
+%o tempo pode ser alterado para gerar uma resposta 
+%mais rápida ou mais lenta. 
 
 
 

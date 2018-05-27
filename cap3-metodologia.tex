@@ -1,6 +1,13 @@
-Para o desenvolvimento deste trabalho foram dadas prioridade e preferência para a utilização de um sistema embarcado de núcleo ARM, com o intúito de desenvolver as capacidades de operar tal tecnologia de processamento, trabalhando com sistema eletrônico simples de fácil acesso mas que atende às necessidades do projeto, bem como a utilização de ferramentas de uso livre.
+Para o desenvolvimento deste trabalho foram dadas prioridade e
+preferência para a utilização de um sistema embarcado de núcleo ARM,
+com o intúito de desenvolver as capacidades de operar tal tecnologia
+de processamento, trabalhando com sistema um eletrônico simples de fácil acesso mas que atenda as necessidades do projeto, bem como a utilização de ferramentas de uso livre.
 
-
+Como metodologia foi adotado o procedimento de comparação de
+resultados gerados entre uma técnica de controle bem estabalecida,
+com uma lógica clássica utilizando um controlador
+Proporcional+Integral (PI), e um controlador proposto
+utilizando a LPA$E\tau$. 
 
 
 
@@ -10,7 +17,15 @@ Para o desenvolvimento deste trabalho foram dadas prioridade e preferência para
 
 \section{Materiais}
 
-O protótipo físico foi constuído baseado em um microcontrolador da família Texas Instruments, modelo $Tiva^{TM}$ TM4C123GH6PM, drive para acionamento do tipo \emph{Pulse Width Modulation}(PWM) do motor com circuito integrado de tecnologia CMOS (IRF540), motor de corrente contínua acoplado a um CD, com uma etiqueta, Figura \ref{fig:discoSensor}, para acionar o sensor óptico e servir de indicador para contagem de giros do motor. Fonte de alimentação chaveada de 12V 10W. A maior parte do sistema pode ser visto na Figura \ref{fig:discoSensorGeral} .
+O protótipo físico foi constuído baseado em um microcontrolador da
+família Texas Instruments, modelo $Tiva^{TM}$ TM4C123GH6PM, drive para
+acionamento do tipo \emph{Pulse Width Modulation}(PWM) do motor com
+circuito integrado de tecnologia CMOS (IRF540), motor de corrente
+contínua acoplado a um disco compacto(CD), com uma etiqueta,
+Figura \ref{fig:discoSensor}, para acionar o sensor óptico e servir de
+indicador para contagem de giros do motor.
+Fonte de alimentação chaveada de 12V 10W.
+A maior parte do sistema pode ser visto na Figura \ref{fig:discoSensorGeral} .
 
 
 \begin{figure}[!htb]
@@ -28,7 +43,8 @@ O protótipo físico foi constuído baseado em um microcontrolador da família T
 {\small Figure: Próprio autor}
 \end{figure}
 
-As ferramentas de software utilizadas foram:
+As ferramentas de software utilizadas foram em sua totalidade de uso
+livre ou de código aberto, sendo eles:
 
 \begin{itemize}
 \item Sistema Operacional GNU/Linux Debian 8(Jessie);
@@ -47,357 +63,74 @@ As ferramentas de software utilizadas foram:
 
 
 
+
+
+
+
+
 \section{ Métodos }
 
-Os métodos utilizados para a validação do objetivo do projeto devem aferir quão próximo o resultado obtido empiricamente foi do objetivo esperado, de modo que as expectativas referentes aos objetivos propostos sejam atendidos ou sua negação seja devidamente exclarecidas. 
+Os métodos utilizados buscam mostrar como implementar e testar o
+sistema de controle proposto, possibilitando uma posterior replicação
+dos ensaios utilizados e análise da forma como o sistema foi
+construído e testado.
 
-Basicamente foram realizados os seguintes passos:
+%!@# rever frase completa
+%Os métodos utilizados para a verificação do objetivo do projeto devem verificar quão próximo o resultado obtido empiricamente foi do objetivo esperado, de modo que as expectativas referentes aos objetivos propostos sejam atendidos ou sua 'negação' seja devidamente esclarecidas. 
+
+Basicamente, são realizadas as seguintes etapas:
 
 \begin{itemize}
 \item Levantamento de um modelo matemático do sistema protótipo utilizado;
-\item Aferição da qualidade desse modelo, com erro percentual médio menor do que 5\%, considerando um sistema não crítico;
+\item Verificação da qualidade desse modelo, com erro percentual médio
+  menor do que 5\%, considerando um sistema não crítico. Se o erro
+  percentual médio for maior do que os 5\%, retornar ao passo anterior e
+  melhorar o modelo;
 \item Definição dos requisitos de desempenho do sistema;
-\item Comparação dos resultados obtidos empiricamente com os requisitos de desempenho do sistema.
+\item Realizar o controle utilizando um controlador PI;
+\item Realizar o controle utilizando um controlador LPA$E\tau$;
 \end{itemize}
 
 
 
 
-\subsection{ Obtenção de um modelo do processo }
 
-Para melhor compreensão dos modelos dinâmicos dos sistemas, é utilizado o Diagrama de blocos do comportamento do sistema em malha aberta, conforme Figura \ref{fig:AcaoMalhaAberta}\cite{Ogata}.
+\subsection{ Obtenção de um modelo matemático do processo }
 
+A obtenção do modelo matemático do processo,
+apresentada no anexo B, consiste em equacionar
+regras matemáticas a partir da física básica do sistema,
+de modo a obter uma função,
+contemplando as as principais variáveis do sistema,
+e que ajustadas adequadamente,
+possam produzir um resultado semelhante ao comportamento do sistema
+original, resultado empírico de funcionamento.
 
-\begin{comment}
 
 
-\begin{figure}[!htb]
-\centering
-\caption{ Diagrama de blocos de sistema de controle em malha aberta}
-\begin{tikzpicture}[scale=0.85]
-%\draw [lightgray](0,0) grid (15,2);
-\draw (0,1) -- (3,1);
-\draw [black, thick](3,0) rectangle (6, 2) ; 
-\draw (6,1) -- (9,1);
-\draw [black, thick](9,0) rectangle (12, 2) ; 
-\draw (12,1) -- (15,1);
+\subsection{ Qualidade do modelo }
 
-\draw [fill]( 3,1) -- ( 2.8, 1.1) -- ( 2.8,0.9) -- ( 3,1);
-\draw [fill]( 9,1) -- ( 8.8, 1.1) -- ( 8.8,0.9) -- ( 9,1);
-\draw [fill](15,1) -- (14.8, 1.1) -- (14.8,0.9) -- (15,1);
+Garantir uma boa qualidade ao modelo é importante para que se possa
+utilizá-lo para calcular os parametros dos controladores.
 
-\node at ( 4.5, 1){Controlador};
-\node at (10.5, 1){Planta};
-\node [above] at ( 1.5,1){Valor de};
-\node [below] at ( 1.5,1){Referência};
-\node [above] at ( 7.5,1){Variável};
-\node [below] at ( 7.5,1){Manipulada};
-\node [above] at (13.5,1){Variável};
-\node [below] at (13.5,1){Controlada};
-\end{tikzpicture}
-\label{fig:malhaAberta}
-
-{\small Fonte: \cite{Ogata}}
-\end{figure}
-
-\end{comment}
-
-Utilizando variáveis para cada elemento do Diagrama de blocos, de forma a representá-los nas equações, temos então que:
-
-
-
-\begin{figure}[!htb]
-\centering
-\caption{ Sistema de controle em malha aberta}
-\begin{tikzpicture}[scale=0.85]
-%\draw [lightgray](0,0) grid (15,2);
-\draw (0,1) -- (3,1);
-\draw [black, thick](3,0) rectangle (6, 2) ; 
-\draw (6,1) -- (9,1);
-\draw [black, thick](9,0) rectangle (12, 2) ; 
-\draw (12,1) -- (15,1);
-
-\draw [fill]( 3,1) -- ( 2.8, 1.1) -- ( 2.8,0.9) -- ( 3,1);
-\draw [fill]( 9,1) -- ( 8.8, 1.1) -- ( 8.8,0.9) -- ( 9,1);
-\draw [fill](15,1) -- (14.8, 1.1) -- (14.8,0.9) -- (15,1);
-
-\node at ( 4.5, 1.4){Controlador};
-\node at ( 4.5, 0.6){f(t)};
-\node at (10.5, 1.4){Planta};
-\node at (10.5, 0.6){g(t)};
-\node [above] at ( 1.5,1){r(t)};
-\node [above] at ( 7.5,1){u(t)};
-\node [above] at (13.5,1){c(t)};
-\end{tikzpicture}
-\label{fig:AcaoMalhaAberta}
-
-{\small Fonte: Próprio autor}
-\end{figure}
-
-
-Onde: 
-
-%\begin{itemize}
-%\item 
-\hspace{1cm} $r(t)$: Valor de Referência em rotações por segundo [rps];
-
-%\item 
-$\hspace{1cm} f(t)$: Controlador que converte rps em \% PWM para acionar o motor;
-
-%\item 
-$\hspace{1cm} u(t)$: Variável Manipulada é o valor percentual do PWM;
-
-%\item 
-$\hspace{1cm} g(t)$: Planta ou Processo formado pelo motor DC com o disco acoplado no eixo;
-
-%\item 
-$\hspace{1cm}  c(t)$: Variável Controlada é a velocidade de rotação do eixo em rps.
-
-%\end{itemize}
-
-
-
-O sistema físico aqui estudado possui comportamento exponencial que pode ser descrito pela equação \ref{eq:ftSistOrdem1}. 
-
-
-
-
-
-
-\begin{equation}
-	 \frac{d c(t)}{dt} + c(t) = r(t) \rightarrow  \mathscr{L} \to \frac{C(s)}{R(s)} = \frac{K}{s + a} 
-\label{eq:ftSistOrdem1}
-\end{equation}
-
-Onde:
-
-\setlength{\parindent}{2cm}
-
-$t$ : tempo,$ r(t) = 0$ , para t $<$ 0;
-
-$\mathscr{L}$ : Operador de Laplace;
-
-$c(t)$ : Variável controlada no domínio do tempo;
-
-$C(s)$ : Variável controlada no domínio da frequência;
-
-$r(t)$ : Valor de referência (\emph{setpoint}) no domínio do tempo;
-
-$R(s)$ : Valor de referência (\emph{setpoint}) no domínio da frequência.
-
-$K$ : Constante de proporcionalidade;
-
-$s$ : Variável complexa de Laplace;
-
-$a$ : Polo da função.
-\setlength{\parindent}{1cm}
-
-
-
-Sendo assim, para um estímulo de entrada do tipo \textbf{degrau}, com amplitude \textbf{A}, temos $ R(s) = \frac{A}{s}$ e aplicando a Transformada Inversa de Laplace:
-
-\begin{equation}
-C(s) = \frac{K}{s+a} \frac{A}{s} \rightarrow \mathscr{L}^{-1} \to c(t) = \frac{K A}{a} (1 - e^{-at})
-\label{eq:degrauA}
-\end{equation}
-
-A Figura \ref{fig:degrauA} mostra um sinal do tipo degrau com amplitude \textbf{A} aplicado ao sistema de teste, que responde conforme um sistema de primeira ordem como mostrado na Figura \ref{fig:cRegime}. 
-
-
-%A partir de um determinado instante de tempo, entra em regime constante ($c_{reg}$), alcançando o valor de referência dado pelo degrau de amplitude A. Assim quando $ t \rightarrow \infty $  então $ c_{reg} \rightarrow A $:
-
-
-
-
-\begin{figure}[!htb]
-\centering
-\caption{Sistema de Primeira Ordem}
-\subfloat[Sinal de entrada tipo degrau com amplitude A]{\label{fig:degrauA}
-\begin{tikzpicture}[scale=0.75]
-\draw [lightgray, dashed](0,0) grid (8.8,5.8);
-\draw [->] (0,0) -- (9,0);
-\draw [fill] (0,6.2) -- (-0.1, 5.8) -- (0.1,5.8) -- (0,6.2);
-\draw [->] (0,0) -- (0,6);
-\draw [fill] (9.2,0) -- (8.8,0.1) -- (8.8,-0.1)--(9.2,0.0);
-\node at (9.0,-0.5) {$t$};
-\node at (0.2,6.5) {$r(t)$};
-\draw [red, ultra thick] (0.0,5.0) -- (9.0,5.0);
-\draw [red, ultra thick] (0.0,0.0) -- (0.0,5.0);
-\node at (-0.5,5.0)[red]{$A$};
-\end{tikzpicture} }
-\subfloat[Resposta transitória e regime de acomodação]{\label{fig:cRegime}
-\begin{tikzpicture}[scale=0.75]
-\draw [lightgray, dashed](0,0) grid (8.8,5.8);
-\draw [->] (0,0) -- (9,0);
-\draw [fill] (0,6.2) -- (-0.1, 5.8) -- (0.1,5.8) -- (0,6.2);
-\draw [->] (0,0) -- (0,6);
-\draw [fill] (9.2,0) -- (8.8,0.1) -- (8.8,-0.1)--(9.2,0.0);
-\node at (9.0,-0.5) {$t$};
-\node at (0.2,6.5) {$c(t)$};
-\node at (-0.5,5.0)[blue]{$C_{reg}$};
-\draw [blue, ultra thick] (0,0) to [out=85, in=180] (6,5);
-\draw [blue, ultra thick] (6,5) -- (9,5);
-\end{tikzpicture}}
-\label{fig:sistPrimeiraOrdem}
-
-{\small Fonte: Próprio autor}
-\end{figure}
-
-%\begin{equation}
-%c_{reg} = \lim_{t \rightarrow \infty} \frac{KA}{a}(1-e^{-at}) = \frac{KA}{a}
-%\label{eq:cregime}
-%\end{equation}
-
-
-
-%Aplicando o Teorema do Valor Final pode-se ver que o \emph{$c_{reg}$} estabiliza em um valor constante como mostrado pela Equação \ref{eq:teoremaValorFinal}:
-
-%\begin{equation}
-%C_{reg} = \lim_{s \rightarrow 0} sC(s) = \lim_{s \rightarrow 0} s\ \frac{K}{s+a}\frac{A}{s} = \frac{KA}{a}
-%\label{eq:teoremaValorFinal}
-%\end{equation}
-
-
-
-Matematicamente, quanto maior o valor de \emph{t} na Equação \ref{eq:degrauA}, o resultado da exponenencial tende a zero, levando a um resultado que depende apenas das constantes para o valor de referência. 
-
-Tomando $t= \frac{1}{a} = a^{-1} = \tau$ para gerar um valor conhecido em $e^{-at}$, da Equação \ref{eq:degrauA} temos:
-
-
-\begin{equation}
-c(a^-1) = \frac{KA}{a}(1-e^{-(a.a^{-1})}) = \frac{KA}{a}(1-e^{-1}) = \frac{KA}{a}.0,63 = 0,63 . C_{reg}
-\end{equation}
-
-A Figura \ref{fig:constTempo} mostra a constante de tempo $\tau$, que é atingida quando o sistema alcança 63\% do seu valor de regime. Como sabemos que $\tau = \frac{1}{a}$, então o polo do sistema, que leva o denominador da Equação \ref{eq:degrauA} a zero, é:
-
-\begin{equation}
-a = \frac{1}{\tau}
-\end{equation}
-
-
-
-\begin{figure}
-\centering
-\caption{Constante de tempo}
-\begin{tikzpicture}[scale=1.0]
-\draw [lightgray, dashed](0,0) grid (8.8,5.8);
-
-\draw [->] (0,0) -- (9,0);
-\draw [fill] (0,6.2) -- (-0.1, 5.8) -- (0.1,5.8) -- (0,6.2);
-\draw [->] (0,0) -- (0,6);
-\draw [fill] (9.2,0) -- (8.8,0.1) -- (8.8,-0.1)--(9.2,0.0);
-
-\node at (9.0,-0.5) {$t$};
-\node at (0.2,6.5) {$c(t)$};
-
-\node at (-0.5,5.0)[blue]{$C_{reg}$};
-\node at (-1,5.0*0.63)[purple]{$0,63.c_{reg}$};
-\draw [purple, ultra thick, dashed] (0.0,5.0*0.63) -- (1.45,5.0*0.63)
-						   -- (1.45,0.0);
-\draw [blue, ultra thick] (0,0) to [out=85, in=180] (6,5);
-\draw [blue, ultra thick] (6,5) -- (9,5);
-
-\draw [<->] (0.0,-0.4) -- (1.45,-0.4); 
-\node at (1.45/2,-0.7){$\tau$};
-
-\end{tikzpicture}
-\label{fig:constTempo}
-
-{\small Fonte: Próprio autor}
-\end{figure}
-
-Portanto:
-
-\begin{equation}
-K = \frac{ac_{reg}}{A}
-\label{eq:calcK}
-\end{equation}
-
-%\begin{tikzpicture}
-%\begin{axis}
-%\addplot[title=Gráfico de uma função, 
-%	xlabel = {$x$}, ylabel={$y$},
-% 	red!70!blue, very thick, samples=200,
-%	domain=-3:3]{x/(x^4-3*x^2+4)};
-%\end{axis}
-%\end{tikzpicture}
-
-
-
-%\begin{figure}[!htb]
-%\center	
-%\includegraphics[scale=1.2]{./imagens/ftMalhaAberta.eps} 
-%\label{fig:ftMalhaAberta} 
-%\caption{ Função de Transferência empírica da planta}
-%\end{figure}
-
-
-
-
-
-A Figura \ref{fig:AcaoMalhaAberta} mostra um sinal do tipo degrau aplicado como referência no valor de \emph{25 rps}, a curva de comportamento real medida empiricamente e a curva aproximada calculada pelo método determinístico como segue:
-
-\begin{figure}[!htb]
-\caption{Ação de Controle em Malha Aberta}
-\center\includegraphics[scale=1.4]{./imagens/acaoMalhaAbertaTau.eps}
-\label{fig:acaoMalhaAberTau}
-
-{\small Fonte: Próprio autor}
-\end{figure}
-
-A Figura \ref{fig:acaoMalhaAberTau} possui uma linha indicativa que mostra o ponto de intercepção da curva ao valor de 63\% do valor de referência, e empiricamente foi gerado um gráfico com divisões no eixo do Tempo no valor de $\tau = 2,5s $.
-
-Calculando o polo da função:
-\begin{equation}
-  a = \frac{1}{\tau} = \frac{1}{2,5} = 0,4
-\end{equation}
-
-Como $c_{reg} = 25$ e $A$ também é $25$ então na Equação \ref{eq:calcK} $K = a$ e assim temos que:
-
-\begin{equation}
-c(t) = \frac{KA}{a}(1-e^{-at}) = \frac{0,4.25}{0,4}(1-e^{-0,4.t}) = 25(1-e^{-0.4.t})
-\end{equation}
-
-
-Aplicando a Transformada de Laplace:
-
-\begin{equation}
-  \frac{C(s)}{R(s)} = \frac{K}{s+a} = \frac{0,4}{s+0,4}
-\end{equation}
-
-
-Para a equação no formato canônico tanto o numerador quanto o denominador são divididos pelo próprio valor de $K$. Assim temos que:
-
-\begin{equation}
-  \frac{C(s)}{R(s)} = \frac{1}{\tau s+1} = \frac{1}{2,5 s+1}
-\end{equation}
-
-
-Baseado no gráfico mostrado na Figura \ref{fig:acaoMalhaAberTau}, o valor de tempo em que o motor assume a velocidade de referência é aproximadamente $5\tau$, 12,5 s, e como objetivo para uma primeira versão da implementação do controle utilizando LPA$E\tau$ é proposto que o sistema reduza o tempo de alcance da velocidade alvo em um tempo de no máximo $1\tau$, ou seja, $2,5 s$.
-
-
-
-\subsubsection{ Qualidade do modelo }
-
-A qualidade do modelo é relativa ao erro aceitável para o sistema estudado. Para o modelo obtido neste estudo foi aplicada o cálculo de Erro Relativo Percentual, e foram feitas análises em trechos diferentes em função da não linearidade inicial apresentada pelo comportamento do motor da planta em estudo.
-
-A equação para o cálculo de Erro Relativo Percentual foi:
+A equação para o cálculo de Erro Relativo Percentual é:
 
 \begin{equation}
  \% erro = \frac{| \text{\emph{valor real}} -\text{\emph{valor calculado}} |}{\text{\emph{valor real}}} x 100
 \end{equation}
 
-Realizando a somatória para o cálculo de erro médio com todas as amostras aquisitadas: 
+Realizando a somatória para o cálculo de erro médio com todas as
+amostras a serem aquisitadas: 
 
 \begin{equation}
- \% erro = \frac{100}{N} . \sum_{n = 0,00}^{n=22,40} {\frac{| \text{\emph{r[n]}} -\text{\emph{c[n]}} |}{\text{\emph{r[n]}}} } 
+ \% erro = \frac{100}{N} . \sum_{n = inicial}^{n = final} {\frac{| \text{\emph{r[n]}} -\text{\emph{c[n]}} |}{\text{\emph{r[n]}}} } 
 \end{equation}
 
 
 Onde:
 
 \setlength{\parindent}{2cm}
-r : valor real; 
+r : valor real, empírico; 
 
 c : valor calculado;
 
@@ -405,93 +138,126 @@ n : número da amostra aquisitada;
 
 N : número total de amostras.
 
-Obs.: As aquisições começaram com tempo inicial de 0,00 s até o tempo final de 22,40 segundos, com intervalo de 10 milisegundos entre aquisições, totalizando 2240 amostras.
-
-\setlength{\parindent}{1cm}
-
-%A Tabela \ref{tab:ErroModelo} mostra o erro médio relativo calculado para diferentes intervalos de tempo. O primeiro valor contempla o intervalo completo de tempo amostrado, de 0,00 até 22,40 s com um erro de 10,77\%. Porém devido a não linearidade inicial, ocorre uma distorção bem grande que pode ser visto nos dois outros intervalos, de 0,00 a 0,50 segundos com erro de 364,13\%, completamente não aceitável, mas que após os 50 milisegundos iniciais, o erro médio é de 2.71\%. 
-
-%Considerando que o intervalo inicial não é pertinente ou relevante para análise aqui proposta,
-%assumindo um valor inicial de 50 milisegundos e 
-%calculando e erro médio, chegou-se ao valor de 2,71\% de erro 
-%para todo o restante da aquisição,
-%valor este que é considerado otimo para o modelo.
-
-Foi obtido um valor médio de 2,71\% de erro 
-para o intervalo de aquisição de 50ms até os 22,40 s, 
-que é o fim da aquisição, 
-desconsiderando a região transitória não linear 
-que ocorre nos instantes iniciais, 
-mas que considera-se não relevante para a atual análise, 
-inclusive pelo baixo valor de erro no restante do intervalo de comparação.
-
-%\begin{table}[h]
-%\centering
-%\caption{Erro Relativo Percentual}
-%\label{tab:ErroModelo}
-
-%\begin{tabular}{c|c}
-%\hline
-%Intervalo de amostras  &  erro médio relativo \\ \hline
-%\hline
-%0,00 a 22,40 s  &   10,77 \% \\ \hline
-%0,00 a  0,50 s 	&  364,13 \% \\ \hline
-%0,50 a 22,40 s  &    2,71 \% \\ \hline
-
-%\end{tabular}
-%\end{table}
-
-
-De forma mais detalhada, 
-foram calculados os erros médios relativos para cada intervalo de 
-tempo de um $\tau$, 
-e pode-se notar, 
-pela Tabela \ref{tab:ErroModeloTau}, 
-que o erro de estado estacionário, para o intervalo acima de 5 $\tau$, é menor do que 1\%. 
-
-
-\begin{table}[h]
-\centering
-\caption{Erro Relativo Percentual para intervalos determinados por $\tau$ }
-\label{tab:ErroModeloTau}
-
-\begin{tabular}{c|c}
-\hline
-Intervalo de amostras  &  erro médio relativo \\ \hline
-\hline
-%0 a 1 $\tau$ & 83,40 \% \\ \hline
-1 a 2 $\tau$ &  3,16 \% \\ \hline
-2 a 3 $\tau$ &  3,38 \% \\ \hline
-3 a 4 $\tau$ &  2,00 \% \\ \hline
-4 a 5 $\tau$ &  2,29 \% \\ \hline
-$>$ 5 $\tau$ &  0,82 \% \\ \hline
-\end{tabular}
-
-{\vspace{0.2cm} \small Fonte: Próprio autor}
-\end{table}
-
-%O intervalo inicial, de 0 a 1$\tau$ apresenta um grande erro, devido a não linearidade já comentada anteriormente, que ocorre nos primeiros 50 ms. 
-
-Desconsiderando a região transitória não linear 
-que ocorre nos instantes iniciais do movimento do eixo do motor, 
-o intervalo de maior erro é de 3,38\%, 
-conforme mostrado na Tabela \ref{tab:ErroModeloTau},
-ressaltando ainda que no regime estacionário 
-o erro é menor do que 1\%.
-Assim, considera-se que o modelo utilizado é bom e representa razoavelmente bem o sistema físico real.
 
 
 
-
-
-
-\subsection{Requisitos de desempenho do sistema}
-
+\subsection{ Requisitos de desempenho do sistema }
 
 Os principais e mais comuns requisitos de desempenho dos sistemas são:
 
 \begin{itemize}
-\item Velocidade de resposta:
-\item Presença ou não de oscilações na estabilização:
-\item Erro de regime estacionário: é a exatidão da resposta do sistema em relação ao valor desejado, assume-se um valor aceitável para o sistema, nesse caso não crítico, de 5\%.
+
+\item Velocidade de resposta: A constante de tempo $\tau$ é a medida
+  de tempo em que um sistema de primeira ordem alcança os $63\%$ do
+  sinal máximo desejado, assumindo que para a estabilidade o sistema
+  precisa de um tempo de cinco vezes o tempo do $\tau$. Assim, é
+  definida como velocidade de resposta desejada uma estabilidade
+  equivalente a duas vezes o  $\tau$, reduzindo a $\frac{2}{5}$ do valor
+  inicial. 
+%\item Velocidade de resposta: A Figura \ref{fig:acaoMalhaAberTau} mostra que para a constante de tempo $\tau$, foi registrado um intevalo de 2,5 segundos, assim, a estabilidade é alcançada em torno de 12,5 segundos, assumindo a partir daí o regime de estabilidade.
+%Como requisito de desempenho é estipulada uma redução do tempo de resposta para $\frac{1}{2}$ do valor inicial, com o novo $\tau$ assimindo o valor máximo de 1,25 segundos.
+
+\item Sobressinal: Para muitos sistemas ter um sobressinal elevado é algo completamente indesejado, outros permitem alguma oscilação, no caso aqui estudado é definido que o sobressinal aceitável é de no máximo $10\%$ do valor desejado.
+  
+\item Erro de regime estacionário: é a exatidão da resposta do sistema em relação ao valor desejado, assume-se um valor aceitável para o sistema, nesse caso não crítico, de $5\%$.
 \end{itemize}
+
+
+
+\subsection{ Ensaio com o controlador Liga/Desliga }
+
+O controlador Liga/Desliga é o de mais fácil implementação, porém não
+apresenta um controle muito eficiente. Consiste em acionar a carga
+com 100$\%$ da alimentação até que a saída alcance o valor desejado,
+desligando-a e retornando a ligá-la quando estiver abaixo do valor
+desejado, ficando num ciclo de liga-desliga. 
+
+
+
+\subsection{ Ensaio com o controlador PI }
+
+A ação de controle Proporcional+Integral (PI) é adequada ao sistema
+proposto utilizado neste estudo.
+
+A Equação \ref{eq:metodoPI} descreve o controlador PI a ser implementado.
+
+\begin{equation}
+  u(t) = kp.e(t) + ki \int_{0}^{\infty} e(t) dt
+\label{eq:metodoPI}  
+\end{equation}
+
+
+\subsection{ Ensaio com o controlador LPA$E\tau$ }
+
+O controlador LPA$E\tau$ a ser implementado é mostrado na Figura 
+\ref{fig:metodoControleLPAEt}, de modo que o $\mu_0 + \delta$ sejam
+ajustados de acordo com a Tabela \ref{tab:correcaoDelta}, conforme
+exposto no respectivo capítulo.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Fig
+\begin{figure}[!h]%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\centering
+\caption{Representação do reticulado da LPA$E\tau$ para o controlador}
+\begin{tikzpicture}[scale=0.80]
+\tikzset{ >=latex, inner sep=0pt, outer sep=0pt,  }
+
+%\draw [lightgray, dashed](0,0) grid (10,10);
+
+\node [fill=black, circle] (V) at (9,5) {:};
+\node [fill=black, circle] (F) at (1,5) {:};
+\node [fill=black, circle] (T) at (5,9) {:};
+\node [fill=black, circle] (L) at (5,1) {:};
+
+\draw [->, thick] (V)   -- (10,5);
+\draw [    thick] (0,5) -- (F);
+\draw [->, thick] (T)   -- (5,10);
+\draw [    thick] (5,0) -- (L);
+
+\draw [thick] (V) -- (T);
+\draw [thick] (T) -- (F);
+\draw [thick] (F) -- (L);
+\draw [thick] (L) -- (V);
+
+\node at (10,4.5) {$G_{c}$};
+\node at (5.5,10) {$G_{ct}$};
+
+\node at (4.5,9.2) {$+1$};
+\node at (9.0,5.5) {$+1$};
+\node at (5.5,1.0) {$-1$};
+\node at (1.0,4.5) {$-1$};
+
+\node at (9.0,4.5) {V};
+\node at (1.0,5.5) {F};
+\node at (5.5,9.2) {$\top$};
+\node at (4.5,1.0) {$\bot$};
+
+\draw [fill, red,nearly transparent] (1.0,5.0) -- (1.5,5.5) -- (1.5,4.5) -- (1.0,5.0);
+\draw [fill, purple, nearly transparent] (1.5,5.5) -- (5.0,9.0) -- (5.2,8.8) -- (1.5,5.5);
+\draw [fill, blue, nearly transparent] (5.0,1.0) -- (8.5,4.5) -- (1.5,4.5) -- (5.0,1.0);
+\draw [fill, green, nearly transparent] (5.2,8.8) -- (2.1,6.0) -- (8.0,6.0) -- (5.2,8.8);
+
+\draw [thick] (5.0,9.0) -- (1.0,5.0);
+
+\node at (5.0,7.0) {1};
+\node at (5.0,5.0) {$\mu_0 + \delta$};
+\node at (5.0,3.0) {0};
+
+\draw [dashed, gray] (2.5,6.0) -- (2.5,4.5);
+\draw [dashed, gray] (3.5,6.0) -- (3.5,4.5);
+\draw [dashed, gray] (6.5,6.0) -- (6.5,4.5);
+\draw [dashed, gray] (7.5,6.0) -- (7.5,4.5);
+\draw [dashed, lightgray] (4.5,6.0) -- (4.5,4.5);
+\draw [dashed, lightgray] (5.5,6.0) -- (5.5,4.5);
+
+\end{tikzpicture}
+\label{fig:metodoControleLPAEt}
+
+{\small Fonte: Próprio autor }
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
