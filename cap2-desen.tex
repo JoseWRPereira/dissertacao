@@ -1012,11 +1012,12 @@ referente ao parâmetro(\%) do acionamento PWM.
 
 \section{Ação de controle Liga-Desliga utilizando a LPA$E\tau$}
 
-Assim como no capítulo sobre Ação de Controle, 
+Assim como pode ser encontrado em Ação de Controle no Anexo A, 
 o tipo mais simples de controlador, o Liga-Desliga,
 pode ser implementado utilizando a 
-LPA$E\tau$, 
-dividindo o reticulado em duas partes conforme 
+LPA$E\tau$, dividindo o reticulado em duas partes
+e sua representação para a condição em que o $Gct$ define o estado
+de Ligar ou Desligar o sistema é mostrado na 
 Figura \ref{fig:reticuladoEtOnOff}.
 
 
@@ -1181,7 +1182,7 @@ como é mostrado na Figura \ref{fig:gctneg}.
 \caption{Representação do reticulado da LPA$E\tau$ para ação de controle Liga-Desliga}
 \subfloat[$Gct$ positivo ($\mu_0 > \mu_1$)]{\label{fig:gctpos}
 
-\begin{tikzpicture}[scale=0.7]
+\begin{tikzpicture}[scale=0.65]
 \tikzset{ >=latex, inner sep=0pt, outer sep=0pt,  }
 %\draw [lightgray, dashed](0,0) grid (10,10);
 
@@ -1219,7 +1220,7 @@ como é mostrado na Figura \ref{fig:gctneg}.
 
 \end{tikzpicture} }
 \subfloat[$Gct$ negativo ($\mu_0<\mu_1$)]{\label{fig:gctneg}
-\begin{tikzpicture}[scale=0.75]
+\begin{tikzpicture}[scale=0.65]
 \tikzset{ >=latex, inner sep=0pt, outer sep=0pt,  }
 %\draw [lightgray, dashed](0,0) grid (10,10);
 
@@ -1275,14 +1276,9 @@ mas que na LPA$E\tau$ pode ser considerado como
 o Grau de Contradição, pois,
 na condição em que a variável controlada é igual a 
 variável de referência, não há erro, e a contradição é zero, 
-entretando se a forem diferentes, 
+entretando se forem diferentes, 
 tanto o erro quanto o grau de contradição
 serão não nulos. 
-
-A representação do reticulado da LPA$E\tau$ 
-para a condição em que o $Gct$ define o estado
-de Ligar ou Desligar o sistema é mostrado na 
-Figura \ref{fig:reticuladoEtOnOff}.
 
 A opção pela ação de controle Liga-Desliga
 é interessante do ponto de vista da velocidade 
@@ -1618,7 +1614,10 @@ foi estipulado um valor de grau de contradição
 %para atender os requisitos de desempenho do sistema,
 podendo ser alterado posteriormente após testes empíricos.
 O grau de contradição está definido entre o intervalo menor do que 0,1 ($Gct < 1$) 
-e maior do que -0,05 ($Gct > -0,05$). 
+e maior do que -0,05 ($Gct > -0,05$). Assumindo um valor inicial para
+a variável manipulada equivalente a um controle em malha aberta, sendo
+assim a resposta do controlador é o próprio $\mu_0$ como mostrado na
+Figura \ref{fig:regiaoAtiva}.
 
 
 

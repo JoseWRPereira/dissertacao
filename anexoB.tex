@@ -1,5 +1,5 @@
 %\section*{ Obtenção de um modelo do processo }
-Para melhor compreensão dos modelos dinâmicos dos sistemas, é utilizado o Diagrama de blocos do comportamento do sistema em malha aberta, conforme Figura \ref{fig:AcaoMalhaAberta}\cite{Ogata}.
+Para melhor compreensão dos modelos dinâmicos dos sistemas, é utilizado o Diagrama de blocos do comportamento do sistema em malha aberta, conforme Figura \ref{fig:AnexoBmalhaAberta}\cite{Ogata}.
 
 
 %\begin{comment}
@@ -29,14 +29,16 @@ Para melhor compreensão dos modelos dinâmicos dos sistemas, é utilizado o Dia
 \node [above] at (13.5,1){Variável};
 \node [below] at (13.5,1){Controlada};
 \end{tikzpicture}
-\label{fig:malhaAberta}
+\label{fig:AnexoBmalhaAberta}
 
 {\small Fonte: \cite{Ogata}}
 \end{figure}
 
 %\end{comment}
 
-Utilizando variáveis para cada elemento do Diagrama de blocos, de forma a representá-los nas equações, temos então que:
+Utilizando variáveis para cada elemento do Diagrama de blocos,
+conforme Figura \ref{fig:AnexoBAcaoMalhaAberta},
+de forma a representá-los nas equações, temos então que:
 
 
 
@@ -63,7 +65,7 @@ Utilizando variáveis para cada elemento do Diagrama de blocos, de forma a repre
 \node [above] at ( 7.5,1){u(t)};
 \node [above] at (13.5,1){c(t)};
 \end{tikzpicture}
-\label{fig:AcaoMalhaAberta}
+\label{fig:AnexoBAcaoMalhaAberta}
 
 {\small Fonte: Próprio autor}
 \end{figure}
@@ -135,7 +137,7 @@ C(s) = \frac{K}{s+a} \frac{A}{s} \rightarrow \mathscr{L}^{-1} \to c(t) = \frac{K
 \label{eq:degrauA}
 \end{equation}
 
-A Figura \ref{fig:degrauA} mostra um sinal do tipo degrau com amplitude \textbf{A} aplicado ao sistema de teste, que responde conforme um sistema de primeira ordem como mostrado na Figura \ref{fig:cRegime}. 
+A Figura \ref{fig:AnexoBacaoMalhaAberTau} mostra um sinal do tipo degrau com amplitude \textbf{A} aplicado ao sistema de teste, que responde conforme um sistema de primeira ordem como mostrado na Figura \ref{fig:AnexoBcRegime}. 
 
 
 %A partir de um determinado instante de tempo, entra em regime constante ($c_{reg}$), alcançando o valor de referência dado pelo degrau de amplitude A. Assim quando $ t \rightarrow \infty $  então $ c_{reg} \rightarrow A $:
@@ -146,7 +148,7 @@ A Figura \ref{fig:degrauA} mostra um sinal do tipo degrau com amplitude \textbf{
 \begin{figure}[!htb]
 \centering
 \caption{Sistema de Primeira Ordem}
-\subfloat[Sinal de entrada tipo degrau com amplitude A]{\label{fig:degrauA}
+\subfloat[Sinal de entrada tipo degrau com amplitude A]{\label{fig:AnexoBdegrauA}
 \begin{tikzpicture}[scale=0.75]
 \draw [lightgray, dashed](0,0) grid (8.8,5.8);
 \draw [->] (0,0) -- (9,0);
@@ -159,7 +161,7 @@ A Figura \ref{fig:degrauA} mostra um sinal do tipo degrau com amplitude \textbf{
 \draw [red, ultra thick] (0.0,0.0) -- (0.0,5.0);
 \node at (-0.5,5.0)[red]{$A$};
 \end{tikzpicture} }
-\subfloat[Resposta transitória e regime de acomodação]{\label{fig:cRegime}
+\subfloat[Resposta transitória e regime de acomodação]{\label{fig:AnexoBcRegime}
 \begin{tikzpicture}[scale=0.75]
 \draw [lightgray, dashed](0,0) grid (8.8,5.8);
 \draw [->] (0,0) -- (9,0);
@@ -172,7 +174,7 @@ A Figura \ref{fig:degrauA} mostra um sinal do tipo degrau com amplitude \textbf{
 \draw [blue, ultra thick] (0,0) to [out=85, in=180] (6,5);
 \draw [blue, ultra thick] (6,5) -- (9,5);
 \end{tikzpicture}}
-\label{fig:sistPrimeiraOrdem}
+\label{fig:AnexoBsistPrimeiraOrdem}
 
 {\small Fonte: Próprio autor}
 \end{figure}
@@ -202,7 +204,7 @@ Tomando $t= \frac{1}{a} = a^{-1} = \tau$ para gerar um valor conhecido em $e^{-a
 c(a^-1) = \frac{KA}{a}(1-e^{-(a.a^{-1})}) = \frac{KA}{a}(1-e^{-1}) = \frac{KA}{a}.0,63 = 0,63 . C_{reg}
 \end{equation}
 
-A Figura \ref{fig:constTempo} mostra a constante de tempo $\tau$, que é atingida quando o sistema alcança 63\% do seu valor de regime. Como sabemos que $\tau = \frac{1}{a}$, então o polo do sistema, que leva o denominador da Equação \ref{eq:degrauA} a zero, é:
+A Figura \ref{fig:AnexoBconstTempo} mostra a constante de tempo $\tau$, que é atingida quando o sistema alcança 63\% do seu valor de regime. Como sabemos que $\tau = \frac{1}{a}$, então o polo do sistema, que leva o denominador da Equação \ref{eq:degrauA} a zero, é:
 
 \begin{equation}
 a = \frac{1}{\tau}
@@ -235,7 +237,7 @@ a = \frac{1}{\tau}
 \node at (1.45/2,-0.7){$\tau$};
 
 \end{tikzpicture}
-\label{fig:constTempo}
+\label{fig:AnexoBconstTempo}
 
 {\small Fonte: Próprio autor}
 \end{figure}
@@ -269,17 +271,22 @@ K = \frac{ac_{reg}}{A}
 
 
 
-A Figura \ref{fig:AcaoMalhaAberta} mostra um sinal do tipo degrau aplicado como referência no valor de \emph{25 rps}, a curva de comportamento real medida empiricamente e a curva aproximada calculada pelo método determinístico como segue:
+A Figura \ref{fig:AnexoBacaoMalhaAberTau} mostra um sinal do tipo
+degrau aplicado como referência no valor de \emph{25 rps}, a curva de
+comportamento real medida empiricamente e a curva aproximada calculada
+pelo método determinístico como segue, e ainda possui uma linha
+indicativa que mostra o ponto de intercepção da curva ao valor de 63\%
+do valor de referência, e foi gerado um gráfico com
+divisões no eixo do Tempo no valor de $\tau = 2,5s $.
 
 \begin{figure}[!htb]
 \caption{Ação de Controle em Malha Aberta}
 \center\includegraphics[scale=1.4]{./imagens/acaoMalhaAbertaTau.eps}
-\label{fig:acaoMalhaAberTau}
+\label{fig:AnexoBacaoMalhaAberTau}
 
 {\small Fonte: Próprio autor}
 \end{figure}
 
-A Figura \ref{fig:acaoMalhaAberTau} possui uma linha indicativa que mostra o ponto de intercepção da curva ao valor de 63\% do valor de referência, e empiricamente foi gerado um gráfico com divisões no eixo do Tempo no valor de $\tau = 2,5s $.
 
 Calculando o polo da função:
 \begin{equation}
@@ -307,11 +314,11 @@ Para a equação no formato canônico tanto o numerador quanto o denominador sã
 \end{equation}
 
 
-Baseado no gráfico mostrado na Figura \ref{fig:acaoMalhaAberTau}, o valor de tempo em que o motor assume a velocidade de referência é aproximadamente $5\tau$, 12,5 s, e como objetivo para uma primeira versão da implementação do controle utilizando LPA$E\tau$ é proposto que o sistema reduza o tempo de alcance da velocidade alvo em um tempo de no máximo $1\tau$, ou seja, $2,5 s$.
+Baseado no gráfico mostrado na Figura \ref{fig:AnexoBacaoMalhaAberTau}, o valor de tempo em que o motor assume a velocidade de referência é aproximadamente $5\tau$, 12,5 s, e como objetivo para uma primeira versão da implementação do controle utilizando LPA$E\tau$ é proposto que o sistema reduza o tempo de alcance da velocidade alvo em um tempo de no máximo $1\tau$, ou seja, $2,5 s$.
 
 
 
-\subsection*{ Qualidade do modelo }
+\subsection{ Qualidade do modelo }
 
 A qualidade do modelo é relativa ao erro aceitável para o sistema estudado. Para o modelo obtido neste estudo foi aplicada o cálculo de Erro Relativo Percentual, e foram feitas análises em trechos diferentes em função da não linearidade inicial apresentada pelo comportamento do motor da planta em estudo.
 
