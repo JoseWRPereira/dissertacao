@@ -975,7 +975,7 @@ como grau de evidência desfavorável.
 Os dois parâmetros que vão gerar os graus de evidência 
 possuem a mesma natureza, a mesma escala, 
 são a velocidade desejada e a velocidade lida pelo sensor,
-de mode a poder comparar e utilizá-las nas operações da
+de modo a poder comparar e utilizá-las nas operações da
 LPA$E\tau$. 
 Para adequação da escala das grandezas 
 de referência $r(t)$ e da variável controlada $c(t)$
@@ -1607,7 +1607,7 @@ que pode sinalizar tal anormalidade.
 
 
 
-Nesta condição o controlador pode tomar a dicisão de 
+Nesta condição o controlador pode tomar a decisão de 
 desligar o sistema controlado, 
 levá-lo a condição de falha e 
 sinalizar ao operador a irregularidade, 
@@ -1624,7 +1624,7 @@ podendo ser alterado posteriormente após testes empíricos.
 O grau de contradição está definido entre o intervalo menor do que 0,1 ($Gct < 1$) 
 e maior do que -0,05 ($Gct > -0,05$). Assumindo um valor inicial para
 a variável manipulada equivalente a um controle em malha aberta, sendo
-assim a resposta do controlador é o próprio $\mu_0$ como mostrado na
+assim a resposta do controlador é o próprio $\mu_0$ como mostra a
 Figura \ref{fig:regiaoAtiva}.
 
 
@@ -1732,13 +1732,13 @@ reversa para atuar ativamente na redução da velocidade.
 
 Considerando a janela entre o $Gct < 0,10$ e $Gct > -0,05$ como a
 região em que o controlador irá atuar ativamente, fora do corte e da
-saturação, na variável manipilada do sistema controlado.
+saturação, na variável manipulada do sistema controlado.
 
-A variável manipilada assume assim o valor da entrada $\mu_0$,
+A variável manipulada assume o valor da entrada $\mu_0$,
 enviando à saída um valor proporcional ao valor desejado.
 Mas como a relação entre o valor de referência e a 
 velocidade de rotação do motor não é perfeitamente linear,
-para cada região ou patamar da valocidade do motor,
+para cada região ou patamar da velocidade do motor,
 pode haver um erro considerável,
 inclusive sendo maior do que o valor permitido pela 
 tolerância. 
@@ -1748,8 +1748,7 @@ em decorrência dessa não linearidade,
 é somado ao $\mu_0$ um valor de correção denominado $\delta$(delta).
 
 Então a representação do reticulado da LPA$E\tau$ 
-fica da seguinte forma mostrada na 
-Figura \ref{fig:regiaoAtivaMuDelta}. 
+fica conforme é apresentada na Figura \ref{fig:regiaoAtivaMuDelta}. 
 
 
 
@@ -2009,9 +2008,9 @@ para um valor de referência de 25\% do valor máximo.
 \section{O fator de correção $\delta$}
 
 O fator de correção $\delta$ tem a finalidade de corrigir a variável
-manipilada de modo a zerar a diferença entre a variável controlada e a
+manipulada de modo a zerar a diferença entre a variável controlada e a
 variável de referência. A correção aqui empregada é de ajuste fino da
-variável manipilada.
+variável manipulada.
 
 A correção se dá por um algorítmo que faz a leitura de forma cíclica
 do grau de contradição e atualiza o $\delta$ correspondente ao patamar
