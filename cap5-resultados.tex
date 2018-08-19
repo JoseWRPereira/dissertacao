@@ -159,6 +159,85 @@ Para o sistema em malha aberta o regime é alcançado com tempo de 8,75s.
 \end{itemize}
 
 
+A Tabela \ref{tab:resultadoComparaErros}
+mostra o erro médio relativo do
+resultado dos dois controladores.
+Em função do tempo de resposta
+inicial, para esta tabela foi utilizado um intervalo de um segundo para gerar as amostras.
+
+Um destaque pode ser dado aos dois primeiros intervalos de amostra,sendo que cada controlador obteve melhor desempenho em um deles.
+
+
+
+
+\begin{table}[h]
+\centering
+\caption{Erro Médio Relativo Percentual }
+\label{tab:resultadoComparaErros}
+
+
+\begin{tabular}{c|c|c}
+\hline
+Intervalo de amostras  &  Controle PI &
+Controle LPA$E\tau$ \\ \hline
+\hline
+ 0 a  1 s & 50,57 \% &  75,68 \% \\ \hline
+ 1 a  2 s & 13,50 \% &  -5,20 \% \\ \hline
+ 2 a  3 s &  5,48 \% &  -5,20 \% \\ \hline
+ 3 a  4 s &  1,62 \% &  -4,64 \% \\ \hline
+ 4 a  5 s &  0,10 \% &  -2,40 \% \\ \hline
+ 5 a  6 s & -0,65 \% &  -2,40 \% \\ \hline
+ 6 a  7 s & -1,19 \% &  -2,16 \% \\ \hline
+ 7 a  8 s & -1,62 \% &   0,00 \% \\ \hline
+ 8 a  9 s & -1,78 \% &   0,00 \% \\ \hline
+ 9 a 10 s & -1,78 \% &   0,00 \% \\ \hline
+10 a 11 s & -1,64 \% &   0,00 \% \\ \hline
+11 a 12 s & -1,31 \% &   0,00 \% \\ \hline
+12 a 13 s & -0,96 \% &   0,00 \% \\ \hline
+13 a 14 s & -0,87 \% &   1,40 \% \\ \hline
+14 a 15 s & -0,58 \% &   1,68 \% \\ \hline
+15 a 16 s & -0,50 \% &   2,80 \% \\ \hline
+16 a 17 s & -0,18 \% &   2,80 \% \\ \hline
+17 a 18 s & -0,28 \% &   2,80 \% \\ \hline
+18 a 19 s &  0,00 \% &   0,84 \% \\ \hline
+19 a 20 s &  0,21 \% &   0,00 \% \\ \hline
+
+\end{tabular}
+
+{\vspace{0.2cm} \small Fonte: Próprio autor}
+\end{table}
+
+
+
+
+O primeiro intervalo de amostras (0 a 1s),
+o controle PI obtem um resultado melhor,
+pois apresenta um erro,
+apesar de muito elevado,
+muito menor do que o controlador LPA$E\tau$.
+O segundo intervalo de amostras (1 a 2s),
+pode-se notar que o erro está menor do que o
+requisito de desempenho para este sistema
+para o controlador LPA$E\tau$,
+mas ainda não atingiu o mesmo limiar com
+o controlador PI.  
+
+O restante dos intervalos apresentam resultado satisfatório pois
+apresentam-se dentro dos requisitos de desempenho do sistema, em ambos
+os controles.
+
+
+
+
+
+
+
+
+
+
+
+
+
 %\begin{figure}[!htb]
 %\caption{Controle utilizando LPAE$\tau$}
 %\center\includegraphics[scale=1.4]{./imagens/a3.eps}
