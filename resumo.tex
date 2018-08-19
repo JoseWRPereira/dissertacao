@@ -27,19 +27,22 @@ Para tanto é realizado um levantamento do modelo matemático desse
 sistema físico, que é utilizado como referência para a implementação de um
 controle clássico, com um controlador PI, bem como a definição dos
 requisitos de desempenho do sistema, que norteiam a implementação
-proposta urilizando a LPA$E\tau$, possibilitando assim a sua validação
+proposta utilizando a LPA$E\tau$, possibilitando assim a sua validação
 por comparação entre os resultados dos controladores. 
 % Resultados
-Para o sistema testado, os resultados entre os controladores PI e
-LPA$E\tau$ foram equivalentes, tendo o tempo de subida como
-destaque, pois para a janela de tolerância de $\pm 5\%$ adotada, tal
-valor foi alcançado em $t=2,5s$ com o controlador PI e $t<1.25s$ com o
-controlador LPA$E\tau$. Os resultados ainda mostraram algumas
-possibilidades para futuras melhorias, que se direcionam para plantas
-mais complexas, como sistemas de segunda ordem, e ainda permitem
-trabalhar com sistemas sem a necessidade de conhecê-lo para
-controlá-lo, adaptando seus parâmetros à ocasião após algumas
-rodadas de aprendizado.
+Para o sistema testado,
+os resultados entre os controladores
+PI e LPA$E\tau$ foram equivalentes,
+com ligeira vantagem a depender do
+requisito de desempenho utilizado como referência.
+Os resultados ainda mostraram algumas
+possibilidades para futuras melhorias,
+que se direcionam para plantas mais complexas,
+como sistemas de segunda ordem,
+e ainda permitem trabalhar com sistemas
+sem a necessidade de conhecê-lo para controlá-lo,
+adaptando seus parâmetros à ocasião
+após algumas rodadas de aprendizado.
 %Conclusão		
 Os estudos e os resultados mostram um grande potencial para a
 implementação e exploração da LPA$E\tau$ em sistemas de controle, de forma
