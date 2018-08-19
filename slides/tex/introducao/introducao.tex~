@@ -28,7 +28,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Objetivo
 \begin{frame}{Objetivo(s)}
 \begin{exampleblock}{Geral}
-Realizar a análise e implementação da \textbf{ Lógica Paraconsistente Anotada Evidencial $E\tau$ (LPA$E\tau$)} em um sistema embarcado para atuar no controle dinâmico de um sistema físico.
+Realizar a análise e implementação da LPA$E\tau$ em um sistema embarcado para atuar no controle dinâmico de um sistema físico.
 \end{exampleblock}
 
 \begin{alertblock}{Específicos}
@@ -46,12 +46,12 @@ Realizar a análise e implementação da \textbf{ Lógica Paraconsistente Anotad
 \begin{frame}{Relevância do Trabalho}
 \begin{alertblock}{ }
   \begin{itemize}
-    \item Iniciar pesquisa de aplicação da LPA$E\tau$ em sistemas de controle;
+    \item Iniciar pesquisa de aplicação da LPA$E\tau$ aos sistemas de controle;
   \end{itemize}
 \end{alertblock}
 \begin{alertblock}{ }
   \begin{itemize}
-    \item Balisar um novo caminho para trabalhos futuros, expondo pontos positivos, dificuldades iniciais e possibilidades para se trabalhar com a LPA$E\tau$ em sistemas de controle.
+    \item Balisar um novo caminho para trabalhos futuros, expondo pontos positivos, dificuldades iniciais e possibilidades para se trabalhar com a LPA$E\tau$ em controle de sistemas.
   \end{itemize}
 \end{alertblock}
 \end{frame}
